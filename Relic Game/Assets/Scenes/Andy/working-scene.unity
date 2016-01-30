@@ -152,7 +152,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 269513510}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c2c8f3125fcae8445a2c8c81f0b58650, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EjectionSpeed: 1000
+  RotationMax: 100
 --- !u!1 &311419527
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,6 +669,7 @@ GameObject:
   - 92: {fileID: 1916320316}
   - 124: {fileID: 1916320315}
   - 81: {fileID: 1916320314}
+  - 114: {fileID: 1916320319}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -742,3 +744,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1916320319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1916320313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e434cbb08439974eb84aa026adb1712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
