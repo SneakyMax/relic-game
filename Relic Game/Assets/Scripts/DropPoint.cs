@@ -8,11 +8,8 @@ namespace Assets.Scripts
 
         public ScoreController ScoreController;
 
-        public void OnCollisionEnter(Collision collision)
+        public void AcceptRelic(RelicPlayer player)
         {
-            if (collision.gameObject.CompareTag("Relic") == false)
-                return;
-
             RelicSpawner.RemoveAndSpawnNewRelic();
         }
     }

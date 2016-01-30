@@ -17,8 +17,6 @@ namespace Assets.Scripts
 
         public void Update()
         {
-            if(Input.GetKeyDown(KeyCode.A))
-                ShakeScreen(Random.Range(0.0f, 1), TimeSpan.FromSeconds(0.5));
         }
 
         public void TicScreen(float factor)
