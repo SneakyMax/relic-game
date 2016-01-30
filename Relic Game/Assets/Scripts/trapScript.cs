@@ -15,21 +15,22 @@ public class trapScript : MonoBehaviour {
 
 	private Vector3 startLocation;
 	private bool hasHit = false;
-	private Rigidbody rigid;
+	private Rigidbody2D rigid;
 
 	// Use this for initialization
 	void Start () 
 	{
 		startLocation = transform.position;
-		if(rigid == null)
+		if(rigid == null && isTrap)
 		{
-			rigid = GetComponent<Rigidbody>();
+			rigid = GetComponent<Rigidbody2D>();
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		if(!isTrap) return;
 		if(hasHit && isCrushing) return;
 		if(isCrushing)
 		{
@@ -38,25 +39,25 @@ public class trapScript : MonoBehaviour {
 			case direction.UP:
 				Debug.Log("Case up");
 				rigid.MovePosition(transform.position + (Vector3.up * speed) * Time.deltaTime);
-				rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+				rigid.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 				break;
 				//move UP
 			case direction.DOWN:
 				Debug.Log("Case down");
 				rigid.MovePosition(transform.position + (Vector3.down * speed) * Time.deltaTime);
-				rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+				rigid.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 				break;
 				//move DOWN
 			case direction.LEFT:
 				Debug.Log("Case left");
 				rigid.MovePosition(transform.position + (Vector3.left * speed) * Time.deltaTime);
-				rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+				rigid.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
 				break;
 				//move LEFT
 			case direction.RIGHT:
 				Debug.Log("Case right");
 				rigid.MovePosition(transform.position + (Vector3.right * speed) * Time.deltaTime);
-				rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+				rigid.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
 				break;
 				//move RIGHT
 			default:
