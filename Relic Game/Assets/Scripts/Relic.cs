@@ -24,14 +24,14 @@ public class Relic : MonoBehaviour
     private new Rigidbody rigidbody;
 
 	// Use this for initialization
-    void Start()
+    private void Awake()
     {
         cameraController = Camera.main.GetComponent<CameraController>();
         rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
