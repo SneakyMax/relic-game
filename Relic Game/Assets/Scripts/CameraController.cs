@@ -18,16 +18,34 @@ namespace Assets.Scripts
         public void Update()
         {
             if(Input.GetKeyDown(KeyCode.A))
-                ApplyShake(Random.Range(0.0f, 1), TimeSpan.FromSeconds(0.5));
+                ShakeScreen(Random.Range(0.0f, 1), TimeSpan.FromSeconds(0.5));
         }
 
-        public void ApplyShake(float factor, TimeSpan duration)
+        public void TicScreen(float factor)
+        {
+            StartCoroutine(TicCoroutine(factor));
+        }
+
+        public void ShakeScreen(float factor, TimeSpan duration)
         {
             startShakeTime = Time.time;
             StartCoroutine(ShakeCoroutine(factor, duration));
         }
 
-        public IEnumerator ShakeCoroutine(float factor, TimeSpan duration)
+        private IEnumerator TicCoroutine(float factor)
+        {
+            var angle = Random.Range(0, Mathf.PI * 2);
+
+            var movement = new Vector3(Mathf.Cos(angle), -Mathf.Sin(angle), 0) * factor;
+
+            transform.localPosition = cameraBasePosition + movement;
+
+            yield return null;
+
+            transform.localPosition = cameraBasePosition;
+        }
+
+        private IEnumerator ShakeCoroutine(float factor, TimeSpan duration)
         {
             while (true)
             {
