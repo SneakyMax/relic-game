@@ -405,6 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RelicSpawner: {fileID: 1238902318}
   ScoreController: {fileID: 578862115}
+  SpawnEffect: {fileID: 101136, guid: 1cc1548ccc362f143b5f76d1c05f112e, type: 2}
 --- !u!4 &129255903 stripped
 Transform:
   m_PrefabParentObject: {fileID: 470992, guid: b51d2ceb466eb8d418eec16467f8c170, type: 2}

@@ -1019,6 +1019,7 @@ MonoBehaviour:
   - {fileID: 11428244}
   - {fileID: 11401246}
   PlayerPrefab: {fileID: 11435410, guid: 1370baccfcba6a743af2caf058be8288, type: 2}
+  SpawnEffect: {fileID: 125524, guid: 21ac15ff0a992c14ba30a563112fa2df, type: 2}
   RespawnDelay: 3
 --- !u!114 &11449012
 MonoBehaviour:

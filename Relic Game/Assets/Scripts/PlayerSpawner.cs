@@ -16,6 +16,8 @@ namespace Assets.Scripts
 
         public RelicPlayer PlayerPrefab;
 
+        public GameObject SpawnEffect;
+
         public bool Enabled { get; private set; }
 
         [Range(0, 10)]
@@ -92,6 +94,9 @@ namespace Assets.Scripts
 
             player.PlayerInstance = relicPlayer;
             player.Spawner = this;
+
+            if (SpawnEffect != null)
+                Instantiate(SpawnEffect, spawnPoint.transform.position, Quaternion.identity);
         }
 
         public void SpawnEveryone()
