@@ -9,6 +9,7 @@ namespace Assets.Scripts
         public HoldingRelic HoldingRelicPrefab;
 
         public HoldingRelic HoldingRelic { get; set; }
+        public PlayerInfo PlayerInfo { get; set; }
 
         private PlayerController playerController;
 
@@ -76,6 +77,19 @@ namespace Assets.Scripts
                 leftHoldPosition.localPosition : rightHoldPosition.localPosition;
 
             lastDirection = playerController.LastRequestedDirection;
+        }
+
+        public void SquashOtherPlayer(GameObject otherPlayer, Collision collision)
+        {
+            otherPlayer.GetComponent<RelicPlayer>().BeSquashed(gameObject);
+
+            GetComponent<PlayerController>().DoBounceOnOtherPlayer(collision);
+        }
+
+        public void BeSquashed(GameObject squasher)
+        {
+            PlayerInfo.Spawner.Despawn(PlayerNumber);
+            PlayerInfo.Spawner.SpawnAfterDelay(PlayerNumber);
         }
     }
 }

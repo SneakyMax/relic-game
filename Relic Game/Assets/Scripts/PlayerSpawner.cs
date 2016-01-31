@@ -15,6 +15,9 @@ namespace Assets.Scripts
         public PlayerSpawnPoint[] PlayerSpawnPoints;
 
         public RelicPlayer PlayerPrefab;
+
+        [Range(0, 10)]
+        public float RespawnDelay = 3;
         
         public void Awake()
         {
@@ -43,6 +46,17 @@ namespace Assets.Scripts
             });
         }
 
+        public void SpawnAfterDelay(int playerNumber, TimeSpan? delay = null)
+        {
+            StartCoroutine(SpawnAfterDelayCoroutine(playerNumber, delay ?? TimeSpan.FromSeconds(RespawnDelay)));
+        }
+
+        private IEnumerator SpawnAfterDelayCoroutine(int playerNumber, TimeSpan delay)
+        {
+            yield return new WaitForSeconds((float) delay.TotalSeconds);
+            Spawn(playerNumber);
+        }
+
         public void Spawn(int playerNumber)
         {
             var player = Players.FirstOrDefault(x => x.PlayerNumber == playerNumber);
@@ -60,8 +74,10 @@ namespace Assets.Scripts
             var relicPlayer = playerInstance.GetComponent<RelicPlayer>();
 
             relicPlayer.PlayerNumber = playerNumber;
+            relicPlayer.PlayerInfo = player;
 
             player.PlayerInstance = relicPlayer;
+            player.Spawner = this;
         }
 
         public void SpawnEveryone()
@@ -83,6 +99,20 @@ namespace Assets.Scripts
                 }
             }
         }
+
+        public void Despawn(int playerNumber)
+        {
+            var info = Players.FirstOrDefault(x => x.PlayerNumber == playerNumber);
+            if (info == null)
+                throw new InvalidOperationException("wrong player number");
+
+            if (info.PlayerInstance != null)
+            {
+                Destroy(info.PlayerInstance.gameObject);
+
+                info.PlayerInstance = null;
+            }
+        }
     }
 
     public class PlayerInfo
@@ -90,5 +120,7 @@ namespace Assets.Scripts
         public RelicPlayer PlayerInstance { get; set; }
 
         public int PlayerNumber { get; set; }
+
+        public PlayerSpawner Spawner { get; set; }
     }
 }
