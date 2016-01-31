@@ -107,7 +107,9 @@ public class trapScript : MonoBehaviour {
 
 	void OnCollisionEnter(Collision c)
 	{
-		// check layer for building and toggle movement off
+		// check layer for Player or toggle movement off
+		if(c.gameObject.CompareTag("Player"))
+			return;
 
 		// v ONLY IF BUILDING v
 		_currentState = STATE.HIT;
@@ -121,5 +123,10 @@ public class trapScript : MonoBehaviour {
 	public void SetHold(bool val)
 	{
 		isHolding = val;
+	}
+
+	public void StopCrushingAndReturn()
+	{
+		_currentState = STATE.HIT;
 	}
 }
