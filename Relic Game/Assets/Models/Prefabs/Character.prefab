@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11408798}
   - 54: {fileID: 5411060}
   - 114: {fileID: 11435410}
-  - 65: {fileID: 6581110}
+  - 136: {fileID: 13674856}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -94,6 +94,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &150972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 452710}
+  m_Layer: 0
+  m_Name: RelicHoldPositionRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &154466
 GameObject:
   m_ObjectHideFlags: 1
@@ -104,6 +119,21 @@ GameObject:
   - 4: {fileID: 483732}
   m_Layer: 0
   m_Name: transform1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &177616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 468712}
+  m_Layer: 0
+  m_Name: RelicHoldPositionLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,6 +266,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 462890}
   m_RootOrder: 0
+--- !u!4 &452710
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 2.24000001, z: 1.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 464514}
+  m_RootOrder: 2
 --- !u!4 &462890
 Transform:
   m_ObjectHideFlags: 1
@@ -260,8 +302,22 @@ Transform:
   m_LocalScale: {x: .25, y: .25, z: .25}
   m_Children:
   - {fileID: 431522}
+  - {fileID: 468712}
+  - {fileID: 452710}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &468712
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.33999991, z: -.959999979}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 464514}
+  m_RootOrder: 1
 --- !u!4 &483732
 Transform:
   m_ObjectHideFlags: 1
@@ -330,23 +386,11 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 2
---- !u!65 &6581110
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 101804}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 5, z: 2}
-  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!95 &9577076
 Animator:
   serializedVersion: 3
@@ -375,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68d9afaf3136d14b97fef4b18a1bef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gravity: 10
+  Gravity: 60
   MaxHorizontalSpeed: 22
   MaxHorizontalAccelleration: 10
   AirControl: 1
@@ -397,6 +441,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoldingRelicPrefab: {fileID: 11434730, guid: fa944072a13724b4dbdc9e3aa31bea67, type: 2}
+--- !u!136 &13674856
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101804}
+  m_Material: {fileID: 13400000, guid: 913a5a379875f6b4f8ab4bfa19f4124b, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.17999995
+  m_Height: 4.98999977
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
