@@ -73,6 +73,7 @@ namespace Assets.Scripts
         public void DespawnAndStop()
         {
             DespawnRelic();
+
             if (spawnAfterDelayCoroutine != null)
             {
                 StopCoroutine(spawnAfterDelayCoroutine);
@@ -81,11 +82,11 @@ namespace Assets.Scripts
 
         public void DespawnRelic()
         {
-            if (CurrentRelic != null)
-            {
-                Destroy(CurrentRelic.gameObject);
-                CurrentRelic = null;
-            }
+            if (CurrentRelic == null)
+                return;
+
+            Destroy(CurrentRelic.gameObject);
+            CurrentRelic = null;
         }
 
         public void SpawnAsDropFromPlayer(RelicPlayer relicPlayer)

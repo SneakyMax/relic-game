@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -44,6 +45,17 @@ namespace Assets.Scripts
 
             if(ScoreChanged != null)
                 ScoreChanged(playerNumber, playerScores[playerNumber]);
+        }
+
+        public void ResetScores()
+        {
+            foreach (var pair in playerScores.ToList())
+            {
+                playerScores[pair.Key] = 0;
+
+                if (ScoreChanged != null)
+                    ScoreChanged(pair.Key, 0);
+            }
         }
     }
 }
