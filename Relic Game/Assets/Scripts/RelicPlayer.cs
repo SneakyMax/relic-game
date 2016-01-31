@@ -76,6 +76,12 @@ namespace Assets.Scripts
                 CollideWithKillZone();
         }
 
+		public void OnTriggerStay(Collider other)
+		{
+			if (other.gameObject.CompareTag("LeverZone"))
+				CollideWithLeverObject(other);
+		}
+
         private void CollideWithKillZone()
         {
             if (HoldingRelic)
@@ -86,6 +92,18 @@ namespace Assets.Scripts
 
             Die(DeathType.None);
         }
+
+		private void CollideWithLeverObject(Collider collider)
+		{
+			var leverController = collider.gameObject.GetComponent<leverScript>();
+			if(leverController == null)
+				throw new InvalidOperationException("LeverZone tagged object does not contain a LeverScript");
+
+			if(Input.GetButtonDown("buttonX" + PlayerNumber))
+			{
+				leverController.Activate();
+			}
+		}
 
         private void CollideWithCrushingTrap(Collision collision)
         {

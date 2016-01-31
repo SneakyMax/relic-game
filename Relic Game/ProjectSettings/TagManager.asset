@@ -8,6 +8,7 @@ TagManager:
   - DropPoint
   - CrushingTrap
   - KillZone
+  - LeverZone
   layers:
   - Default
   - TransparentFX
