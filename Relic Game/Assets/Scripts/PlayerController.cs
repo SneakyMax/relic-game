@@ -263,26 +263,14 @@ namespace Assets.Scripts
         {
             if (playerNumber == 0)
                 throw new InvalidOperationException("Player number hasn't been set.");
-
-            var horizontalAxis = Input.GetAxis("Horizontal" + playerNumber);
             
-			var direction = Input.GetAxis("Horizontal" + playerNumber);
+			var horizontalAxis = Input.GetAxis("Horizontal" + playerNumber);			         
 
-            if (playerNumber == 1)
-            {
-                //Debug.Log(direction);
-            }
-            
-			if(direction != 0)
-			{
-				direction = direction / Mathf.Abs(direction);
-			}
+            desiredHorizontalAccelleration = horizontalAxis * MaxHorizontalAccelleration;
 
-            desiredHorizontalAccelleration = direction * MaxHorizontalAccelleration;
-
-            LastRequestedDirection = direction == -1
+            LastRequestedDirection = horizontalAxis == -1
                 ? Direction.Left
-                : direction == 1 ? Direction.Right : LastRequestedDirection;
+                : horizontalAxis == 1 ? Direction.Right : LastRequestedDirection;
 
             if (Input.GetButton("buttonA" + playerNumber)) 
             {
