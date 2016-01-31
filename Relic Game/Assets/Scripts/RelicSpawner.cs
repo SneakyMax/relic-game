@@ -45,7 +45,10 @@ namespace Assets.Scripts
             var newObj = (GameObject)Instantiate(RelicPrefab.gameObject, position, Quaternion.identity);
             var relic = newObj.GetComponent<Relic>();
             relic.Spawner = this;
-
+            {
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.Play();
+            }
             relic.RandomImpulse();
             CurrentRelic = relic;
             
@@ -92,6 +95,10 @@ namespace Assets.Scripts
         public void SpawnAsDropFromPlayer(RelicPlayer relicPlayer)
         {
             SpawnRelicAtPosition(relicPlayer.transform.position);
+            {
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.Play();
+            }
         }
 
         public void RemoveAndSpawnNewRelic(HoldingRelic holdingRelic)

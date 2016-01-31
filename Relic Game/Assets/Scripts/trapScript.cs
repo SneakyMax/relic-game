@@ -60,17 +60,19 @@ public class trapScript : MonoBehaviour {
 			break;
 		case STATE.ACTIVATED:
 			// any initializations stuff like slight shake before taking off.
-			_currentState = STATE.MOVING;
-			break;
+			_currentState = STATE.MOVING;            
+                break;
 		case STATE.MOVING:
-			CrushTrapMovement();
-			break;
+			CrushTrapMovement();               
+                break;
 		case STATE.HIT:
 			// wait for dramatic effect
 			// maybe squish or something when hitting
 			//if(!isHolding)_currentState = STATE.RETURNING;
 			_currentState = STATE.RETURNING;
-			break;
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.Play();
+                break;
 		case STATE.RETURNING:
 			Vector3 moveVec = (startLocation - transform.position).normalized;
 			if((startLocation - transform.position).magnitude > snap)

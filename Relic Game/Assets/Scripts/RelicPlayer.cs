@@ -134,6 +134,7 @@ namespace Assets.Scripts
             HoldingRelic = null;
             lastDirection = null;
 
+
             collision.gameObject.GetComponent<DropPoint>().AcceptRelic(this);
         }
 
@@ -142,7 +143,11 @@ namespace Assets.Scripts
             var relic = collision.gameObject.GetComponent<Relic>();
 
             if (relic.CanPickUp == false)
-                return;
+            return;
+            {
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.Play();
+            }
 
             var holdingRelic = relic.BeHeldBy(this);
             

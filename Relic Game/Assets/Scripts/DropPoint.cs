@@ -11,7 +11,10 @@ namespace Assets.Scripts
         public void AcceptRelic(RelicPlayer player)
         {
             RelicSpawner.RemoveAndSpawnNewRelic();
-
+            {
+                AudioSource audio = GetComponent<AudioSource>();
+                audio.Play();
+            }
             ScoreController.AddScore(player.PlayerNumber, 1);
         }
     }

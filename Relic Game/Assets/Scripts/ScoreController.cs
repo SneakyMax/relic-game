@@ -15,6 +15,9 @@ namespace Assets.Scripts
 
         private IDictionary<int, int> playerScores;
 
+        private IList<AudioSource> audioSources;
+        private AudioSource currentMusic;
+
         public void Awake()
         {
             if (PlayersDefinition == null)
@@ -26,6 +29,12 @@ namespace Assets.Scripts
             {
                 playerScores[player.PlayerNumber] = 0;
             }
+
+            audioSources = GetComponents<AudioSource>();
+        }
+        public void Start()
+        {
+            PlayMusic("rushIG_(NORELIC)");
         }
 
         public int GetScore(int playerNumber)
@@ -45,6 +54,52 @@ namespace Assets.Scripts
 
             if(ScoreChanged != null)
                 ScoreChanged(playerNumber, playerScores[playerNumber]);
+
+            var maxScore = playerScores.Max(x => x.Value);            
+           /* if(maxScore == 1)
+            {
+                PlayMusic("rushIG_(1RELIC)");
+            }
+            else if(maxScore == 2)
+            {
+                PlayMusic("rushIG_(2RELIC)");
+            }
+            else if(maxScore == 4)
+            {
+                PlayMusic("rushIG_(END)");
+            }
+            else if(maxScore == 5)
+            {
+                PlayMusic("rushIG_(FIN)");
+            }*/
+            switch(maxScore)
+            {
+                case 1:
+                    PlayMusic("rushIG_(1RELIC)");
+                    break;
+                case 2:
+                    PlayMusic("rushIG_(2RELIC)");
+                    break;
+                case 4:
+                    PlayMusic("rushIG_(END)");
+                    break;
+                case 5:
+                    PlayMusic("rushIG_(FIN)");
+                    break;
+            }
+        }
+
+        public void PlayMusic(string name)
+        {
+            if (currentMusic != null)
+                currentMusic.Stop();
+            currentMusic = GetAudio(name);
+            GetAudio(name).Play();
+        }
+
+        public AudioSource GetAudio(string name)
+        {
+            return audioSources.FirstOrDefault(x => x.clip.name == name);
         }
 
         public void ResetScores()
@@ -55,6 +110,7 @@ namespace Assets.Scripts
 
                 if (ScoreChanged != null)
                     ScoreChanged(pair.Key, 0);
+                PlayMusic("rushIG_(NORELIC)");
             }
         }
     }
