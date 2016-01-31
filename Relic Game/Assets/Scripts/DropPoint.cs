@@ -13,10 +13,9 @@ namespace Assets.Scripts
         public void AcceptRelic(RelicPlayer player)
         {
             RelicSpawner.RemoveAndSpawnNewRelic();
-            {
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.Play();
-            }
+
+            GeneralAudioController.PlaySound("RushShrineCollect");
+
             ScoreController.AddScore(player.PlayerNumber, 1);
 
             if (SpawnEffect != null)
