@@ -1,75 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &134146
+--- !u!1 &107762
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 458874}
-  - 33: {fileID: 3317204}
-  - 23: {fileID: 2397210}
-  - 95: {fileID: 9598564}
-  m_Layer: 8
-  m_Name: oneby3
+  - 4: {fileID: 489612}
+  - 33: {fileID: 3359222}
+  - 23: {fileID: 2353932}
+  - 95: {fileID: 9537618}
+  m_Layer: 0
+  m_Name: altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &186648
+--- !u!1 &111734
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 470992}
-  - 65: {fileID: 6582152}
-  m_Layer: 8
-  m_Name: 1by3
+  - 4: {fileID: 448782}
+  m_Layer: 0
+  m_Name: Altar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &458874
+--- !u!4 &448782
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134146}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
-  m_Children: []
-  m_Father: {fileID: 470992}
-  m_RootOrder: 0
---- !u!4 &470992
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186648}
-  m_LocalRotation: {x: .70710659, y: 0, z: 0, w: -.707106948}
-  m_LocalPosition: {x: 6.98999977, y: -1.00357628, z: .00999999885}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_GameObject: {fileID: 111734}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
+  m_LocalPosition: {x: -.0700000003, y: -2.38800001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 458874}
+  - {fileID: 489612}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2397210
+--- !u!4 &489612
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107762}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
+  m_Children: []
+  m_Father: {fileID: 448782}
+  m_RootOrder: 0
+--- !u!23 &2353932
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134146}
+  m_GameObject: {fileID: 107762}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 89ebc230299de48479ef3ed9a0a6813d, type: 2}
+  - {fileID: 2100000, guid: 436272afecf0b3a40a555d103b3f7540, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -83,34 +82,22 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3317204
+--- !u!33 &3359222
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134146}
-  m_Mesh: {fileID: 4300000, guid: 603c82f714575b94bb1276afc56d17e0, type: 3}
---- !u!65 &6582152
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186648}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &9598564
+  m_GameObject: {fileID: 107762}
+  m_Mesh: {fileID: 4300000, guid: c01adbfbc011d8a4a8a7c955ef5f6b77, type: 3}
+--- !u!95 &9537618
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134146}
+  m_GameObject: {fileID: 107762}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 603c82f714575b94bb1276afc56d17e0, type: 3}
+  m_Avatar: {fileID: 9000000, guid: c01adbfbc011d8a4a8a7c955ef5f6b77, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -128,5 +115,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 186648}
+  m_RootGameObject: {fileID: 111734}
   m_IsPrefabParent: 1

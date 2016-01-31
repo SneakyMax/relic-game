@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollisionParticleSystemPrefab: {fileID: 19829978, guid: e06b25eca4928d64091b6b00d5f83aee,
     type: 2}
-  EjectionSpeed: 1000
+  EjectionSpeed: 1722
   RotationMax: 100
   CameraShakeFactor: 0.03
   MinCollisionSpeed: 4.9
@@ -123,6 +123,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_CollisionDetection
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: EjectionSpeed
+      value: 1722
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
