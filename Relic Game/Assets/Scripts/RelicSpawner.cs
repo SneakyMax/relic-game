@@ -15,6 +15,8 @@ namespace Assets.Scripts
 
         [Range(0, 5)]
         public float RelicSpawnDelay;
+
+        private Coroutine spawnAfterDelayCoroutine;
         
         public void Start()
         {
@@ -39,16 +41,33 @@ namespace Assets.Scripts
 
         public void RemoveAndSpawnNewRelic()
         {
-            if (CurrentRelic != null)
-                Destroy(CurrentRelic.gameObject);
-
-            StartCoroutine(SpawnRelicAfterDelay(TimeSpan.FromSeconds(RelicSpawnDelay)));
+            DespawnRelic();
+            
+            spawnAfterDelayCoroutine = StartCoroutine(SpawnRelicAfterDelay(TimeSpan.FromSeconds(RelicSpawnDelay)));
         }
 
         private IEnumerator SpawnRelicAfterDelay(TimeSpan spawnDelay)
         {
             yield return new WaitForSeconds((float)spawnDelay.TotalSeconds);
             SpawnRelic();
+        }
+
+        public void DespawnAndStop()
+        {
+            DespawnRelic();
+            if (spawnAfterDelayCoroutine != null)
+            {
+                StopCoroutine(spawnAfterDelayCoroutine);
+            }
+        }
+
+        public void DespawnRelic()
+        {
+            if (CurrentRelic != null)
+            {
+                Destroy(CurrentRelic.gameObject);
+                CurrentRelic = null;
+            }
         }
     }
 }
