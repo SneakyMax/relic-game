@@ -118,11 +118,7 @@ namespace Assets.Scripts
                 if (player.PlayerInstance != null)
                     player.PlayerInstance.Die(RelicPlayer.DeathType.Squash);
             }
-
-            var surviving = PlayerSpawner.Players.FirstOrDefault(x => x.PlayerInstance != null);
-            if (surviving == null)
-                throw new InvalidOperationException("no player left??");
-
+            
             yield return new WaitForSeconds(2);
 
             PlayerSpawner.DespawnAllPlayers();

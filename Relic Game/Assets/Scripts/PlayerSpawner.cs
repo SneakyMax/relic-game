@@ -52,6 +52,9 @@ namespace Assets.Scripts
 
         public void SpawnAfterDelay(int playerNumber, TimeSpan? delay = null)
         {
+            if (spawnAfterDelayCoroutine != null)
+                StopCoroutine(spawnAfterDelayCoroutine);
+
             spawnAfterDelayCoroutine = StartCoroutine(SpawnAfterDelayCoroutine(playerNumber, delay ?? TimeSpan.FromSeconds(RespawnDelay)));
         }
 
@@ -70,6 +73,9 @@ namespace Assets.Scripts
 
             if (player == null)
                 throw new InvalidOperationException("Player " + playerNumber + " hasn't been added!");
+
+            if (player.PlayerInstance != null)
+                Despawn(playerNumber);
 
             var spawnPoint = PlayerSpawnPoints.FirstOrDefault(x => x.PlayerNumber == playerNumber);
             if (spawnPoint == null)
