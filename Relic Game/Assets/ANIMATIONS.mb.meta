@@ -1,0 +1,489 @@
+fileFormatVersion: 2
+guid: 9797f8d7dc9d64c498a5858b461088b2
+timeCreated: 1454269383
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: body1
+    100004: dress
+    100006: head
+    100008: joint10
+    100010: joint11
+    100012: joint12
+    100014: joint13
+    100016: joint7
+    100018: joint8
+    100020: joint8 1
+    100022: joint9
+    100024: joint9 1
+    100026: left
+    100028: left1
+    100030: Mesh
+    100032: polySurface1
+    100034: polySurface2
+    100036: polySurface3
+    100038: polySurface3 1
+    100040: polySurface4
+    100042: polySurface5
+    100044: polySurface6
+    100046: rite
+    100048: rite1
+    100050: root
+    100052: skeleton
+    100054: sm
+    100056: t1
+    100058: t2
+    100060: t3
+    100062: t4
+    100064: t5
+    100066: t6
+    100068: tail
+    100070: transform1
+    100072: transform2
+    100074: transform3
+    100076: transform4
+    100078: transform5
+    100080: transform6
+    100082: transform7
+    400000: //RootNode
+    400002: body1
+    400004: dress
+    400006: head
+    400008: joint10
+    400010: joint11
+    400012: joint12
+    400014: joint13
+    400016: joint7
+    400018: joint8
+    400020: joint8 1
+    400022: joint9
+    400024: joint9 1
+    400026: left
+    400028: left1
+    400030: Mesh
+    400032: polySurface1
+    400034: polySurface2
+    400036: polySurface3
+    400038: polySurface3 1
+    400040: polySurface4
+    400042: polySurface5
+    400044: polySurface6
+    400046: rite
+    400048: rite1
+    400050: root
+    400052: skeleton
+    400054: sm
+    400056: t1
+    400058: t2
+    400060: t3
+    400062: t4
+    400064: t5
+    400066: t6
+    400068: tail
+    400070: transform1
+    400072: transform2
+    400074: transform3
+    400076: transform4
+    400078: transform5
+    400080: transform6
+    400082: transform7
+    4300000: polySurface3
+    7400000: Idle
+    7400002: Run
+    7400004: Jump
+    9500000: //RootNode
+    13700000: polySurface3
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Mesh
+        weight: 1
+      - path: Mesh/polySurface1
+        weight: 1
+      - path: Mesh/polySurface1/transform5
+        weight: 1
+      - path: Mesh/polySurface2
+        weight: 1
+      - path: Mesh/polySurface2/transform6
+        weight: 1
+      - path: Mesh/polySurface3 1
+        weight: 1
+      - path: Mesh/polySurface3 1/transform7
+        weight: 1
+      - path: Mesh/polySurface4
+        weight: 1
+      - path: Mesh/polySurface4/transform4
+        weight: 1
+      - path: Mesh/polySurface5
+        weight: 1
+      - path: Mesh/polySurface5/transform3
+        weight: 1
+      - path: Mesh/polySurface6
+        weight: 1
+      - path: Mesh/polySurface6/transform2
+        weight: 1
+      - path: Mesh/transform1
+        weight: 1
+      - path: polySurface3
+        weight: 1
+      - path: skeleton
+        weight: 1
+      - path: sm
+        weight: 1
+      - path: sm/body1
+        weight: 1
+      - path: sm/body1/dress
+        weight: 1
+      - path: sm/body1/head
+        weight: 1
+      - path: sm/body1/root
+        weight: 1
+      - path: sm/body1/root/joint7
+        weight: 1
+      - path: sm/body1/root/joint7/joint8 1
+        weight: 1
+      - path: sm/body1/root/joint7/joint8 1/joint9 1
+        weight: 1
+      - path: sm/body1/root/joint10
+        weight: 1
+      - path: sm/body1/root/joint10/joint8
+        weight: 1
+      - path: sm/body1/root/joint10/joint8/joint9
+        weight: 1
+      - path: sm/body1/root/joint11
+        weight: 1
+      - path: sm/body1/root/joint11/joint12
+        weight: 1
+      - path: sm/body1/root/joint11/joint12/joint13
+        weight: 1
+      - path: sm/body1/root/t1
+        weight: 1
+      - path: sm/body1/root/t1/t2
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3/t4
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3/t4/t5
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3/t4/t5/t6
+        weight: 1
+      - path: sm/body1/tail
+        weight: 1
+      - path: sm/left
+        weight: 1
+      - path: sm/left/left1
+        weight: 1
+      - path: sm/rite
+        weight: 1
+      - path: sm/rite/rite1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Jump
+      takeName: Take 001
+      firstFrame: 20
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Mesh
+        weight: 1
+      - path: Mesh/polySurface1
+        weight: 1
+      - path: Mesh/polySurface1/transform5
+        weight: 1
+      - path: Mesh/polySurface2
+        weight: 1
+      - path: Mesh/polySurface2/transform6
+        weight: 1
+      - path: Mesh/polySurface3 1
+        weight: 1
+      - path: Mesh/polySurface3 1/transform7
+        weight: 1
+      - path: Mesh/polySurface4
+        weight: 1
+      - path: Mesh/polySurface4/transform4
+        weight: 1
+      - path: Mesh/polySurface5
+        weight: 1
+      - path: Mesh/polySurface5/transform3
+        weight: 1
+      - path: Mesh/polySurface6
+        weight: 1
+      - path: Mesh/polySurface6/transform2
+        weight: 1
+      - path: Mesh/transform1
+        weight: 1
+      - path: polySurface3
+        weight: 1
+      - path: skeleton
+        weight: 1
+      - path: sm
+        weight: 1
+      - path: sm/body1
+        weight: 1
+      - path: sm/body1/dress
+        weight: 1
+      - path: sm/body1/head
+        weight: 1
+      - path: sm/body1/root
+        weight: 1
+      - path: sm/body1/root/joint7
+        weight: 1
+      - path: sm/body1/root/joint7/joint8 1
+        weight: 1
+      - path: sm/body1/root/joint7/joint8 1/joint9 1
+        weight: 1
+      - path: sm/body1/root/joint10
+        weight: 1
+      - path: sm/body1/root/joint10/joint8
+        weight: 1
+      - path: sm/body1/root/joint10/joint8/joint9
+        weight: 1
+      - path: sm/body1/root/joint11
+        weight: 1
+      - path: sm/body1/root/joint11/joint12
+        weight: 1
+      - path: sm/body1/root/joint11/joint12/joint13
+        weight: 1
+      - path: sm/body1/root/t1
+        weight: 1
+      - path: sm/body1/root/t1/t2
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3/t4
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3/t4/t5
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3/t4/t5/t6
+        weight: 1
+      - path: sm/body1/tail
+        weight: 1
+      - path: sm/left
+        weight: 1
+      - path: sm/left/left1
+        weight: 1
+      - path: sm/rite
+        weight: 1
+      - path: sm/rite/rite1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 65
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Mesh
+        weight: 1
+      - path: Mesh/polySurface1
+        weight: 1
+      - path: Mesh/polySurface1/transform5
+        weight: 1
+      - path: Mesh/polySurface2
+        weight: 1
+      - path: Mesh/polySurface2/transform6
+        weight: 1
+      - path: Mesh/polySurface3 1
+        weight: 1
+      - path: Mesh/polySurface3 1/transform7
+        weight: 1
+      - path: Mesh/polySurface4
+        weight: 1
+      - path: Mesh/polySurface4/transform4
+        weight: 1
+      - path: Mesh/polySurface5
+        weight: 1
+      - path: Mesh/polySurface5/transform3
+        weight: 1
+      - path: Mesh/polySurface6
+        weight: 1
+      - path: Mesh/polySurface6/transform2
+        weight: 1
+      - path: Mesh/transform1
+        weight: 1
+      - path: polySurface3
+        weight: 1
+      - path: skeleton
+        weight: 1
+      - path: sm
+        weight: 1
+      - path: sm/body1
+        weight: 1
+      - path: sm/body1/dress
+        weight: 1
+      - path: sm/body1/head
+        weight: 1
+      - path: sm/body1/root
+        weight: 1
+      - path: sm/body1/root/joint7
+        weight: 1
+      - path: sm/body1/root/joint7/joint8 1
+        weight: 1
+      - path: sm/body1/root/joint7/joint8 1/joint9 1
+        weight: 1
+      - path: sm/body1/root/joint10
+        weight: 1
+      - path: sm/body1/root/joint10/joint8
+        weight: 1
+      - path: sm/body1/root/joint10/joint8/joint9
+        weight: 1
+      - path: sm/body1/root/joint11
+        weight: 1
+      - path: sm/body1/root/joint11/joint12
+        weight: 1
+      - path: sm/body1/root/joint11/joint12/joint13
+        weight: 1
+      - path: sm/body1/root/t1
+        weight: 1
+      - path: sm/body1/root/t1/t2
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3/t4
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3/t4/t5
+        weight: 1
+      - path: sm/body1/root/t1/t2/t3/t4/t5/t6
+        weight: 1
+      - path: sm/body1/tail
+        weight: 1
+      - path: sm/left
+        weight: 1
+      - path: sm/left/left1
+        weight: 1
+      - path: sm/rite
+        weight: 1
+      - path: sm/rite/rite1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: sm
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
