@@ -25,7 +25,11 @@ public class leverActionScript : MonoBehaviour {
 		if (leverLeft && timer >= 0.0f)
 		{
 			timer -= Time.deltaTime;
-			if (timer < 0.0f) timer = 0.0f;
+			if (timer < 0.0f) 
+			{
+				timer = 0.0f;			
+				LeverFlip();
+			}
 		}
 		else if (!leverLeft && timer <= duration)
 		{
@@ -38,7 +42,7 @@ public class leverActionScript : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotVal);
 	}
 	
-	void LeverFlip()
+	public void LeverFlip()
 	{
 		leverLeft = !leverLeft;
 	}

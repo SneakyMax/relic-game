@@ -118,5 +118,9 @@ public class PlayerController2D : MonoBehaviour
         {
             _motor.Dash();
         }
+		if(Input.GetButtonDown("Fire1"))
+		{
+			_motor.ForceDash();
+		}
     }
 }
