@@ -6,6 +6,10 @@ namespace Assets.Scripts
     public class PlayersDefinition : MonoBehaviour
     {
         public PlayerDefinition[] Players;
+
+		public void Start() {
+			DontDestroyOnLoad(gameObject);
+		}
     }
 
     [Serializable]

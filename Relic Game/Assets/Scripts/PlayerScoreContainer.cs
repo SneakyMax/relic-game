@@ -20,6 +20,7 @@ namespace Assets.Scripts
 		private Image relic2;
 
 		public void Awake() {
+			PlayersDefinition = FindObjectOfType<PlayersDefinition> ();
 			SetupScoreText ();
 			Component[] comps = gameObject.GetComponentsInChildren(typeof(Image));
 			foreach(Component comp in comps) {

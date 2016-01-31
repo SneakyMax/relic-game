@@ -10,22 +10,23 @@ namespace Assets.Scripts
     {
         public event PlayerScoreChanged ScoreChanged;
 
-        public PlayersDefinition PlayersDefinition;
+        private PlayersDefinition PlayersDefinition;
 
         private IDictionary<int, int> playerScores;
 
-        public void Awake()
-        {
-            if (PlayersDefinition == null)
-                throw new InvalidOperationException("Must set players definition.");
+		public void Start() {
+			PlayersDefinition = FindObjectOfType<PlayersDefinition> ();
+			
+			if (PlayersDefinition == null)
+				throw new InvalidOperationException("Player Definitions are supposed to carry over from ready up screen but they didn't. My bad - Dylan");
 
-            playerScores = new Dictionary<int, int>();
-
-            foreach (var player in PlayersDefinition.Players)
-            {
-                playerScores[player.PlayerNumber] = 0;
-            }
-        }
+			playerScores = new Dictionary<int, int>();
+			
+			foreach (var player in PlayersDefinition.Players)
+			{
+				playerScores[player.PlayerNumber] = 0;
+			}
+		}
 
         public int GetScore(int playerNumber)
         {

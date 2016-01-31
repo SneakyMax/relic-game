@@ -7,3 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Dylan/StartScrene.unity
+  - enabled: 1
+    path: Assets/Scenes/Dylan/ReadyUpScene.unity
+  - enabled: 1
+    path: Assets/Scenes/Dylan/DylanTestScene.unity

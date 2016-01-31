@@ -16,9 +16,9 @@ namespace Assets.Scripts
     {
         public RelicSpawner RelicSpawner;
 
-		public event GameStateChanged stateChanged;
+		public static event GameStateChanged stateChanged;
 
-		private GameState gameState = GameState.START;
+		private static GameState gameState = GameState.START;
 
 		public void Awake() {
 
@@ -29,7 +29,7 @@ namespace Assets.Scripts
         {
 			addStateChangeListeners ();
 
-            RelicSpawner.RemoveAndSpawnNewRelic();
+            //RelicSpawner.RemoveAndSpawnNewRelic();
         }
 
 		private void addStateChangeListeners() {
@@ -37,12 +37,12 @@ namespace Assets.Scripts
 				if(oldState == GameState.START && newState == GameState.READY_UP) {
 					Application.LoadLevel(1);
 				} else if(oldState == GameState.READY_UP && newState == GameState.ACTIVE_GAME) {
-
+					Application.LoadLevel(2);
 				}
 			};
 		}
 
-		public GameState GameState {
+		public static GameState GameState {
 			get {
 				return gameState;
 			}
