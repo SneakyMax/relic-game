@@ -1,22 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
 namespace Assets.Scripts
 {
+    [Serializable]
+    public struct LevelInfo
+    {
+        public int LevelId;
+        public bool IsEgyptLevel;
+    }
+
     public class LevelManager : MonoBehaviour
     {
         public float SecondsToHoldSelect = 2;
 
         public int ReadyUpLevelId;
 
-        public int[] LevelIds;
+        public LevelInfo[] Levels;
 
-        private Queue<int> levelQueue;
+        private Queue<LevelInfo> levelQueue;
         private Random random;
 
         private float secondsSelectHeld;
+
+        public LevelInfo CurrentLevel { get; private set; }
+
+        public bool CurrentLevelIsEgypt
+        {
+            get { return CurrentLevel.IsEgyptLevel; }
+        }
 
         public void Start()
         {
@@ -26,7 +41,7 @@ namespace Assets.Scripts
 
             DontDestroyOnLoad(gameObject);
 
-            levelQueue = new Queue<int>();
+            levelQueue = new Queue<LevelInfo>();
             random = new Random();
 
             QueueAll();
@@ -34,7 +49,7 @@ namespace Assets.Scripts
 
         private void QueueAll()
         {
-            foreach (var level in LevelIds.OrderBy(x => random.Next(10000)))
+            foreach (var level in Levels.OrderBy(x => random.Next(10000)))
             {
                 levelQueue.Enqueue(level);
             }
@@ -48,8 +63,10 @@ namespace Assets.Scripts
             var level = levelQueue.Dequeue();
 
 #pragma warning disable 618
-            Application.LoadLevel(level);
+            Application.LoadLevel(level.LevelId);
 #pragma warning restore 618
+
+            CurrentLevel = level;
         }
 
         public void Update()
@@ -65,7 +82,9 @@ namespace Assets.Scripts
 
             if (secondsSelectHeld >= SecondsToHoldSelect)
             {
+#pragma warning disable 618
                 Application.LoadLevel(ReadyUpLevelId);
+#pragma warning restore 618
             }
         }
     }
