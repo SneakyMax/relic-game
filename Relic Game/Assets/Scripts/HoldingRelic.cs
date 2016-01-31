@@ -13,5 +13,10 @@ namespace Assets.Scripts
         {
             Spawner.SpawnAsDropFromPlayer(RelicPlayer);
         }
+
+        public void RemoveAndRespawn()
+        {
+            Spawner.RemoveAndSpawnNewRelic(this);
+        }
     }
 }
