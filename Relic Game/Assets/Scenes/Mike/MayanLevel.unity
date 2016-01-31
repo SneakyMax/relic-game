@@ -5471,15 +5471,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 479254, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.23609221
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479254, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.25088739
+      value: .125
       objectReference: {fileID: 0}
     - target: {fileID: 479254, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -12.650959
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 479254, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5504,6 +5504,38 @@ Prefab:
     - target: {fileID: 19833858, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
       propertyPath: InitialModule.startLifetime.scalar
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 466142, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 466142, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 466142, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 475512, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19874700, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19874700, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19833858, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19874700, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
+      propertyPath: SizeModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52bacda88764ffa4ab46b4ef783b3505, type: 2}
@@ -5734,7 +5766,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 1
-  m_Color: {r: .912981749, g: 1, b: .713235259, a: 1}
+  m_Color: {r: .882352948, g: .9902637, b: 1, a: 1}
   m_Intensity: 1.37
   m_Range: 10
   m_SpotAngle: 30
