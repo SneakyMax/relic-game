@@ -10,6 +10,8 @@ namespace Assets.Scripts
     {
         public PlayersDefinition PlayersDefinition;
 
+        public MainScenePreferences Preferences;
+
         public Text NextStepText;
 
         public int MinPlayers = 2;
@@ -49,6 +51,11 @@ namespace Assets.Scripts
         {
             if (readyStates.Count(x => x.Value) < MinPlayers)
                 return;
+
+            foreach (var pair in readyStates)
+            {
+                Preferences.PlayersIn[pair.Key] = pair.Value;
+            }
 
 #pragma warning disable 618
             Application.LoadLevel(2);

@@ -2226,6 +2226,10 @@ Prefab:
       propertyPath: PlayerNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11466440, guid: 5fc220286bd7b4847bb5dc25d4ca68ee, type: 2}
+      propertyPath: PlayerSpawner
+      value: 
+      objectReference: {fileID: 1245039933}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fc220286bd7b4847bb5dc25d4ca68ee, type: 2}
   m_IsPrefabParent: 0
@@ -2510,6 +2514,10 @@ Prefab:
       propertyPath: m_Name
       value: PlayerScoreContainer_ul
       objectReference: {fileID: 0}
+    - target: {fileID: 11466440, guid: 5fc220286bd7b4847bb5dc25d4ca68ee, type: 2}
+      propertyPath: PlayerSpawner
+      value: 
+      objectReference: {fileID: 1245039933}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fc220286bd7b4847bb5dc25d4ca68ee, type: 2}
   m_IsPrefabParent: 0
@@ -4897,6 +4905,10 @@ Prefab:
       propertyPath: PlayerNumber
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11466440, guid: 5fc220286bd7b4847bb5dc25d4ca68ee, type: 2}
+      propertyPath: PlayerSpawner
+      value: 
+      objectReference: {fileID: 1245039933}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fc220286bd7b4847bb5dc25d4ca68ee, type: 2}
   m_IsPrefabParent: 0
@@ -7641,6 +7653,10 @@ Prefab:
       propertyPath: PlayerNumber
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11466440, guid: 5fc220286bd7b4847bb5dc25d4ca68ee, type: 2}
+      propertyPath: PlayerSpawner
+      value: 
+      objectReference: {fileID: 1245039933}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fc220286bd7b4847bb5dc25d4ca68ee, type: 2}
   m_IsPrefabParent: 0
