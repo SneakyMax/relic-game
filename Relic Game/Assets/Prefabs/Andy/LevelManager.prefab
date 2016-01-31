@@ -41,7 +41,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SecondsToHoldSelect: 2
   ReadyUpLevelId: 0
-  LevelIds: 01000000020000000300000004000000
+  Levels:
+  - LevelId: 1
+    IsEgyptLevel: 0
+  - LevelId: 2
+    IsEgyptLevel: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

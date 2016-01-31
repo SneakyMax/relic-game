@@ -98,9 +98,9 @@ namespace Assets.Scripts
             var playerDefinition = PlayersDefinition.Players.FirstOrDefault(x => x.PlayerNumber == PlayerNumber);
 
             var color = playerDefinition.Color;
-            var transparentColor = new Color(color.r, color.g, color.b, 0.3f); 
+            var transparentColor = new Color(color.r, color.g, color.b); 
 
-            transform.FindChild("Background").GetComponent<Image>().color = transparentColor;
+            transform.FindChild("bg2").GetComponent<Image>().color = transparentColor;
         }
     }
 }
