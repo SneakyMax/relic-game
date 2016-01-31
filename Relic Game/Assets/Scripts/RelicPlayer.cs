@@ -154,7 +154,7 @@ namespace Assets.Scripts
             GetComponent<PlayerController>().DoBounceOnOtherPlayer(collision);
         }
 
-        private void Die(DeathType deathType)
+        public void Die(DeathType deathType)
         {
             deathPosition = transform.position;
 
@@ -192,6 +192,11 @@ namespace Assets.Scripts
                 HoldingRelic.DropAtPlayer();
                 HoldingRelic = null;
             }
+        }
+
+        public void StopInput()
+        {
+            GetComponent<PlayerController>().AllowInput = false;
         }
     }
 }

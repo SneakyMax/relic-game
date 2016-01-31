@@ -16,8 +16,12 @@ namespace Assets.Scripts
 
         public RelicPlayer PlayerPrefab;
 
+        public bool Enabled { get; private set; }
+
         [Range(0, 10)]
         public float RespawnDelay = 3;
+
+        private Coroutine spawnAfterDelayCoroutine;
         
         public void Awake()
         {
@@ -48,7 +52,7 @@ namespace Assets.Scripts
 
         public void SpawnAfterDelay(int playerNumber, TimeSpan? delay = null)
         {
-            StartCoroutine(SpawnAfterDelayCoroutine(playerNumber, delay ?? TimeSpan.FromSeconds(RespawnDelay)));
+            spawnAfterDelayCoroutine = StartCoroutine(SpawnAfterDelayCoroutine(playerNumber, delay ?? TimeSpan.FromSeconds(RespawnDelay)));
         }
 
         private IEnumerator SpawnAfterDelayCoroutine(int playerNumber, TimeSpan delay)
@@ -59,6 +63,9 @@ namespace Assets.Scripts
 
         public void Spawn(int playerNumber)
         {
+            if (!Enabled)
+                return;
+
             var player = Players.FirstOrDefault(x => x.PlayerNumber == playerNumber);
 
             if (player == null)
@@ -94,7 +101,7 @@ namespace Assets.Scripts
             {
                 if (player.PlayerInstance != null)
                 {
-                    Destroy(player.PlayerInstance);
+                    Destroy(player.PlayerInstance.gameObject);
                     player.PlayerInstance = null;
                 }
             }
@@ -112,6 +119,19 @@ namespace Assets.Scripts
 
                 info.PlayerInstance = null;
             }
+        }
+
+        public void Disable()
+        {
+            Enabled = false;
+
+            if (spawnAfterDelayCoroutine != null)
+                StopCoroutine(spawnAfterDelayCoroutine);
+        }
+
+        public void Enable()
+        {
+            Enabled = true;
         }
     }
 

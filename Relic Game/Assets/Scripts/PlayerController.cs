@@ -45,6 +45,8 @@ namespace Assets.Scripts
 
         public PlayerState State { get; set; }
 
+        public bool AllowInput { get; set; }
+
         public enum PlayerState
         {
             Grounded,
@@ -69,6 +71,7 @@ namespace Assets.Scripts
 		public void Start()
 		{
 			playerNumber = GetComponent<RelicPlayer>().PlayerNumber;
+		    AllowInput = true;
 		}
 
         public void Update()
@@ -261,6 +264,13 @@ namespace Assets.Scripts
 
         private void UpdateInput()
         {
+            if (!AllowInput)
+            {
+                desiredHorizontalAccelleration = 0;
+                jumpRequested = false;
+                return;
+            }
+
             if (playerNumber == 0)
                 throw new InvalidOperationException("Player number hasn't been set.");
             
@@ -268,9 +278,9 @@ namespace Assets.Scripts
 
             desiredHorizontalAccelleration = horizontalAxis * MaxHorizontalAccelleration;
 
-            LastRequestedDirection = horizontalAxis == -1
+            LastRequestedDirection = horizontalAxis < 0
                 ? Direction.Left
-                : horizontalAxis == 1 ? Direction.Right : LastRequestedDirection;
+                : horizontalAxis > 0 ? Direction.Right : LastRequestedDirection;
 
             if (Input.GetButton("buttonA" + playerNumber)) 
             {
