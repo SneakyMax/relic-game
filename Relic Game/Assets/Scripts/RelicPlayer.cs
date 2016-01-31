@@ -32,17 +32,14 @@ namespace Assets.Scripts
                 CollideWithRelic(collision);
                 return;
             }
-        }
 
-        public void OnTriggerEnter(Collider collider)
-        {
-            if(collider.gameObject.CompareTag("DropPoint"))
+            if (collision.gameObject.CompareTag("DropPoint"))
             {
-                CollideWithDropPoint(collider);
+                CollideWithDropPoint(collision);
             }
         }
 
-        private void CollideWithDropPoint(Collider collision)
+        private void CollideWithDropPoint(Collision collision)
         {
             if (HoldingRelic == null || HoldingRelic.gameObject == null)
                 return;

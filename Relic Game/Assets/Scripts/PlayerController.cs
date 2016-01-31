@@ -233,7 +233,7 @@ namespace Assets.Scripts
 
             if (playerNumber == 1)
             {
-                Debug.Log(direction);
+                //Debug.Log(direction);
             }
             
 			if(direction != 0)
