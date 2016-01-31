@@ -32,15 +32,36 @@ namespace Assets.Scripts
 
         public void Start()
         {
-            // TODO temporary, this will be done on the screen where everyone readies up.
-            PlayerSpawner.AddPlayer(1);
-            PlayerSpawner.AddPlayer(2);
-            PlayerSpawner.AddPlayer(3);
-            PlayerSpawner.AddPlayer(4);
-
+            SetUpPlayers();
+            
             TransitionToSpawnPlayers();
             
             ScoreController.ScoreChanged += HangleScoreChanged;
+        }
+
+        private void SetUpPlayers()
+        {
+            var prefsObj = GameObject.Find("Main Scene Preferences");
+
+            if (prefsObj != null)
+            {
+                var prefs = prefsObj.GetComponent<MainScenePreferences>();
+                foreach (var pair in prefs.PlayersIn)
+                {
+                    if (pair.Value)
+                    {
+                        PlayerSpawner.AddPlayer(pair.Key);
+                    }
+                }
+                Destroy(prefsObj);
+            }
+            else
+            {
+                PlayerSpawner.AddPlayer(1);
+                PlayerSpawner.AddPlayer(2);
+                PlayerSpawner.AddPlayer(3);
+                PlayerSpawner.AddPlayer(4);
+            }
         }
 
         private void TransitionToSpawnPlayers()
@@ -97,11 +118,7 @@ namespace Assets.Scripts
                 if (player.PlayerInstance != null)
                     player.PlayerInstance.Die(RelicPlayer.DeathType.Squash);
             }
-
-            var surviving = PlayerSpawner.Players.FirstOrDefault(x => x.PlayerInstance != null);
-            if (surviving == null)
-                throw new InvalidOperationException("no player left??");
-
+            
             yield return new WaitForSeconds(2);
 
             PlayerSpawner.DespawnAllPlayers();
@@ -109,6 +126,19 @@ namespace Assets.Scripts
             yield return new WaitForSeconds(1);
 
             TransitionToSpawnPlayers();
+        }
+
+        private void NextLevel()
+        {
+            var levelManager = GameObject.Find("LevelManager");
+
+            if (levelManager == null)
+            {
+                TransitionToSpawnPlayers();
+                return;
+            }
+
+            levelManager.GetComponent<LevelManager>().NextRandomLevel();
         }
 
         private IEnumerator SpawnAfterDelay(TimeSpan delay)

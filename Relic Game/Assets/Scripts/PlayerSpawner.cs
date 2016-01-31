@@ -21,7 +21,7 @@ namespace Assets.Scripts
         [Range(0, 10)]
         public float RespawnDelay = 3;
 
-        private Coroutine spawnAfterDelayCoroutine;
+        private IDictionary<int, Coroutine> spawnAfterDelayCoroutines;
         
         public void Awake()
         {
@@ -29,6 +29,7 @@ namespace Assets.Scripts
                 throw new InvalidOperationException("no players definition");
 
             Players = new List<PlayerInfo>();
+            spawnAfterDelayCoroutines = new Dictionary<int, Coroutine>();
 
             if (PlayerSpawnPoints.Length == 0)
                 throw new InvalidOperationException("Need to add player spawn points.");
@@ -52,7 +53,10 @@ namespace Assets.Scripts
 
         public void SpawnAfterDelay(int playerNumber, TimeSpan? delay = null)
         {
-            spawnAfterDelayCoroutine = StartCoroutine(SpawnAfterDelayCoroutine(playerNumber, delay ?? TimeSpan.FromSeconds(RespawnDelay)));
+            if(spawnAfterDelayCoroutines.ContainsKey(playerNumber) && spawnAfterDelayCoroutines[playerNumber] != null)
+                StopCoroutine(spawnAfterDelayCoroutines[playerNumber]);
+
+            spawnAfterDelayCoroutines[playerNumber] = StartCoroutine(SpawnAfterDelayCoroutine(playerNumber, delay ?? TimeSpan.FromSeconds(RespawnDelay)));
         }
 
         private IEnumerator SpawnAfterDelayCoroutine(int playerNumber, TimeSpan delay)
@@ -70,6 +74,9 @@ namespace Assets.Scripts
 
             if (player == null)
                 throw new InvalidOperationException("Player " + playerNumber + " hasn't been added!");
+
+            if (player.PlayerInstance != null)
+                Despawn(playerNumber);
 
             var spawnPoint = PlayerSpawnPoints.FirstOrDefault(x => x.PlayerNumber == playerNumber);
             if (spawnPoint == null)
@@ -125,8 +132,11 @@ namespace Assets.Scripts
         {
             Enabled = false;
 
-            if (spawnAfterDelayCoroutine != null)
-                StopCoroutine(spawnAfterDelayCoroutine);
+            foreach (var pair in spawnAfterDelayCoroutines)
+            {
+                if (pair.Value != null)
+                    StopCoroutine(pair.Value);
+            }
         }
 
         public void Enable()

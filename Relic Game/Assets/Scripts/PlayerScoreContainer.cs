@@ -10,6 +10,8 @@ namespace Assets.Scripts
     {
         public PlayersDefinition PlayersDefinition;
 
+        public PlayerSpawner PlayerSpawner;
+
         public ScoreController ScoreController;
 
         public int PlayerNumber;
@@ -24,9 +26,20 @@ namespace Assets.Scripts
 
 		    ScoreController.ScoreChanged += HandleScoreChange;
 
-			if (ScoreController == null || PlayersDefinition == null || ItemPrefab == null)
+			if (ScoreController == null || PlayersDefinition == null || ItemPrefab == null || PlayerSpawner == null)
 				throw new InvalidOperationException("Incorrectly configured.");
 		}
+
+        public void Start()
+        {
+            SetBackgroundColor();
+
+            var playerInfo = PlayerSpawner.Players.FirstOrDefault(x => x.PlayerNumber == PlayerNumber);
+            if (playerInfo == null)
+            {
+                gameObject.SetActive(false);
+            }
+        }
 
         private void HandleScoreChange(int playerNumber, int newScore)
         {
@@ -48,11 +61,6 @@ namespace Assets.Scripts
                     item.transform.SetParent(transform.FindChild("Items"), false);
                 }
             }
-        }
-
-        public void Start()
-        {
-            SetBackgroundColor();
         }
 
         private void SetBackgroundColor()
