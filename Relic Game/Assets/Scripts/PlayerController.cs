@@ -58,6 +58,8 @@ namespace Assets.Scripts
         private bool jumpRequested;
         private float desiredHorizontalAccelleration;
         private bool hitGround;
+		private Animator AnimController;
+		private float localModelScale = 0.25f;
 
         private Vector2 currentVelocity;
 
@@ -71,12 +73,28 @@ namespace Assets.Scripts
 		public void Start()
 		{
 			playerNumber = GetComponent<RelicPlayer>().PlayerNumber;
+			AnimController = GetComponentInChildren<Animator>();
 		    AllowInput = true;
 		}
 
         public void Update()
         {
             UpdateInput();
+			if(currentVelocity.x != 0.0f)
+			{
+				AnimController.SetBool("isRunning", true);
+				if(currentVelocity.x < 0.0f)
+					AnimController.gameObject.transform.localScale = new Vector3(localModelScale, localModelScale, -localModelScale);
+				else
+					AnimController.gameObject.transform.localScale = new Vector3(localModelScale, localModelScale, localModelScale);
+			}
+			else
+				AnimController.SetBool("isRunning", false);
+
+			if(currentVelocity.y > 0.001f)
+				AnimController.SetBool("isJumping", true);
+			else
+				AnimController.SetBool("isJumping", false);
         }
 
         public void FixedUpdate()
