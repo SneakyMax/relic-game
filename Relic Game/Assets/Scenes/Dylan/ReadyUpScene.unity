@@ -95,8 +95,9 @@ GameObject:
   - 224: {fileID: 24449126}
   - 222: {fileID: 24449125}
   - 114: {fileID: 24449124}
+  - 114: {fileID: 24449127}
   m_Layer: 5
-  m_Name: Panel (4)
+  m_Name: Player4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
+  m_Color: {r: 0, g: .0896549225, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -143,15 +144,27 @@ RectTransform:
   m_GameObject: {fileID: 24449123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: .524991632, z: 1}
   m_Children: []
   m_Father: {fileID: 1946618428}
   m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -200, y: 0}
+  m_AnchoredPosition: {x: 154.899994, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &24449127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 24449123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97109e6aac6f9824792173488962f38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerNumber: 4
 --- !u!1 &580428157
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,8 +175,9 @@ GameObject:
   - 224: {fileID: 580428158}
   - 222: {fileID: 580428160}
   - 114: {fileID: 580428159}
+  - 114: {fileID: 580428161}
   m_Layer: 5
-  m_Name: Panel (3)
+  m_Name: Player3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,13 +191,13 @@ RectTransform:
   m_GameObject: {fileID: 580428157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: .524991632, z: 1}
   m_Children: []
   m_Father: {fileID: 1946618428}
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -200, y: 0}
+  m_AnchoredPosition: {x: 50.2000008, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &580428159
@@ -198,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
+  m_Color: {r: 0, g: 1, b: .131034613, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -219,6 +233,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 580428157}
+--- !u!114 &580428161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 580428157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97109e6aac6f9824792173488962f38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerNumber: 3
 --- !u!1 &779292935
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +375,7 @@ MonoBehaviour:
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
-  m_CancelButton: Cancel
+  m_CancelButton: Submit
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
   m_ForceModuleActive: 0
@@ -389,8 +415,9 @@ GameObject:
   - 224: {fileID: 1283669498}
   - 222: {fileID: 1283669500}
   - 114: {fileID: 1283669499}
+  - 114: {fileID: 1283669501}
   m_Layer: 5
-  m_Name: Panel (2)
+  m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,13 +431,13 @@ RectTransform:
   m_GameObject: {fileID: 1283669497}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: .524991632, z: 1}
   m_Children: []
   m_Father: {fileID: 1946618428}
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -200, y: 0}
+  m_AnchoredPosition: {x: -52.5999985, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1283669499
@@ -425,7 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
+  m_Color: {r: 1, g: .972413778, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -446,6 +473,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1283669497}
+--- !u!114 &1283669501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1283669497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97109e6aac6f9824792173488962f38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerNumber: 2
 --- !u!1 &1700581177
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +716,7 @@ GameObject:
   - 224: {fileID: 2007053958}
   - 222: {fileID: 2007053960}
   - 114: {fileID: 2007053959}
+  - 114: {fileID: 2007053961}
   m_Layer: 5
   m_Name: Player1
   m_TagString: Untagged
@@ -692,13 +732,13 @@ RectTransform:
   m_GameObject: {fileID: 2007053957}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: .524991632, z: 1}
   m_Children: []
   m_Father: {fileID: 1946618428}
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -200, y: 0}
+  m_AnchoredPosition: {x: -155.800003, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2007053959
@@ -713,7 +753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -734,3 +774,15 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2007053957}
+--- !u!114 &2007053961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2007053957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97109e6aac6f9824792173488962f38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerNumber: 1

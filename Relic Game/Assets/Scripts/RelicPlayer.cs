@@ -4,6 +4,8 @@ namespace Assets.Scripts
 {
     public class RelicPlayer : MonoBehaviour
     {
+		public int PlayerNumber = 0;
+
         public HoldingRelic HoldingRelicPrefab;
 
         public HoldingRelic HoldingRelic { get; set; }

@@ -29,7 +29,7 @@ namespace Assets.Scripts
         {
 			addStateChangeListeners ();
 
-            RelicSpawner.RemoveAndSpawnNewRelic();
+            //RelicSpawner.RemoveAndSpawnNewRelic();
         }
 
 		private void addStateChangeListeners() {

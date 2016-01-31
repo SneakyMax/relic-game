@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets.Scripts
 {
     public class PlayerController : MonoBehaviour
-    {
+    {	
         [Range(0, 100)]
         public float Gravity;
 
@@ -48,18 +48,24 @@ namespace Assets.Scripts
             ClimbingUpLedge
         }
 
+		private int playerNumber;
         private bool jumpRequested;
         private float desiredHorizontalAccelleration;
         private bool hitGround;
 
         private Vector2 currentVelocity;
 
-        private new Rigidbody rigidbody;
-        
+        private new Rigidbody rigidbody;       
+
         public void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
         }
+
+		public void Start()
+		{
+			playerNumber = GetComponent<RelicPlayer>().PlayerNumber;
+		}
 
         public void Update()
         {
@@ -217,7 +223,7 @@ namespace Assets.Scripts
 
         private void UpdateInput()
         {
-            var horizontalAxis = Input.GetAxis("Horizontal");
+            var horizontalAxis = Input.GetAxis("Horizontal" + playerNumber);
 
             /*if (Mathf.Abs(horizontalAxis) > 0.1)
             {
@@ -228,7 +234,12 @@ namespace Assets.Scripts
                 desiredHorizontalAccelleration = 0;
             }*/
 
-            var direction = (Input.GetKey(KeyCode.A) ? -1 : 0) + (Input.GetKey(KeyCode.D) ? 1 : 0);
+            //var direction = (Input.GetKey(KeyCode.A) ? -1 : 0) + (Input.GetKey(KeyCode.D) ? 1 : 0);
+			var direction = Input.GetAxis("Horizontal" + playerNumber);
+			if(direction != 0)
+			{
+				direction = direction / Mathf.Abs(direction);
+			}
 
             desiredHorizontalAccelleration = direction * MaxHorizontalAccelleration;
 
@@ -236,7 +247,7 @@ namespace Assets.Scripts
                 ? Direction.Left
                 : direction == 1 ? Direction.Right : LastRequestedDirection;
 
-            if (Input.GetButton("Jump") || Input.GetKeyDown(KeyCode.Space)) 
+            if (Input.GetButton("buttonA" + playerNumber)) 
             {
                 if(State == PlayerState.Grounded)
                     jumpRequested = true;
