@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
@@ -53,7 +53,7 @@ namespace Assets.Scripts
         {
             if (oldState == GameState.Start && newState == GameState.ReadyUp)
             {
-                SceneManager.LoadScene(1);
+                //SceneManager.LoadScene(1);
             }
             else if (oldState == GameState.ReadyUp && newState == GameState.ActiveGame)
             {

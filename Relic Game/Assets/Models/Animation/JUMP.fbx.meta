@@ -92,7 +92,7 @@ ModelImporter:
     400082: transform8
     400084: transform9
     4300000: polySurface1
-    7400000: Take 001
+    7400000: Jump
     9500000: //RootNode
     13700000: polySurface1
   materials:
@@ -116,7 +116,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Jump
       takeName: Take 001
       firstFrame: 1
       lastFrame: 40

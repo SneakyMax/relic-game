@@ -218,9 +218,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179398}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .25, y: .25, z: .25}
   m_Children:
   - {fileID: 444872}
   - {fileID: 432204}
@@ -273,7 +273,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.76, y: 2.2399998, z: 0}
+  m_LocalPosition: {x: .75999999, y: 2.23999977, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 464514}
@@ -285,7 +285,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 2.1638925, z: -0.028785558}
+  m_LocalPosition: {x: -0, y: 2.16389251, z: -.0287855584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 451684}
@@ -298,8 +298,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.88, y: -2.56, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalPosition: {x: 9.31410027, y: .430000246, z: .249914169}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 431522}
   - {fileID: 468712}
@@ -313,7 +313,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.12, y: 2.34, z: 0}
+  m_LocalPosition: {x: -1.12, y: 2.33999991, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 464514}
@@ -363,10 +363,8 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -387,7 +385,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: .0500000007
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -402,7 +400,7 @@ Animator:
   m_GameObject: {fileID: 179398}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8dab4da1b948ce14eb221344e135e913, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 247ce2ac47e9d9f4d98476ae7a29c5f4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -424,13 +422,13 @@ MonoBehaviour:
   Gravity: 60
   MaxHorizontalSpeed: 22
   MaxHorizontalAccelleration: 10
-  AirControl: 0.5
+  AirControl: .5
   GroundFriction: 1.5
-  ReverseSpeedFactor: 2.94
+  ReverseSpeedFactor: 2.94000006
   JumpStartThreshhold: 1
   JumpStartAmount: 3
   JumpForce: 13
-  InstantStopSpeedThreshold: 6.1
+  InstantStopSpeedThreshold: 6.0999999
 --- !u!114 &11435410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -453,10 +451,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 913a5a379875f6b4f8ab4bfa19f4124b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.18
-  m_Height: 4.99
+  m_Radius: .294999987
+  m_Height: 1.24749994
   m_Direction: 1
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Center: {x: 0, y: .625, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
