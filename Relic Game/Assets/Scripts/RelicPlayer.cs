@@ -6,7 +6,14 @@ namespace Assets.Scripts
 {
     public class RelicPlayer : MonoBehaviour
     {
-		public int PlayerNumber = 0;
+        public enum DeathType
+        {
+            None,
+            Player,
+            Squash
+        }
+
+        public int PlayerNumber = 0;
 
         public HoldingRelic HoldingRelicPrefab;
 
@@ -21,7 +28,14 @@ namespace Assets.Scripts
         private Transform leftHoldPosition;
         private Transform rightHoldPosition;
 
+        public GameObject SquishEffects;
+        public GameObject DeathByPlayerEffects;
+
         private PlayerController.Direction? lastDirection;
+
+        private CameraController cameraController;
+
+        private Vector3 deathPosition;
 
         public void Awake()
         {
@@ -29,6 +43,8 @@ namespace Assets.Scripts
 
             leftHoldPosition = transform.FindChild("RelicHoldPositionLeft");
             rightHoldPosition = transform.Find("RelicHoldPositionRight");
+
+            cameraController = Camera.main.GetComponent<CameraController>();
         }
 
         public void OnCollisionEnter(Collision collision)
@@ -68,7 +84,7 @@ namespace Assets.Scripts
                 HoldingRelic = null;
             }
 
-            Die();
+            Die(DeathType.None);
         }
 
         private void CollideWithCrushingTrap(Collision collision)
@@ -82,7 +98,7 @@ namespace Assets.Scripts
             if (!hit)
                 return;
 
-            BeSquashed(collision.gameObject);
+            BeSquashed(collision.gameObject, DeathType.Squash);
 
             var trapController = collision.gameObject.GetComponentInParent<trapScript>();
             if (trapController == null)
@@ -133,20 +149,43 @@ namespace Assets.Scripts
 
         public void SquashOtherPlayer(GameObject otherPlayer, Collision collision)
         {
-            otherPlayer.GetComponent<RelicPlayer>().BeSquashed(gameObject);
+            otherPlayer.GetComponent<RelicPlayer>().BeSquashed(gameObject, DeathType.Player);
 
             GetComponent<PlayerController>().DoBounceOnOtherPlayer(collision);
         }
 
-        private void Die()
+        private void Die(DeathType deathType)
         {
+            deathPosition = transform.position;
+
             PlayerInfo.Spawner.Despawn(PlayerNumber);
             PlayerInfo.Spawner.SpawnAfterDelay(PlayerNumber);
+
+            if (deathType == DeathType.Player)
+                PlayerDeathEffects();
+            else if (deathType == DeathType.Squash)
+                SquashDeathEffects();
         }
 
-        public void BeSquashed(GameObject squasher)
+        private void SquashDeathEffects()
         {
-            Die();
+            cameraController.ShakeScreen(1, TimeSpan.FromSeconds(0.5f));
+
+            if(SquishEffects != null)
+                Instantiate(SquishEffects, deathPosition, Quaternion.identity);
+        }
+
+        private void PlayerDeathEffects()
+        {
+            cameraController.ShakeScreen(0.5f, TimeSpan.FromSeconds(0.5f));
+
+            if(DeathByPlayerEffects != null)
+                Instantiate(DeathByPlayerEffects, deathPosition, Quaternion.identity);
+        }
+
+        public void BeSquashed(GameObject squasher, DeathType deathType)
+        {
+            Die(deathType);
 
             if (HoldingRelic != null)
             {
