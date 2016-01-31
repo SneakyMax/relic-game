@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using Assets.Scripts;
 using Random = UnityEngine.Random;
@@ -21,13 +20,13 @@ public class Relic : MonoBehaviour
     public float MinCollisionSpeed;
 
     private CameraController cameraController;
-    private new Rigidbody2D rigidbody;
+    private new Rigidbody rigidbody;
 
 	// Use this for initialization
     private void Awake()
     {
         cameraController = Camera.main.GetComponent<CameraController>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -35,7 +34,7 @@ public class Relic : MonoBehaviour
     {
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter(Collision collision)
     {
         var collisionMagnitude = collision.relativeVelocity.magnitude;
         if (collisionMagnitude < MinCollisionSpeed)
@@ -65,7 +64,7 @@ public class Relic : MonoBehaviour
         var force = new Vector2(x, y) * EjectionSpeed;
 
         rigidbody.AddForce(force);
-        rigidbody.AddTorque(Random.Range(RotationMax / 2, RotationMax));
+        rigidbody.AddTorque(new Vector3(0, 0, Random.Range(RotationMax / 2, RotationMax)));
     }
 
     public void BeHeldBy(RelicPlayer player)

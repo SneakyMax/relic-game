@@ -8,21 +8,22 @@ namespace Assets.Scripts
 
         public HoldingRelic HoldingRelic { get; set; }
 
-        private PlatformerMotor2D motor;
+        private PlayerController playerController;
 
         private Transform leftHoldPosition;
         private Transform rightHoldPosition;
-        private bool? lastDirection;
+
+        private PlayerController.Direction? lastDirection;
 
         public void Awake()
         {
-            motor = GetComponent<PlatformerMotor2D>();
+            playerController = GetComponent<PlayerController>();
 
             leftHoldPosition = transform.FindChild("RelicHoldPositionLeft");
             rightHoldPosition = transform.Find("RelicHoldPositionRight");
         }
 
-        public void OnCollisionEnter2D(Collision2D collision)
+        public void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Relic"))
             {
@@ -31,7 +32,7 @@ namespace Assets.Scripts
             }
         }
 
-        public void OnTriggerEnter2D(Collider2D collider)
+        public void OnTriggerEnter(Collider collider)
         {
             if(collider.gameObject.CompareTag("DropPoint"))
             {
@@ -39,8 +40,11 @@ namespace Assets.Scripts
             }
         }
 
-        private void CollideWithDropPoint(Collider2D collision)
+        private void CollideWithDropPoint(Collider collision)
         {
+            if (HoldingRelic == null || HoldingRelic.gameObject == null)
+                return;
+
             Destroy(HoldingRelic.gameObject);
             HoldingRelic = null;
             lastDirection = null;
@@ -48,7 +52,7 @@ namespace Assets.Scripts
             collision.gameObject.GetComponent<DropPoint>().AcceptRelic(this);
         }
 
-        private void CollideWithRelic(Collision2D collision)
+        private void CollideWithRelic(Collision collision)
         {
             var relic = collision.gameObject.GetComponent<Relic>();
 
@@ -65,13 +69,14 @@ namespace Assets.Scripts
             if (HoldingRelic == null)
                 return;
 
-            if (motor.facingLeft == lastDirection)
+            if (playerController.LastRequestedDirection == lastDirection)
                 return;
 
             HoldingRelic.transform.localPosition = 
-                motor.facingLeft ? leftHoldPosition.localPosition : rightHoldPosition.localPosition;
+                playerController.LastRequestedDirection == PlayerController.Direction.Left ? 
+                leftHoldPosition.localPosition : rightHoldPosition.localPosition;
 
-            lastDirection = motor.facingLeft;
+            lastDirection = playerController.LastRequestedDirection;
         }
     }
 }
