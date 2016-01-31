@@ -20,13 +20,16 @@ namespace Assets.Scripts
 
         private Stack<GameObject> items;
 
+        public Sprite EgyptContainer;
+        public Sprite MayanContainer;
+
 		public void Awake()
 		{
 		    items = new Stack<GameObject>();
 
 		    ScoreController.ScoreChanged += HandleScoreChange;
 
-			if (ScoreController == null || PlayersDefinition == null || ItemPrefab == null || PlayerSpawner == null)
+			if (ScoreController == null || PlayersDefinition == null || ItemPrefab == null || PlayerSpawner == null || EgyptContainer == null || MayanContainer == null)
 				throw new InvalidOperationException("Incorrectly configured.");
 		}
 
@@ -39,6 +42,33 @@ namespace Assets.Scripts
             {
                 gameObject.SetActive(false);
             }
+
+            var levelManager = GameObject.Find("LevelManager");
+            if (levelManager == null)
+            {
+                SetMayan();
+            }
+            else
+            {
+                if (levelManager.GetComponent<LevelManager>().CurrentLevelIsEgypt)
+                {
+                    SetEgypt();
+                }
+                else
+                {
+                    SetMayan();
+                }
+            }
+        }
+
+        public void SetMayan()
+        {
+            transform.FindChild("Background").GetComponent<Image>().overrideSprite = MayanContainer;
+        }
+
+        public void SetEgypt()
+        {
+            transform.FindChild("Background").GetComponent<Image>().overrideSprite = EgyptContainer;
         }
 
         private void HandleScoreChange(int playerNumber, int newScore)
@@ -68,9 +98,9 @@ namespace Assets.Scripts
             var playerDefinition = PlayersDefinition.Players.FirstOrDefault(x => x.PlayerNumber == PlayerNumber);
 
             var color = playerDefinition.Color;
-            var transparentColor = new Color(color.r, color.g, color.b, 0.3f); 
+            var transparentColor = new Color(color.r, color.g, color.b); 
 
-            transform.FindChild("Background").GetComponent<Image>().color = transparentColor;
+            transform.FindChild("bg2").GetComponent<Image>().color = transparentColor;
         }
     }
 }
