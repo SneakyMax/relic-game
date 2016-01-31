@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -7,6 +8,9 @@ namespace Assets.Scripts
 		public int PlayerNumber = 0;
 
         public HoldingRelic HoldingRelicPrefab;
+
+        [Range(0, 5)]
+        public float CrushingDistance;
 
         public HoldingRelic HoldingRelic { get; set; }
         public PlayerInfo PlayerInfo { get; set; }
@@ -38,6 +42,26 @@ namespace Assets.Scripts
             {
                 CollideWithDropPoint(collision);
             }
+        }
+
+        public void OnCollisionStay(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("CrushingTrap"))
+                CollideWithCrushingTrap(collision);
+        }
+
+        private void CollideWithCrushingTrap(Collision collision)
+        {
+            var normal = collision.contacts.First().normal;
+
+            var allInRaycast = Physics.RaycastAll(new Ray(transform.position, normal), CrushingDistance);
+
+            var hit = allInRaycast.Any(x => x.collider.gameObject.CompareTag("Player") == false);
+
+            if (!hit)
+                return;
+
+            BeSquashed(collision.gameObject);
         }
 
         private void CollideWithDropPoint(Collision collision)
