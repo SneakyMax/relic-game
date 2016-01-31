@@ -1357,13 +1357,8 @@ MonoBehaviour:
   trapDirection: 0
   isActive: 0
   isHolding: 0
-<<<<<<< HEAD
-  speed: .430000007
-  snap: .333000004
-=======
   speed: 0.43
   snap: 0.2
->>>>>>> origin/master
   speedEasingCrushingCurve:
     serializedVersion: 2
     m_Curve:

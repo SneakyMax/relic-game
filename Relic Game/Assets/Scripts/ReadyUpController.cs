@@ -57,9 +57,12 @@ namespace Assets.Scripts
                 Preferences.PlayersIn[pair.Key] = pair.Value;
             }
 
-#pragma warning disable 618
-            Application.LoadLevel(2);
-#pragma warning restore 618
+            var levelManager = GameObject.Find("LevelManager");
+
+            if (levelManager == null)
+                throw new InvalidOperationException("Couldn't find level manager");
+
+            levelManager.GetComponent<LevelManager>().NextRandomLevel();
         }
     }
 }

@@ -128,6 +128,19 @@ namespace Assets.Scripts
             TransitionToSpawnPlayers();
         }
 
+        private void NextLevel()
+        {
+            var levelManager = GameObject.Find("LevelManager");
+
+            if (levelManager == null)
+            {
+                TransitionToSpawnPlayers();
+                return;
+            }
+
+            levelManager.GetComponent<LevelManager>().NextRandomLevel();
+        }
+
         private IEnumerator SpawnAfterDelay(TimeSpan delay)
         {
             yield return new WaitForSeconds((float)delay.TotalSeconds);
