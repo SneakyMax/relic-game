@@ -3,7 +3,6 @@ using System.Collections;
 
 public class trapScript : MonoBehaviour {
 
-	public bool isTrap = false;
 	public enum direction {UP, RIGHT, LEFT, DOWN};
 	public direction trapDirection = direction.UP;
 	public bool isActive = false;
@@ -12,7 +11,6 @@ public class trapScript : MonoBehaviour {
 	public float speed = 1.0f;
 	[Range(0.0f, 1.0f)]
 	public float snap = 0.2f;
-
 
 	private Vector3 startLocation;
 	private Rigidbody rigid;
@@ -23,14 +21,14 @@ public class trapScript : MonoBehaviour {
 	void Start () 
 	{
 		startLocation = transform.position;
-		if(rigid == null && isTrap)
+		if(rigid == null)
 		{
 			rigid = GetComponent<Rigidbody>();
 		}
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		switch (_currentState) 
 		{
@@ -40,6 +38,7 @@ public class trapScript : MonoBehaviour {
 				_currentState = STATE.ACTIVATED;
 
 			}
+			rigid.velocity = Vector3.zero;
 			// not doing anything, waiting for the word to take off.
 			break;
 		case STATE.ACTIVATED:
@@ -52,7 +51,8 @@ public class trapScript : MonoBehaviour {
 		case STATE.HIT:
 			// wait for dramatic effect
 			// maybe squish or something when hitting
-			if(!isHolding)_currentState = STATE.RETURNING;
+			//if(!isHolding)_currentState = STATE.RETURNING;
+			_currentState = STATE.RETURNING;
 			break;
 		case STATE.RETURNING:
 			Vector3 moveVec = (startLocation - transform.position).normalized;
@@ -77,32 +77,27 @@ public class trapScript : MonoBehaviour {
 	{
 		switch (trapDirection)
 		{
-		case direction.UP:
-			Debug.Log("Case up");
+		case direction.UP:		
 			rigid.MovePosition(transform.position + (Vector3.up * speed) * Time.deltaTime);
 			rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move UP
 		case direction.DOWN:
-			Debug.Log("Case down");
 			rigid.MovePosition(transform.position + (Vector3.down * speed) * Time.deltaTime);
 			rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move DOWN
 		case direction.LEFT:
-			Debug.Log("Case left");
 			rigid.MovePosition(transform.position + (Vector3.left * speed) * Time.deltaTime);
 			rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move LEFT
 		case direction.RIGHT:
-			Debug.Log("Case right");
 			rigid.MovePosition(transform.position + (Vector3.right * speed) * Time.deltaTime);
 			rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move RIGHT
 		default:
-			Debug.Log("Direction not set... Setting direction to UP");
 			trapDirection = direction.UP;
 			break;
 		}
