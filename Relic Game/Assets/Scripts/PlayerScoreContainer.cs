@@ -20,13 +20,16 @@ namespace Assets.Scripts
 
         private Stack<GameObject> items;
 
+        public Sprite EgyptContainer;
+        public Sprite MayanContainer;
+
 		public void Awake()
 		{
 		    items = new Stack<GameObject>();
 
 		    ScoreController.ScoreChanged += HandleScoreChange;
 
-			if (ScoreController == null || PlayersDefinition == null || ItemPrefab == null || PlayerSpawner == null)
+			if (ScoreController == null || PlayersDefinition == null || ItemPrefab == null || PlayerSpawner == null || EgyptContainer == null || MayanContainer == null)
 				throw new InvalidOperationException("Incorrectly configured.");
 		}
 
@@ -39,6 +42,33 @@ namespace Assets.Scripts
             {
                 gameObject.SetActive(false);
             }
+
+            var levelManager = GameObject.Find("LevelManager");
+            if (levelManager == null)
+            {
+                SetMayan();
+            }
+            else
+            {
+                if (levelManager.GetComponent<LevelManager>().CurrentLevelIsEgypt)
+                {
+                    SetEgypt();
+                }
+                else
+                {
+                    SetMayan();
+                }
+            }
+        }
+
+        public void SetMayan()
+        {
+            transform.FindChild("Background").GetComponent<Image>().overrideSprite = MayanContainer;
+        }
+
+        public void SetEgypt()
+        {
+            transform.FindChild("Background").GetComponent<Image>().overrideSprite = EgyptContainer;
         }
 
         private void HandleScoreChange(int playerNumber, int newScore)
