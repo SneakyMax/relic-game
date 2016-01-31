@@ -14,5 +14,7 @@ namespace Assets.Scripts
         public int PlayerNumber;
 
         public Color Color;
+
+		public bool isPlaying;
     }
 }
