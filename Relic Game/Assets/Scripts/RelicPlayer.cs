@@ -56,12 +56,13 @@ namespace Assets.Scripts
         {
             var relic = collision.gameObject.GetComponent<Relic>();
 
-            relic.BeHeldBy(this);
+            if (relic.CanPickUp == false)
+                return;
 
-            var holdingRelic = Instantiate(HoldingRelicPrefab);
-            holdingRelic.transform.SetParent(transform, false);
-
+            var holdingRelic = relic.BeHeldBy(this);
+            
             HoldingRelic = holdingRelic;
+            HoldingRelic.RelicPlayer = this;
         }
 
         public void Update()
@@ -90,6 +91,12 @@ namespace Assets.Scripts
         {
             PlayerInfo.Spawner.Despawn(PlayerNumber);
             PlayerInfo.Spawner.SpawnAfterDelay(PlayerNumber);
+
+            if (HoldingRelic != null)
+            {
+                HoldingRelic.DropAtPlayer();
+                HoldingRelic = null;
+            }
         }
     }
 }

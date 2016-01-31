@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Assets.Scripts
@@ -17,26 +18,39 @@ namespace Assets.Scripts
         public float RelicSpawnDelay;
 
         private Coroutine spawnAfterDelayCoroutine;
-        
+        public HoldingRelic HoldingRelicPrefab;
+
         public void Start()
         {
             if (RelicPrefab == null)
                 throw new InvalidOperationException("No relic prefab");
+
+            if (HoldingRelicPrefab == null)
+                throw new InvalidOperationException("No holding relic prefab");
         }
         
         public void SpawnRelic()
         {
-            if (CurrentRelic != null)
-                return; // Only one relic at a time
-
             var position = SpawnLocations.Length == 0 ? new Vector3() :
                 SpawnLocations[Random.Range(0, SpawnLocations.Length)].position;
 
+            SpawnRelicAtPosition(position);
+        }
+
+        public void SpawnRelicAtPosition(Vector3 position)
+        {
+            if (CurrentRelic != null)
+                return; // Only one relic at a time
+
             var newObj = (GameObject)Instantiate(RelicPrefab.gameObject, position, Quaternion.identity);
             var relic = newObj.GetComponent<Relic>();
+            relic.Spawner = this;
 
             relic.RandomImpulse();
             CurrentRelic = relic;
+            
+
+            relic.DelayBeingAbleToBePickedUp();
         }
 
         public void RemoveAndSpawnNewRelic()
@@ -68,6 +82,11 @@ namespace Assets.Scripts
                 Destroy(CurrentRelic.gameObject);
                 CurrentRelic = null;
             }
+        }
+
+        public void SpawnAsDropFromPlayer(RelicPlayer relicPlayer)
+        {
+            SpawnRelicAtPosition(relicPlayer.transform.position);
         }
     }
 }
