@@ -57,6 +57,17 @@ public class Relic : MonoBehaviour
         Destroy(particles, 8);
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("KillZone"))
+            EnterKillZone();
+    }
+
+    private void EnterKillZone()
+    {
+        Spawner.RemoveAndSpawnNewRelic();
+    }
+
     public void RandomImpulse()
     {
         const float pi = Mathf.PI;

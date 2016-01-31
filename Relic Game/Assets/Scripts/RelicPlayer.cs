@@ -54,6 +54,23 @@ namespace Assets.Scripts
                 CollideWithCrushingTrap(collision);
         }
 
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("KillZone"))
+                CollideWithKillZone();
+        }
+
+        private void CollideWithKillZone()
+        {
+            if (HoldingRelic)
+            {
+                HoldingRelic.RemoveAndRespawn();
+                HoldingRelic = null;
+            }
+
+            Die();
+        }
+
         private void CollideWithCrushingTrap(Collision collision)
         {
             var normal = collision.contacts.First().normal;
@@ -121,10 +138,15 @@ namespace Assets.Scripts
             GetComponent<PlayerController>().DoBounceOnOtherPlayer(collision);
         }
 
-        public void BeSquashed(GameObject squasher)
+        private void Die()
         {
             PlayerInfo.Spawner.Despawn(PlayerNumber);
             PlayerInfo.Spawner.SpawnAfterDelay(PlayerNumber);
+        }
+
+        public void BeSquashed(GameObject squasher)
+        {
+            Die();
 
             if (HoldingRelic != null)
             {

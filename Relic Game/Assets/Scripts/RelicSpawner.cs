@@ -56,11 +56,15 @@ namespace Assets.Scripts
         public void RemoveAndSpawnNewRelic()
         {
             DespawnRelic();
-            
-            spawnAfterDelayCoroutine = StartCoroutine(SpawnRelicAfterDelay(TimeSpan.FromSeconds(RelicSpawnDelay)));
+            SpawnRelicAfterRespawnDelay();
         }
 
-        private IEnumerator SpawnRelicAfterDelay(TimeSpan spawnDelay)
+        private void SpawnRelicAfterRespawnDelay()
+        {
+            spawnAfterDelayCoroutine = StartCoroutine(SpawnRelicAfterDelayCoroutine(TimeSpan.FromSeconds(RelicSpawnDelay)));
+        }
+
+        private IEnumerator SpawnRelicAfterDelayCoroutine(TimeSpan spawnDelay)
         {
             yield return new WaitForSeconds((float)spawnDelay.TotalSeconds);
             SpawnRelic();
@@ -87,6 +91,12 @@ namespace Assets.Scripts
         public void SpawnAsDropFromPlayer(RelicPlayer relicPlayer)
         {
             SpawnRelicAtPosition(relicPlayer.transform.position);
+        }
+
+        public void RemoveAndSpawnNewRelic(HoldingRelic holdingRelic)
+        {
+            Destroy(holdingRelic);
+            SpawnRelicAfterRespawnDelay();
         }
     }
 }
