@@ -14,7 +14,7 @@ GameObject:
   - 136: {fileID: 13674856}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -431,6 +431,7 @@ MonoBehaviour:
   JumpStartAmount: 3
   JumpForce: 13
   InstantStopSpeedThreshold: 6.1
+  BounceOtherPlayerForce: 13.8
 --- !u!114 &11435410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -467,6 +468,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Gravity
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BounceOtherPlayerForce
+      value: 13.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

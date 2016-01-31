@@ -36,6 +36,9 @@ namespace Assets.Scripts
         [Range(0, 10)]
         public float InstantStopSpeedThreshold;
 
+        [Range(0, 30)]
+        public float BounceOtherPlayerForce;
+
         public enum Direction { Left, Right }
 
         public Direction LastRequestedDirection { get; set; }
@@ -119,12 +122,7 @@ namespace Assets.Scripts
                     //SlowDownHorizontalMovement();
                 }
 
-                if (jumpRequested)
-                {
-                    rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
-                    jumpRequested = false;
-                    State = PlayerState.InAir;
-                }
+                TryJump();
             }
             else if (State == PlayerState.InAir)
             {
@@ -136,16 +134,14 @@ namespace Assets.Scripts
             }
         }
 
-        private void SlowDownHorizontalMovement()
+        private void TryJump()
         {
-            var amount = -Mathf.Sign(currentVelocity.x) * GroundFriction;
+            if (!jumpRequested)
+                return;
 
-            var clamped = currentVelocity.x < 0 ? Mathf.Min(-currentVelocity.x, amount) :
-                                                  Mathf.Max(-currentVelocity.x, amount);
-
-            Debug.Log("Clamped " + clamped + " amount " + amount);
-
-            rigidbody.AddForce(new Vector3(clamped, 0, 0), ForceMode.VelocityChange);
+            rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
+            jumpRequested = false;
+            State = PlayerState.InAir;
         }
 
         private void StopInstantly()
@@ -198,15 +194,56 @@ namespace Assets.Scripts
 
         public void OnCollisionEnter(Collision collision)
         {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                OnCollisionPlayer(collision);
+                return;
+            }
+
+            OnCollisionOther(collision);
+        }
+
+        private void OnCollisionOther(Collision collision)
+        {
             var points = collision.contacts.First(); //todo
             var normal = new Vector2(points.normal.x, points.normal.y);
 
             var upAmount = Vector2.Dot(new Vector2(0, 1), normal);
-            
+
             if (upAmount > 0.1) // Facing up?
             {
                 hitGround = true;
             }
+        }
+
+        private void OnCollisionPlayer(Collision collision)
+        {
+            var normal = collision.contacts.First().normal;
+
+            if (currentVelocity.y >= 0)
+                return; // Moving up
+
+            var amountUp = Vector3.Dot(Vector3.up, normal);
+
+            if (amountUp >= 0.1)
+            {
+                // The contact normal is "pointing up", which means we stomped someone else
+                GetComponent<RelicPlayer>().SquashOtherPlayer(collision.gameObject, collision);
+            }
+        }
+
+        public void CancelVerticalMomentum()
+        {
+            var verticalSpeed = currentVelocity.y;
+
+            rigidbody.AddForce(new Vector3(0, -verticalSpeed, 0), ForceMode.VelocityChange);
+        }
+
+        public void DoBounceOnOtherPlayer(Collision collision)
+        {
+            CancelVerticalMomentum();
+
+            rigidbody.AddForce(new Vector3(0, BounceOtherPlayerForce, 0), ForceMode.Impulse);
         }
 
         public void OnCollisionStay(Collision collision)
