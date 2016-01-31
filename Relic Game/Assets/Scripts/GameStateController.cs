@@ -1,57 +1,64 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
-	public enum GameState {
-		START,
-		READY_UP,
-		ACTIVE_GAME,
-		RESTART,
-		PAUSE
-	}
+    public enum GameState
+    {
+        Start,
+        ReadyUp,
+        ActiveGame,
+        Restart,
+        Pause
+    }
 
-	public delegate void GameStateChanged(GameState oldState, GameState newState);
+    public delegate void GameStateChanged(GameState oldState, GameState newState);
 
     public class GameStateController : MonoBehaviour
     {
         public RelicSpawner RelicSpawner;
 
-		public event GameStateChanged stateChanged;
+		public event GameStateChanged StateChanged;
 
-		private GameState gameState = GameState.START;
+        public GameState GameState
+        {
+            get { return gameState; }
+            set
+            {
+                if(value == gameState)
+                    return;
 
-		public void Awake() {
+                if(StateChanged != null)
+                    StateChanged(gameState, value);
 
-			DontDestroyOnLoad(gameObject); //keeps the state controller alive across all scenes (i think)
-		}
+                gameState = value;
+            }
+        }
+
+        private GameState gameState = GameState.Start;
+
+        public void Awake()
+        {
+            DontDestroyOnLoad(gameObject); //keeps the state controller alive across all scenes (i think)
+        }
 
         public void Start()
         {
-			addStateChangeListeners ();
+            StateChanged += HandleNewState;
 
             //RelicSpawner.RemoveAndSpawnNewRelic();
         }
 
-		private void addStateChangeListeners() {
-			stateChanged += (GameState oldState, GameState newState) => {
-				if(oldState == GameState.START && newState == GameState.READY_UP) {
-					Application.LoadLevel(1);
-				} else if(oldState == GameState.READY_UP && newState == GameState.ACTIVE_GAME) {
+        private void HandleNewState(GameState oldState, GameState newState)
+        {
+            if (oldState == GameState.Start && newState == GameState.ReadyUp)
+            {
+                SceneManager.LoadScene(1);
+            }
+            else if (oldState == GameState.ReadyUp && newState == GameState.ActiveGame)
+            {
 
-				}
-			};
-		}
-
-		public GameState GameState {
-			get {
-				return gameState;
-			}
-			set {
-				if(value == gameState)
-					return;
-				stateChanged(gameState, value);
-				gameState = value;
-			}
-		}
+            }
+        }
     }
 }

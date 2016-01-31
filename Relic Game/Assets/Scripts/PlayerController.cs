@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -223,19 +224,18 @@ namespace Assets.Scripts
 
         private void UpdateInput()
         {
+            if (playerNumber == 0)
+                throw new InvalidOperationException("Player number hasn't been set.");
+
             var horizontalAxis = Input.GetAxis("Horizontal" + playerNumber);
-
-            /*if (Mathf.Abs(horizontalAxis) > 0.1)
-            {
-                desiredHorizontalAccelleration = horizontalAxis * MaxHorizontalAccelleration;
-            }
-            else
-            {
-                desiredHorizontalAccelleration = 0;
-            }*/
-
-            //var direction = (Input.GetKey(KeyCode.A) ? -1 : 0) + (Input.GetKey(KeyCode.D) ? 1 : 0);
+            
 			var direction = Input.GetAxis("Horizontal" + playerNumber);
+
+            if (playerNumber == 1)
+            {
+                Debug.Log(direction);
+            }
+            
 			if(direction != 0)
 			{
 				direction = direction / Mathf.Abs(direction);
