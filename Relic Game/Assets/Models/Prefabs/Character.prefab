@@ -445,6 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerNumber: 0
   HoldingRelicPrefab: {fileID: 11434730, guid: fa944072a13724b4dbdc9e3aa31bea67, type: 2}
+  CrushingDistance: 1.3
 --- !u!136 &13674856
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -476,6 +477,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BounceOtherPlayerForce
       value: 13.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CrushingDistance
+      value: 1.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

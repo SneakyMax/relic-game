@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -42,6 +43,9 @@ namespace Assets.Scripts
             {
                 CollideWithDropPoint(collision);
             }
+
+            if (collision.gameObject.CompareTag("CrushingTrap"))
+                CollideWithCrushingTrap(collision);
         }
 
         public void OnCollisionStay(Collision collision)
@@ -62,6 +66,12 @@ namespace Assets.Scripts
                 return;
 
             BeSquashed(collision.gameObject);
+
+            var trapController = collision.gameObject.GetComponentInParent<trapScript>();
+            if (trapController == null)
+                throw new InvalidOperationException("huh?");
+
+            trapController.StopCrushingAndReturn();
         }
 
         private void CollideWithDropPoint(Collision collision)
