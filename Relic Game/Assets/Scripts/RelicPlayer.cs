@@ -20,7 +20,7 @@ namespace Assets.Scripts
             playerController = GetComponent<PlayerController>();
 
             leftHoldPosition = transform.FindChild("RelicHoldPositionLeft");
-            rightHoldPosition = transform.Find("RelicHoldPositionRight");
+            rightHoldPosition = transform.FindChild("RelicHoldPositionRight");
         }
 
         public void OnCollisionEnter(Collision collision)
@@ -30,17 +30,14 @@ namespace Assets.Scripts
                 CollideWithRelic(collision);
                 return;
             }
-        }
 
-        public void OnTriggerEnter(Collider collider)
-        {
-            if(collider.gameObject.CompareTag("DropPoint"))
+            if (collision.gameObject.CompareTag("DropPoint"))
             {
-                CollideWithDropPoint(collider);
+                CollideWithDropPoint(collision);
             }
         }
 
-        private void CollideWithDropPoint(Collider collision)
+        private void CollideWithDropPoint(Collision collision)
         {
             if (HoldingRelic == null || HoldingRelic.gameObject == null)
                 return;
