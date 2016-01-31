@@ -11,6 +11,8 @@ namespace Assets.Scripts
         public void AcceptRelic(RelicPlayer player)
         {
             RelicSpawner.RemoveAndSpawnNewRelic();
+
+            ScoreController.AddScore(player.PlayerNumber, 1);
         }
     }
 }

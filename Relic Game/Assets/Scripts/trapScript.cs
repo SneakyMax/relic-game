@@ -3,34 +3,48 @@ using System.Collections;
 
 public class trapScript : MonoBehaviour {
 
-	public bool isTrap = false;
 	public enum direction {UP, RIGHT, LEFT, DOWN};
+
 	public direction trapDirection = direction.UP;
+
 	public bool isActive = false;
+
 	public bool isHolding = false;
-	[Range(0.2f, 20.0f)]
-	public float speed = 1.0f;
+
+	[Range(0.01f, 2.0f)]
+	public float speed = 0.4f;
+
 	[Range(0.0f, 1.0f)]
 	public float snap = 0.2f;
 
+	public AnimationCurve speedEasingCrushingCurve;
+
+	[Range(0.0f, 2.0f)]
+	public float timeToMaxSpeed = 0.5f;
+
+	public float crushingEasingTimer = 0.0f;
 
 	private Vector3 startLocation;
+
 	private Rigidbody rigid;
+
 	private enum STATE {WAITING, ACTIVATED, MOVING, HIT, RETURNING}
+
+	[SerializeField]
 	private STATE _currentState = STATE.WAITING;
 
 	// Use this for initialization
 	void Start () 
 	{
 		startLocation = transform.position;
-		if(rigid == null && isTrap)
+		if(rigid == null)
 		{
 			rigid = GetComponent<Rigidbody>();
 		}
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		switch (_currentState) 
 		{
@@ -38,8 +52,10 @@ public class trapScript : MonoBehaviour {
 			if(isActive)
 			{
 				_currentState = STATE.ACTIVATED;
-
 			}
+			rigid.MovePosition(startLocation);
+			rigid.velocity = Vector3.zero;
+			crushingEasingTimer = 0.0f;
 			// not doing anything, waiting for the word to take off.
 			break;
 		case STATE.ACTIVATED:
@@ -52,13 +68,14 @@ public class trapScript : MonoBehaviour {
 		case STATE.HIT:
 			// wait for dramatic effect
 			// maybe squish or something when hitting
-			if(!isHolding)_currentState = STATE.RETURNING;
+			//if(!isHolding)_currentState = STATE.RETURNING;
+			_currentState = STATE.RETURNING;
 			break;
 		case STATE.RETURNING:
 			Vector3 moveVec = (startLocation - transform.position).normalized;
 			if((startLocation - transform.position).magnitude > snap)
 			{
-				rigid.MovePosition(transform.position + ((moveVec * speed) * Time.deltaTime));
+				rigid.MovePosition(transform.position + ((moveVec * speed)));
 			}
 			else
 			{
@@ -75,34 +92,37 @@ public class trapScript : MonoBehaviour {
 
 	private void CrushTrapMovement()
 	{
+		crushingEasingTimer += Time.fixedDeltaTime;
+
+		float t = crushingEasingTimer / speed;
+
+		t = speedEasingCrushingCurve.Evaluate(t);
+
+		float modifiedSpeed = t * speed;
+
 		switch (trapDirection)
 		{
-		case direction.UP:
-			Debug.Log("Case up");
-			rigid.MovePosition(transform.position + (Vector3.up * speed) * Time.deltaTime);
+		case direction.UP:		
+			rigid.MovePosition(transform.position + (Vector3.up * modifiedSpeed));
 			rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move UP
 		case direction.DOWN:
-			Debug.Log("Case down");
-			rigid.MovePosition(transform.position + (Vector3.down * speed) * Time.deltaTime);
+			rigid.MovePosition(transform.position + (Vector3.down * modifiedSpeed));
 			rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move DOWN
 		case direction.LEFT:
-			Debug.Log("Case left");
-			rigid.MovePosition(transform.position + (Vector3.left * speed) * Time.deltaTime);
+			rigid.MovePosition(transform.position + (Vector3.left * modifiedSpeed));
 			rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move LEFT
 		case direction.RIGHT:
-			Debug.Log("Case right");
-			rigid.MovePosition(transform.position + (Vector3.right * speed) * Time.deltaTime);
+			rigid.MovePosition(transform.position + (Vector3.right * modifiedSpeed));
 			rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move RIGHT
 		default:
-			Debug.Log("Direction not set... Setting direction to UP");
 			trapDirection = direction.UP;
 			break;
 		}
@@ -112,7 +132,9 @@ public class trapScript : MonoBehaviour {
 
 	void OnCollisionEnter(Collision c)
 	{
-		// check layer for building and toggle movement off
+		// check layer for Player or toggle movement off
+		if(c.gameObject.CompareTag("Player") || _currentState != STATE.MOVING )
+			return;
 
 		// v ONLY IF BUILDING v
 		_currentState = STATE.HIT;
@@ -126,5 +148,10 @@ public class trapScript : MonoBehaviour {
 	public void SetHold(bool val)
 	{
 		isHolding = val;
+	}
+
+	public void StopCrushingAndReturn()
+	{
+		_currentState = STATE.HIT;
 	}
 }

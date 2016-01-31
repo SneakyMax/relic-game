@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,14 +14,45 @@ namespace Assets.Scripts
 
         public int PlayerNumber;
 
+        public GameObject ItemPrefab;
+
+        private Stack<GameObject> items;
+
+		public void Awake()
+		{
+		    items = new Stack<GameObject>();
+
+		    ScoreController.ScoreChanged += HandleScoreChange;
+
+			if (ScoreController == null || PlayersDefinition == null || ItemPrefab == null)
+				throw new InvalidOperationException("Incorrectly configured.");
+		}
+
+        private void HandleScoreChange(int playerNumber, int newScore)
+        {
+            if (playerNumber != PlayerNumber)
+                return;
+
+            while (items.Count != newScore)
+            {
+                if (items.Count > newScore)
+                {
+                    var item = items.Pop();
+                    Destroy(item);
+                }
+                else
+                {
+                    var item = Instantiate(ItemPrefab);
+                    items.Push(item);
+
+                    item.transform.SetParent(transform.FindChild("Items"), false);
+                }
+            }
+        }
+
         public void Start()
         {
-            if (ScoreController == null || PlayersDefinition == null)
-                throw new InvalidOperationException("Incorrectly configured.");
-
             SetBackgroundColor();
-
-            SetupScoreText();
         }
 
         private void SetBackgroundColor()
@@ -28,22 +60,9 @@ namespace Assets.Scripts
             var playerDefinition = PlayersDefinition.Players.FirstOrDefault(x => x.PlayerNumber == PlayerNumber);
 
             var color = playerDefinition.Color;
-            var transparentColor = new Color(color.r, color.g, color.b, 0.3f);
+            var transparentColor = new Color(color.r, color.g, color.b, 0.3f); 
 
             transform.FindChild("Background").GetComponent<Image>().color = transparentColor;
-        }
-
-        private void SetupScoreText()
-        {
-            var formatter = transform.FindChild("ScoreText").GetComponent<TextFormatter>();
-
-            formatter.Set("sc", ScoreController.GetScore(PlayerNumber));
-
-            ScoreController.ScoreChanged += (playerNumber, score) =>
-            {
-                if (playerNumber == PlayerNumber)
-                    formatter.Set("sc", score);
-            };
         }
     }
 }

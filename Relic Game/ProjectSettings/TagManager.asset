@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Relic
   - DropPoint
+  - CrushingTrap
+  - KillZone
   layers:
   - Default
   - TransparentFX

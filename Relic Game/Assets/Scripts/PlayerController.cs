@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class PlayerController : MonoBehaviour
-    {
+    {	
         [Range(0, 100)]
         public float Gravity;
 
@@ -35,11 +36,16 @@ namespace Assets.Scripts
         [Range(0, 10)]
         public float InstantStopSpeedThreshold;
 
+        [Range(0, 30)]
+        public float BounceOtherPlayerForce;
+
         public enum Direction { Left, Right }
 
         public Direction LastRequestedDirection { get; set; }
 
         public PlayerState State { get; set; }
+
+        public bool AllowInput { get; set; }
 
         public enum PlayerState
         {
@@ -48,18 +54,25 @@ namespace Assets.Scripts
             ClimbingUpLedge
         }
 
+		private int playerNumber;
         private bool jumpRequested;
         private float desiredHorizontalAccelleration;
         private bool hitGround;
 
         private Vector2 currentVelocity;
 
-        private new Rigidbody rigidbody;
-        
+        private new Rigidbody rigidbody;       
+
         public void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
         }
+
+		public void Start()
+		{
+			playerNumber = GetComponent<RelicPlayer>().PlayerNumber;
+		    AllowInput = true;
+		}
 
         public void Update()
         {
@@ -112,12 +125,7 @@ namespace Assets.Scripts
                     //SlowDownHorizontalMovement();
                 }
 
-                if (jumpRequested)
-                {
-                    rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
-                    jumpRequested = false;
-                    State = PlayerState.InAir;
-                }
+                TryJump();
             }
             else if (State == PlayerState.InAir)
             {
@@ -129,16 +137,14 @@ namespace Assets.Scripts
             }
         }
 
-        private void SlowDownHorizontalMovement()
+        private void TryJump()
         {
-            var amount = -Mathf.Sign(currentVelocity.x) * GroundFriction;
+            if (!jumpRequested)
+                return;
 
-            var clamped = currentVelocity.x < 0 ? Mathf.Min(-currentVelocity.x, amount) :
-                                                  Mathf.Max(-currentVelocity.x, amount);
-
-            Debug.Log("Clamped " + clamped + " amount " + amount);
-
-            rigidbody.AddForce(new Vector3(clamped, 0, 0), ForceMode.VelocityChange);
+            rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
+            jumpRequested = false;
+            State = PlayerState.InAir;
         }
 
         private void StopInstantly()
@@ -191,15 +197,56 @@ namespace Assets.Scripts
 
         public void OnCollisionEnter(Collision collision)
         {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                OnCollisionPlayer(collision);
+                return;
+            }
+
+            OnCollisionOther(collision);
+        }
+
+        private void OnCollisionOther(Collision collision)
+        {
             var points = collision.contacts.First(); //todo
             var normal = new Vector2(points.normal.x, points.normal.y);
 
             var upAmount = Vector2.Dot(new Vector2(0, 1), normal);
-            
+
             if (upAmount > 0.1) // Facing up?
             {
                 hitGround = true;
             }
+        }
+
+        private void OnCollisionPlayer(Collision collision)
+        {
+            var normal = collision.contacts.First().normal;
+
+            if (currentVelocity.y >= 0)
+                return; // Moving up
+
+            var amountUp = Vector3.Dot(Vector3.up, normal);
+
+            if (amountUp >= 0.1)
+            {
+                // The contact normal is "pointing up", which means we stomped someone else
+                GetComponent<RelicPlayer>().SquashOtherPlayer(collision.gameObject, collision);
+            }
+        }
+
+        public void CancelVerticalMomentum()
+        {
+            var verticalSpeed = currentVelocity.y;
+
+            rigidbody.AddForce(new Vector3(0, -verticalSpeed, 0), ForceMode.VelocityChange);
+        }
+
+        public void DoBounceOnOtherPlayer(Collision collision)
+        {
+            CancelVerticalMomentum();
+
+            rigidbody.AddForce(new Vector3(0, BounceOtherPlayerForce, 0), ForceMode.Impulse);
         }
 
         public void OnCollisionStay(Collision collision)
@@ -217,26 +264,25 @@ namespace Assets.Scripts
 
         private void UpdateInput()
         {
-            var horizontalAxis = Input.GetAxis("Horizontal");
-
-            /*if (Mathf.Abs(horizontalAxis) > 0.1)
-            {
-                desiredHorizontalAccelleration = horizontalAxis * MaxHorizontalAccelleration;
-            }
-            else
+            if (!AllowInput)
             {
                 desiredHorizontalAccelleration = 0;
-            }*/
+                jumpRequested = false;
+                return;
+            }
 
-            var direction = (Input.GetKey(KeyCode.A) ? -1 : 0) + (Input.GetKey(KeyCode.D) ? 1 : 0);
+            if (playerNumber == 0)
+                throw new InvalidOperationException("Player number hasn't been set.");
+            
+			var horizontalAxis = Input.GetAxis("Horizontal" + playerNumber);			         
 
-            desiredHorizontalAccelleration = direction * MaxHorizontalAccelleration;
+            desiredHorizontalAccelleration = horizontalAxis * MaxHorizontalAccelleration;
 
-            LastRequestedDirection = direction == -1
+            LastRequestedDirection = horizontalAxis < 0
                 ? Direction.Left
-                : direction == 1 ? Direction.Right : LastRequestedDirection;
+                : horizontalAxis > 0 ? Direction.Right : LastRequestedDirection;
 
-            if (Input.GetButton("Jump") || Input.GetKeyDown(KeyCode.Space)) 
+            if (Input.GetButton("buttonA" + playerNumber)) 
             {
                 if(State == PlayerState.Grounded)
                     jumpRequested = true;

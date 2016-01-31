@@ -14,7 +14,7 @@ GameObject:
   - 136: {fileID: 13674856}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,7 +218,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179398}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -273,7 +273,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 2.24000001, z: 1.13}
+  m_LocalPosition: {x: 0.76, y: 2.2399998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 464514}
@@ -285,7 +285,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 2.16389251, z: -.0287855584}
+  m_LocalPosition: {x: -0, y: 2.1638925, z: -0.028785558}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 451684}
@@ -297,9 +297,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101804}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: -17.8799992, y: -2.55999994, z: -.0299999993}
-  m_LocalScale: {x: .25, y: .25, z: .25}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.88, y: -2.56, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 431522}
   - {fileID: 468712}
@@ -313,7 +313,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.33999991, z: -.959999979}
+  m_LocalPosition: {x: -1.12, y: 2.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 464514}
@@ -352,7 +352,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 436272afecf0b3a40a555d103b3f7540, type: 2}
+  - {fileID: 0}
   - {fileID: 2100000, guid: 142414571d7170f4ba79f1b0c6a8ab63, type: 2}
   - {fileID: 2100000, guid: fe19b3cbe92f68c48a46123820c951db, type: 2}
   - {fileID: 2100000, guid: dde17f63ed62e3542a67cd87627220e4, type: 2}
@@ -363,8 +363,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -385,11 +387,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 88
   m_CollisionDetection: 2
 --- !u!95 &9577076
 Animator:
@@ -422,13 +424,14 @@ MonoBehaviour:
   Gravity: 60
   MaxHorizontalSpeed: 22
   MaxHorizontalAccelleration: 10
-  AirControl: 1
-  GroundFriction: 3
-  ReverseSpeedFactor: 2.94000006
+  AirControl: 0.5
+  GroundFriction: 1.5
+  ReverseSpeedFactor: 2.94
   JumpStartThreshhold: 1
   JumpStartAmount: 3
-  JumpForce: 15.3999996
-  InstantStopSpeedThreshold: 6.0999999
+  JumpForce: 13
+  InstantStopSpeedThreshold: 6.1
+  BounceOtherPlayerForce: 13.8
 --- !u!114 &11435410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -440,7 +443,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e83c88d4fae7342b3b1a063f70cf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerNumber: 0
   HoldingRelicPrefab: {fileID: 11434730, guid: fa944072a13724b4dbdc9e3aa31bea67, type: 2}
+  CrushingDistance: 1.3
+  SquishEffects: {fileID: 172400, guid: b9daba373d6d85a44982cf9a6db57a1f, type: 2}
+  DeathByPlayerEffects: {fileID: 172400, guid: b9daba373d6d85a44982cf9a6db57a1f, type: 2}
 --- !u!136 &13674856
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -450,8 +457,8 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 913a5a379875f6b4f8ab4bfa19f4124b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.17999995
-  m_Height: 4.98999977
+  m_Radius: 1.18
+  m_Height: 4.99
   m_Direction: 1
   m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1001 &100100000
@@ -465,6 +472,26 @@ Prefab:
       propertyPath: Gravity
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BounceOtherPlayerForce
+      value: 13.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CrushingDistance
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SquishEffects
+      value: 
+      objectReference: {fileID: 172400, guid: b9daba373d6d85a44982cf9a6db57a1f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeathByPlayerEffects
+      value: 
+      objectReference: {fileID: 172400, guid: b9daba373d6d85a44982cf9a6db57a1f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 101804}

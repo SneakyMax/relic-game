@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Assets.Scripts;
 using Random = UnityEngine.Random;
@@ -19,8 +20,15 @@ public class Relic : MonoBehaviour
     [Range(0, 10)]
     public float MinCollisionSpeed;
 
+    [Range(0, 10)]
+    public float SpawnPickupDelay;
+
     private CameraController cameraController;
     private new Rigidbody rigidbody;
+
+    public RelicSpawner Spawner { get; set; }
+    
+    public bool CanPickUp { get; set; }
 
 	// Use this for initialization
     private void Awake()
@@ -49,6 +57,17 @@ public class Relic : MonoBehaviour
         Destroy(particles, 8);
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("KillZone"))
+            EnterKillZone();
+    }
+
+    private void EnterKillZone()
+    {
+        Spawner.RemoveAndSpawnNewRelic();
+    }
+
     public void RandomImpulse()
     {
         const float pi = Mathf.PI;
@@ -67,8 +86,29 @@ public class Relic : MonoBehaviour
         rigidbody.AddTorque(new Vector3(0, 0, Random.Range(RotationMax / 2, RotationMax)));
     }
 
-    public void BeHeldBy(RelicPlayer player)
+    public HoldingRelic BeHeldBy(RelicPlayer player)
     {
-        Destroy(gameObject);
+        Spawner.DespawnRelic();
+
+        var holdingRelic = Instantiate(Spawner.HoldingRelicPrefab);
+        holdingRelic.transform.SetParent(player.gameObject.transform, false);
+
+        holdingRelic.Spawner = Spawner;
+
+        return holdingRelic;
+    }
+
+    public void DelayBeingAbleToBePickedUp()
+    {
+        StartCoroutine(DelayBeingAbleToBePickedUpCouroutine());
+    }
+
+    private IEnumerator DelayBeingAbleToBePickedUpCouroutine()
+    {
+        CanPickUp = false;
+        
+        yield return new WaitForSeconds(SpawnPickupDelay);
+
+        CanPickUp = true;
     }
 }
