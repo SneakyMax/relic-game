@@ -1333,6 +1333,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioObjects:
   - {fileID: 147616, guid: a20c8e2266ab53f42a67efbeb406539c, type: 2}
+  - {fileID: 164282, guid: 95d1a6f17ac64ef46bd93cfe91bdfc44, type: 2}
+  - {fileID: 108920, guid: ffc882f28c0242341adb6ad58be8e5f6, type: 2}
+  - {fileID: 147616, guid: a20c8e2266ab53f42a67efbeb406539c, type: 2}
 --- !u!114 &11428244
 MonoBehaviour:
   m_ObjectHideFlags: 1

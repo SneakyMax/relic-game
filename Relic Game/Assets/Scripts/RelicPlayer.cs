@@ -143,11 +143,9 @@ namespace Assets.Scripts
             var relic = collision.gameObject.GetComponent<Relic>();
 
             if (relic.CanPickUp == false)
-            return;
-            {
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.Play();
-            }
+                return;
+
+            GeneralAudioController.PlaySound("RushPickup");
 
             var holdingRelic = relic.BeHeldBy(this);
             
