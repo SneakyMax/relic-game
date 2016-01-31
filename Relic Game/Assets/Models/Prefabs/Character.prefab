@@ -644,7 +644,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 402844}
-  - 95: {fileID: 9557152}
+  - 95: {fileID: 9551192}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -715,7 +715,7 @@ Transform:
   m_GameObject: {fileID: 193524}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
+  m_LocalScale: {x: .25, y: .25, z: .25}
   m_Children:
   - {fileID: 406186}
   - {fileID: 490340}
@@ -985,7 +985,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.0960522, y: -2.78942394, z: .0196478311}
+  m_LocalPosition: {x: -16.865181, y: -1.47783816, z: 1.03999841}
   m_LocalScale: {x: .25, y: .25, z: -.25}
   m_Children:
   - {fileID: 468712}
@@ -1351,6 +1351,23 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!95 &9551192
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193524}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 79acafb8af932f544a76dcf06563e4bf, type: 3}
+  m_Controller: {fileID: 9100000, guid: b01445ea3e4b613439f4fa29c4eace35, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9577076
 Animator:
   serializedVersion: 3
@@ -1515,13 +1532,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
-      value: -.25
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: a3ab26ebc1c2da24cb0d531739c6b51d, type: 3}
+      value: .25
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: .25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
