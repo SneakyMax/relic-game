@@ -23,6 +23,8 @@ public class Relic : MonoBehaviour
     [Range(0, 10)]
     public float SpawnPickupDelay;
 
+	public string RelicName;
+
     private CameraController cameraController;
     private new Rigidbody rigidbody;
 

@@ -9,10 +9,11 @@ namespace Assets.Scripts
     public class RelicSpawner : MonoBehaviour
     {
         public Relic CurrentRelic { get; set; }
+        public string LastRelicName { get; private set; }
 
         public Transform[] SpawnLocations;
 
-        public Relic RelicPrefab;
+        public Relic[] RelicPrefabs;
 
         [Range(0, 5)]
         public float RelicSpawnDelay;
@@ -22,8 +23,10 @@ namespace Assets.Scripts
 
         public void Start()
         {
-            if (RelicPrefab == null)
-                throw new InvalidOperationException("No relic prefab");
+            /*foreach (var item in RelicPrefabs) {
+
+			}
+                throw new InvalidOperationException("No relic prefab");*/
 
             if (HoldingRelicPrefab == null)
                 throw new InvalidOperationException("No holding relic prefab");
@@ -42,7 +45,9 @@ namespace Assets.Scripts
             if (CurrentRelic != null)
                 return; // Only one relic at a time
 
-            var newObj = (GameObject)Instantiate(RelicPrefab.gameObject, position, Quaternion.identity);
+			var relicRandom = RelicPrefabs[Random.Range(0, RelicPrefabs.Length)];
+
+            var newObj = (GameObject)Instantiate(relicRandom.gameObject, position, Quaternion.identity);
             var relic = newObj.GetComponent<Relic>();
             relic.Spawner = this;
             {
@@ -51,7 +56,8 @@ namespace Assets.Scripts
             }
             relic.RandomImpulse();
             CurrentRelic = relic;
-            
+
+            LastRelicName = ""; //TODO
 
             relic.DelayBeingAbleToBePickedUp();
         }

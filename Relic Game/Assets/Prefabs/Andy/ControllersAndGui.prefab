@@ -633,7 +633,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.5799999, y: 4.76999998, z: 0}
+  m_LocalPosition: {x: 10.4099998, y: 8.96000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 417972}
@@ -661,7 +661,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.55999994, y: -5.3499999, z: 0}
+  m_LocalPosition: {x: 4.03999996, y: -.870000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 417972}
@@ -721,7 +721,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.0999999, y: 3.94000006, z: 0}
+  m_LocalPosition: {x: -3.78999996, y: -.50999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 417972}
@@ -1080,6 +1080,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1100,6 +1101,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &8293986
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1188,6 +1190,11 @@ MonoBehaviour:
   ItemPrefab: {fileID: 186174, guid: 6cfe1b3df0b0c874d96567c3f052e23a, type: 2}
   EgyptContainer: {fileID: 21300000, guid: b22f1807c72248e43861c52385ae4074, type: 3}
   MayanContainer: {fileID: 21300000, guid: 1493f5f406ee978448f7fd9bad981915, type: 3}
+  Icons:
+  - RelicName: medallion
+    Sprite: {fileID: 21300000, guid: 94be21d7f27bf614a846d3f01765877e, type: 3}
+  - RelicName: cart
+    Sprite: {fileID: 21300000, guid: f51591b529286d244a87a15f20d6b3e6, type: 3}
 --- !u!114 &11401246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1297,7 +1304,9 @@ MonoBehaviour:
   - {fileID: 421356}
   - {fileID: 465742}
   - {fileID: 432628}
-  RelicPrefab: {fileID: 11452264, guid: 7905ed10858738e459bfba143ed12051, type: 2}
+  RelicPrefabs:
+  - {fileID: 11452264, guid: 7905ed10858738e459bfba143ed12051, type: 2}
+  - {fileID: 11452264, guid: c7316948683ef104992e289a3a6d58db, type: 2}
   RelicSpawnDelay: 1
   HoldingRelicPrefab: {fileID: 11434730, guid: fa944072a13724b4dbdc9e3aa31bea67, type: 2}
 --- !u!114 &11420366
@@ -1510,6 +1519,11 @@ MonoBehaviour:
   ItemPrefab: {fileID: 186174, guid: 6cfe1b3df0b0c874d96567c3f052e23a, type: 2}
   EgyptContainer: {fileID: 21300000, guid: b22f1807c72248e43861c52385ae4074, type: 3}
   MayanContainer: {fileID: 21300000, guid: 1493f5f406ee978448f7fd9bad981915, type: 3}
+  Icons:
+  - RelicName: medallion
+    Sprite: {fileID: 21300000, guid: 94be21d7f27bf614a846d3f01765877e, type: 3}
+  - RelicName: cart
+    Sprite: {fileID: 21300000, guid: f51591b529286d244a87a15f20d6b3e6, type: 3}
 --- !u!114 &11457684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1638,6 +1652,11 @@ MonoBehaviour:
   ItemPrefab: {fileID: 186174, guid: 6cfe1b3df0b0c874d96567c3f052e23a, type: 2}
   EgyptContainer: {fileID: 21300000, guid: b22f1807c72248e43861c52385ae4074, type: 3}
   MayanContainer: {fileID: 21300000, guid: 1493f5f406ee978448f7fd9bad981915, type: 3}
+  Icons:
+  - RelicName: medallion
+    Sprite: {fileID: 21300000, guid: 94be21d7f27bf614a846d3f01765877e, type: 3}
+  - RelicName: cart
+    Sprite: {fileID: 21300000, guid: f51591b529286d244a87a15f20d6b3e6, type: 3}
 --- !u!114 &11470790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1710,6 +1729,11 @@ MonoBehaviour:
   ItemPrefab: {fileID: 186174, guid: 6cfe1b3df0b0c874d96567c3f052e23a, type: 2}
   EgyptContainer: {fileID: 21300000, guid: b22f1807c72248e43861c52385ae4074, type: 3}
   MayanContainer: {fileID: 21300000, guid: 1493f5f406ee978448f7fd9bad981915, type: 3}
+  Icons:
+  - RelicName: medallion
+    Sprite: {fileID: 21300000, guid: 94be21d7f27bf614a846d3f01765877e, type: 3}
+  - RelicName: cart
+    Sprite: {fileID: 21300000, guid: f51591b529286d244a87a15f20d6b3e6, type: 3}
 --- !u!114 &11494038
 MonoBehaviour:
   m_ObjectHideFlags: 1

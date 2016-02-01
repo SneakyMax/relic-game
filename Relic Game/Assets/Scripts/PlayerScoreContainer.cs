@@ -23,6 +23,8 @@ namespace Assets.Scripts
         public Sprite EgyptContainer;
         public Sprite MayanContainer;
 
+        public RelicIconInfo[] Icons;
+
 		public void Awake()
 		{
 		    items = new Stack<GameObject>();
@@ -71,7 +73,7 @@ namespace Assets.Scripts
             transform.FindChild("Background").GetComponent<Image>().overrideSprite = EgyptContainer;
         }
 
-        private void HandleScoreChange(int playerNumber, int newScore)
+        private void HandleScoreChange(int playerNumber, int newScore, string pickedUpRelic)
         {
             if (playerNumber != PlayerNumber)
                 return;
@@ -89,6 +91,15 @@ namespace Assets.Scripts
                     items.Push(item);
 
                     item.transform.SetParent(transform.FindChild("Items"), false);
+
+                    if (String.IsNullOrEmpty(pickedUpRelic) == false)
+                    {
+                        var icon = Icons.FirstOrDefault(x => x.RelicName == pickedUpRelic);
+                        if (icon.Sprite == null)
+                            icon = Icons.First();
+
+                        item.GetComponentInChildren<Image>().overrideSprite = icon.Sprite;
+                    }
                 }
             }
         }
@@ -102,5 +113,13 @@ namespace Assets.Scripts
 
             transform.FindChild("bg2").GetComponent<Image>().color = transparentColor;
         }
+    }
+
+    [Serializable]
+    public struct RelicIconInfo
+    {
+        public string RelicName;
+
+        public Sprite Sprite;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public delegate void PlayerScoreChanged(int playerNumber, int newScore);
+    public delegate void PlayerScoreChanged(int playerNumber, int newScore, string pickedUpRelic);
 
     public class ScoreController : MonoBehaviour
     {
@@ -45,7 +45,7 @@ namespace Assets.Scripts
             return playerScores[playerNumber];
         }
 
-        public void AddScore(int playerNumber, int score)
+        public void AddScore(int playerNumber, int score, string pickedUpRelic)
         {
             if (playerScores.ContainsKey(playerNumber) == false)
                 throw new InvalidOperationException("No player " + playerNumber);
@@ -53,25 +53,10 @@ namespace Assets.Scripts
             playerScores[playerNumber] += score;
 
             if(ScoreChanged != null)
-                ScoreChanged(playerNumber, playerScores[playerNumber]);
+                ScoreChanged(playerNumber, playerScores[playerNumber], pickedUpRelic);
 
-            var maxScore = playerScores.Max(x => x.Value);            
-           /* if(maxScore == 1)
-            {
-                PlayMusic("rushIG_(1RELIC)");
-            }
-            else if(maxScore == 2)
-            {
-                PlayMusic("rushIG_(2RELIC)");
-            }
-            else if(maxScore == 4)
-            {
-                PlayMusic("rushIG_(END)");
-            }
-            else if(maxScore == 5)
-            {
-                PlayMusic("rushIG_(FIN)");
-            }*/
+            var maxScore = playerScores.Max(x => x.Value);
+
             switch(maxScore)
             {
                 case 1:
@@ -109,7 +94,7 @@ namespace Assets.Scripts
                 playerScores[pair.Key] = 0;
 
                 if (ScoreChanged != null)
-                    ScoreChanged(pair.Key, 0);
+                    ScoreChanged(pair.Key, 0, null);
                 PlayMusic("rushIG_(NORELIC)");
             }
         }

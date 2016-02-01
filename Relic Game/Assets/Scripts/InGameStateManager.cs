@@ -36,7 +36,7 @@ namespace Assets.Scripts
             
             TransitionToSpawnPlayers();
             
-            ScoreController.ScoreChanged += HangleScoreChanged;
+            ScoreController.ScoreChanged += HandleScoreChanged;
         }
 
         private void SetUpPlayers()
@@ -82,7 +82,7 @@ namespace Assets.Scripts
             State = GameState.InGame;
         }
 
-        private void HangleScoreChanged(int playerNumber, int newScore)
+        private void HandleScoreChanged(int playerNumber, int newScore, string pickedUpRelic)
         {
             if (newScore == ScoreToWin && State == GameState.InGame)
             {
