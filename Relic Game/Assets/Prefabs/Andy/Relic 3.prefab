@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &169764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 440510}
+  - 136: {fileID: 13612910}
+  m_Layer: 0
+  m_Name: collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &179560
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +28,6 @@ GameObject:
   - 23: {fileID: 2311712}
   - 114: {fileID: 11452264}
   - 54: {fileID: 5415538}
-  - 136: {fileID: 13613794}
   m_Layer: 0
   m_Name: Relic 3
   m_TagString: Relic
@@ -20,6 +35,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &440510
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169764}
+  m_LocalRotation: {x: 0, y: 0, z: -.351841688, w: .936059535}
+  m_LocalPosition: {x: -.203999996, y: .111000001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 495852}
+  m_RootOrder: 0
 --- !u!4 &495852
 Transform:
   m_ObjectHideFlags: 1
@@ -27,9 +54,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.13405704, y: 4.11102962, z: .492000014}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 440510}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!23 &2311712
@@ -97,17 +125,17 @@ MonoBehaviour:
   MinCollisionSpeed: 4.9000001
   SpawnPickupDelay: 0
   RelicName: dagger
---- !u!136 &13613794
+--- !u!136 &13612910
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179560}
+  m_GameObject: {fileID: 169764}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .436225474
-  m_Height: .747737944
+  m_Radius: .150000006
+  m_Height: 1.20000005
   m_Direction: 1
   m_Center: {x: .0406874865, y: .356410712, z: 1.11758709e-08}
 --- !u!1001 &100100000
