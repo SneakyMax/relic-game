@@ -57,7 +57,7 @@ namespace Assets.Scripts
             relic.RandomImpulse();
             CurrentRelic = relic;
 
-            LastRelicName = ""; //TODO
+			LastRelicName = relicRandom.RelicName; //TODO
 
             relic.DelayBeingAbleToBePickedUp();
         }
