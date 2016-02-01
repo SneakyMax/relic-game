@@ -125,7 +125,7 @@ namespace Assets.Scripts
 
             yield return new WaitForSeconds(1);
 
-            TransitionToSpawnPlayers();
+			NextLevel ();
         }
 
         private void NextLevel()
