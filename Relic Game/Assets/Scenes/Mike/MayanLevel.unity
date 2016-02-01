@@ -1566,9 +1566,11 @@ Transform:
   - {fileID: 486235700}
   - {fileID: 2131659504}
   - {fileID: 776930552}
-  - {fileID: 11114345}
+  - {fileID: 537188909}
   - {fileID: 1521116614}
   - {fileID: 466093692}
+  - {fileID: 11114345}
+  - {fileID: 734717777}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!1001 &537188908
@@ -1617,6 +1619,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bade6a3cffb72b14aa82fa2e5c2671d4, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &537188909 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 411764, guid: bade6a3cffb72b14aa82fa2e5c2671d4, type: 2}
+  m_PrefabInternal: {fileID: 537188908}
 --- !u!1001 &555893880
 Prefab:
   m_ObjectHideFlags: 0
@@ -2476,6 +2482,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bade6a3cffb72b14aa82fa2e5c2671d4, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &734717777 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 411764, guid: bade6a3cffb72b14aa82fa2e5c2671d4, type: 2}
+  m_PrefabInternal: {fileID: 734717776}
 --- !u!1001 &736252618
 Prefab:
   m_ObjectHideFlags: 0
@@ -6364,7 +6374,7 @@ Camera:
   far clip plane: 65.8000031
   field of view: 60
   orthographic: 1
-  orthographic size: 10.5
+  orthographic size: 10.8800001
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
