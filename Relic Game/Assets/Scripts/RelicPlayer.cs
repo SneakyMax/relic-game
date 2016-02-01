@@ -134,8 +134,12 @@ namespace Assets.Scripts
             HoldingRelic = null;
             lastDirection = null;
 
+			var dropPoint = collision.gameObject.GetComponent<DropPoint>();
 
-            collision.gameObject.GetComponent<DropPoint>().AcceptRelic(this);
+			if(dropPoint == null)
+				dropPoint = collision.gameObject.GetComponentInParent<DropPoint>();
+
+            dropPoint.AcceptRelic(this);
         }
 
         private void CollideWithRelic(Collision collision)

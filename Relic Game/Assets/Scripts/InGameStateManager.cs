@@ -53,7 +53,6 @@ namespace Assets.Scripts
                         PlayerSpawner.AddPlayer(pair.Key);
                     }
                 }
-                Destroy(prefsObj);
             }
             else
             {
