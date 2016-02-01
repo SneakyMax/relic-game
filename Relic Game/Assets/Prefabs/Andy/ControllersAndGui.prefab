@@ -1080,7 +1080,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1101,7 +1100,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!82 &8293986
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1307,6 +1305,7 @@ MonoBehaviour:
   RelicPrefabs:
   - {fileID: 11452264, guid: 7905ed10858738e459bfba143ed12051, type: 2}
   - {fileID: 11452264, guid: c7316948683ef104992e289a3a6d58db, type: 2}
+  - {fileID: 11452264, guid: a0eb2b9655968e144a9e563ed751d3fe, type: 2}
   RelicSpawnDelay: 1
   HoldingRelicPrefab: {fileID: 11434730, guid: fa944072a13724b4dbdc9e3aa31bea67, type: 2}
 --- !u!114 &11420366

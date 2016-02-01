@@ -39,12 +39,6 @@ namespace Assets.Scripts
         {
             SetBackgroundColor();
 
-            var playerInfo = PlayerSpawner.Players.FirstOrDefault(x => x.PlayerNumber == PlayerNumber);
-            if (playerInfo == null)
-            {
-                gameObject.SetActive(false);
-            }
-
             var levelManager = GameObject.Find("LevelManager");
             if (levelManager == null)
             {
@@ -62,6 +56,18 @@ namespace Assets.Scripts
                 }
             }
         }
+
+		public void Update()
+		{
+			var playerInfo = PlayerSpawner.Players.FirstOrDefault(x => x.PlayerNumber == PlayerNumber);
+			if (playerInfo == null)
+			{
+				foreach(Transform subObj in transform)
+				{
+					subObj.gameObject.SetActive(false);
+				}
+			}
+		}
 
         public void SetMayan()
         {
@@ -98,7 +104,12 @@ namespace Assets.Scripts
                         if (icon.Sprite == null)
                             icon = Icons.First();
 
-                        item.GetComponentInChildren<Image>().overrideSprite = icon.Sprite;
+						var image = item.GetComponent<Image>();
+
+						if(image == null)
+							throw new InvalidOperationException("No image on item??");
+
+                        image.overrideSprite = icon.Sprite;
                     }
                 }
             }
