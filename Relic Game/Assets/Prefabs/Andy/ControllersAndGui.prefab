@@ -579,7 +579,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119946}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.0799999, y: 4.80000019, z: 0}
+  m_LocalPosition: {x: 17.5699997, y: 4.69999981, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 428814}
@@ -621,7 +621,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.8799992, y: 4.73999977, z: 0}
+  m_LocalPosition: {x: -16.6599998, y: -1.59000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 428814}
@@ -685,7 +685,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.4599991, y: -1.58000004, z: 0}
+  m_LocalPosition: {x: -17.4599991, y: 4.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 428814}
@@ -1501,6 +1501,11 @@ MonoBehaviour:
   - {fileID: 11401246}
   PlayerPrefab: {fileID: 11435410, guid: 1370baccfcba6a743af2caf058be8288, type: 2}
   SpawnEffect: {fileID: 125524, guid: 21ac15ff0a992c14ba30a563112fa2df, type: 2}
+  PlayerMaterials:
+  - {fileID: 2100000, guid: 34439a071af1af042b2dcbaba713f0fb, type: 2}
+  - {fileID: 2100000, guid: 2378235a4d4f6814d92727959f247cdd, type: 2}
+  - {fileID: 2100000, guid: d3886f92725e53d489f1ba8e0592ce1a, type: 2}
+  - {fileID: 2100000, guid: 3dd96222d6e19b945b98508eccf2f4be, type: 2}
   RespawnDelay: 3
 --- !u!114 &11449012
 MonoBehaviour:
