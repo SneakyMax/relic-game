@@ -1080,6 +1080,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1100,6 +1101,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &8293986
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1188,6 +1190,11 @@ MonoBehaviour:
   ItemPrefab: {fileID: 186174, guid: 6cfe1b3df0b0c874d96567c3f052e23a, type: 2}
   EgyptContainer: {fileID: 21300000, guid: b22f1807c72248e43861c52385ae4074, type: 3}
   MayanContainer: {fileID: 21300000, guid: 1493f5f406ee978448f7fd9bad981915, type: 3}
+  Icons:
+  - RelicName: medallion
+    Sprite: {fileID: 21300000, guid: 94be21d7f27bf614a846d3f01765877e, type: 3}
+  - RelicName: cart
+    Sprite: {fileID: 21300000, guid: f51591b529286d244a87a15f20d6b3e6, type: 3}
 --- !u!114 &11401246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1334,6 +1341,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioObjects:
+  - {fileID: 147616, guid: a20c8e2266ab53f42a67efbeb406539c, type: 2}
+  - {fileID: 164282, guid: 95d1a6f17ac64ef46bd93cfe91bdfc44, type: 2}
+  - {fileID: 108920, guid: ffc882f28c0242341adb6ad58be8e5f6, type: 2}
   - {fileID: 147616, guid: a20c8e2266ab53f42a67efbeb406539c, type: 2}
 --- !u!114 &11428244
 MonoBehaviour:
@@ -1509,6 +1519,11 @@ MonoBehaviour:
   ItemPrefab: {fileID: 186174, guid: 6cfe1b3df0b0c874d96567c3f052e23a, type: 2}
   EgyptContainer: {fileID: 21300000, guid: b22f1807c72248e43861c52385ae4074, type: 3}
   MayanContainer: {fileID: 21300000, guid: 1493f5f406ee978448f7fd9bad981915, type: 3}
+  Icons:
+  - RelicName: medallion
+    Sprite: {fileID: 21300000, guid: 94be21d7f27bf614a846d3f01765877e, type: 3}
+  - RelicName: cart
+    Sprite: {fileID: 21300000, guid: f51591b529286d244a87a15f20d6b3e6, type: 3}
 --- !u!114 &11457684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1637,6 +1652,11 @@ MonoBehaviour:
   ItemPrefab: {fileID: 186174, guid: 6cfe1b3df0b0c874d96567c3f052e23a, type: 2}
   EgyptContainer: {fileID: 21300000, guid: b22f1807c72248e43861c52385ae4074, type: 3}
   MayanContainer: {fileID: 21300000, guid: 1493f5f406ee978448f7fd9bad981915, type: 3}
+  Icons:
+  - RelicName: medallion
+    Sprite: {fileID: 21300000, guid: 94be21d7f27bf614a846d3f01765877e, type: 3}
+  - RelicName: cart
+    Sprite: {fileID: 21300000, guid: f51591b529286d244a87a15f20d6b3e6, type: 3}
 --- !u!114 &11470790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1709,6 +1729,11 @@ MonoBehaviour:
   ItemPrefab: {fileID: 186174, guid: 6cfe1b3df0b0c874d96567c3f052e23a, type: 2}
   EgyptContainer: {fileID: 21300000, guid: b22f1807c72248e43861c52385ae4074, type: 3}
   MayanContainer: {fileID: 21300000, guid: 1493f5f406ee978448f7fd9bad981915, type: 3}
+  Icons:
+  - RelicName: medallion
+    Sprite: {fileID: 21300000, guid: 94be21d7f27bf614a846d3f01765877e, type: 3}
+  - RelicName: cart
+    Sprite: {fileID: 21300000, guid: f51591b529286d244a87a15f20d6b3e6, type: 3}
 --- !u!114 &11494038
 MonoBehaviour:
   m_ObjectHideFlags: 1

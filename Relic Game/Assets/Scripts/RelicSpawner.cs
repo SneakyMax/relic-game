@@ -9,6 +9,7 @@ namespace Assets.Scripts
     public class RelicSpawner : MonoBehaviour
     {
         public Relic CurrentRelic { get; set; }
+        public string LastRelicName { get; private set; }
 
         public Transform[] SpawnLocations;
 
@@ -55,7 +56,8 @@ namespace Assets.Scripts
             }
             relic.RandomImpulse();
             CurrentRelic = relic;
-            
+
+            LastRelicName = ""; //TODO
 
             relic.DelayBeingAbleToBePickedUp();
         }

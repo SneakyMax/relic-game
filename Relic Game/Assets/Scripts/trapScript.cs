@@ -70,8 +70,7 @@ public class trapScript : MonoBehaviour {
 			// maybe squish or something when hitting
 			//if(!isHolding)_currentState = STATE.RETURNING;
 			_currentState = STATE.RETURNING;
-                AudioSource audio = GetComponent<AudioSource>();
-                audio.Play();
+                GeneralAudioController.PlaySound("RushSquish");
                 break;
 		case STATE.RETURNING:
 			Vector3 moveVec = (startLocation - transform.position).normalized;

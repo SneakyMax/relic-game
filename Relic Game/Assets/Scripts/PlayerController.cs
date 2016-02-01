@@ -163,6 +163,8 @@ namespace Assets.Scripts
             rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
             jumpRequested = false;
             State = PlayerState.InAir;
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
         }
 
         private void StopInstantly()
