@@ -20,6 +20,8 @@ namespace Assets.Scripts
 
         public bool Enabled { get; private set; }
 
+		public Material[] PlayerMaterials;
+
         [Range(0, 10)]
         public float RespawnDelay = 3;
 
@@ -88,6 +90,9 @@ namespace Assets.Scripts
 
             var playerInstance = (GameObject)Instantiate(PlayerPrefab.gameObject, spawnPoint.transform.position, Quaternion.identity);
             var relicPlayer = playerInstance.GetComponent<RelicPlayer>();
+
+			var meshRenderer = playerInstance.GetComponentInChildren<SkinnedMeshRenderer>();
+			meshRenderer.material = PlayerMaterials[playerNumber - 1];
 
             relicPlayer.PlayerNumber = playerNumber;
             relicPlayer.PlayerInfo = player;
