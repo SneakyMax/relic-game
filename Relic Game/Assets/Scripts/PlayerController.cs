@@ -15,7 +15,7 @@ namespace Assets.Scripts
         [Range(0, 30)]
         public float MaxHorizontalAccelleration;
 
-        [Range(0, 1)]
+        [Range(0, 5)]
         public float AirControl;
 
         [Range(0, 10)]
@@ -58,7 +58,10 @@ namespace Assets.Scripts
         }
 
 		private int playerNumber;
+
         private bool jumpRequested;
+        private bool jumpStopRequested;
+
         private float desiredHorizontalAccelleration;
         private bool hitGround;
 		private Animator AnimController;
@@ -124,6 +127,8 @@ namespace Assets.Scripts
 
             if (State == PlayerState.Grounded)
             {
+                jumpStopRequested = false;
+
                 if (Mathf.Abs(desiredHorizontalAccelleration) > 0)
                 {
                     TryPlayerMoveOnGround();
@@ -142,6 +147,12 @@ namespace Assets.Scripts
                 {
                     // Air control
                     TryPlayerMoveInAir();
+                }
+
+                if (jumpStopRequested && currentVelocity.y > 0.1)
+                {
+                    jumpStopRequested = false;
+                    SetVerticalVelocity(0);
                 }
             }
 
@@ -220,7 +231,8 @@ namespace Assets.Scripts
                 //We're trying to reverse direction
                 rigidbody.AddForce(new Vector3(desiredHorizontalAccelleration * ReverseSpeedFactor * AirControl, 0, 0));
             }
-            else
+
+            if (Mathf.Abs(desiredHorizontalAccelleration) > 0.1)
             {
                 // Apply force to move
                 rigidbody.AddForce(new Vector3(desiredHorizontalAccelleration * AirControl, 0, 0));
@@ -290,7 +302,9 @@ namespace Assets.Scripts
 
             var upAmount = Vector2.Dot(new Vector2(0, 1), normal);
 
-            if (upAmount > 0.1) // Facing up?
+            var verticalVelocity = rigidbody.velocity.y;
+
+            if (upAmount > 0.1 && verticalVelocity < 0.1) //facing up and moving down
             {
                 hitGround = true;
             }
@@ -316,10 +330,21 @@ namespace Assets.Scripts
                 ? Direction.Left
                 : horizontalAxis > 0 ? Direction.Right : LastRequestedDirection;
 
-            if (Input.GetButton("buttonA" + playerNumber)) 
+            if (State == PlayerState.Grounded)
             {
-                if(State == PlayerState.Grounded)
+                if (Input.GetButtonDown("buttonA" + playerNumber))
+                {
                     jumpRequested = true;
+                }
+            }
+
+
+            if (Input.GetButtonUp("buttonA" + playerNumber))
+            {
+                if (State == PlayerState.InAir)
+                {
+                    jumpStopRequested = true;
+                }
             }
         }
     }
