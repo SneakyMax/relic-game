@@ -19,7 +19,7 @@ public class trapScript : MonoBehaviour {
 	[Range(0.0f, 1.0f)]
 	public float snap = 0.2f;
 
-	public AnimationCurve speedEasingCrushingCurve = AnimationCurve.Linear;
+	public AnimationCurve speedEasingCrushingCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
 	public float timeToWaitAfterHit = 0.0f;
 
