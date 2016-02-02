@@ -30,8 +30,8 @@ namespace Assets.Scripts
         [Range(0, 5)]
         public float JumpStartAmount = 3;
         
-        [Range(0, 30)]
-        public float JumpForce;
+        [Range(0, 60)]
+        public float JumpVelocity;
 
         [Range(0, 10)]
         public float InstantStopSpeedThreshold;
@@ -155,12 +155,20 @@ namespace Assets.Scripts
             }
         }
 
+        private void SetVerticalVelocity(float velocity)
+        {
+            var verticalVelocity = rigidbody.velocity.y;
+            var difference = verticalVelocity - velocity;
+
+            rigidbody.AddForce(new Vector3(0, -difference, 0), ForceMode.VelocityChange);
+        }
+
         private void TryJump()
         {
             if (!jumpRequested)
                 return;
 
-            rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
+            SetVerticalVelocity(JumpVelocity);
             jumpRequested = false;
             State = PlayerState.InAir;
             AudioSource audio = GetComponent<AudioSource>();
@@ -233,7 +241,9 @@ namespace Assets.Scripts
 
             var upAmount = Vector2.Dot(new Vector2(0, 1), normal);
 
-            if (upAmount > 0.1) // Facing up?
+            var verticalVelocity = rigidbody.velocity.y;
+
+            if (upAmount > 0.1 && verticalVelocity < 0.1) //facing up and moving down
             {
                 hitGround = true;
             }
