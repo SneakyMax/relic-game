@@ -12,7 +12,7 @@ namespace Assets.Scripts
         [Range(0, 30)]
         public float MaxHorizontalSpeed;
 
-        [Range(0, 10)]
+        [Range(0, 30)]
         public float MaxHorizontalAccelleration;
 
         [Range(0, 1)]
@@ -130,19 +130,7 @@ namespace Assets.Scripts
                     StopInstantly();
                     //SlowDownHorizontalMovement();
                 }
-
-                if (Mathf.Abs(currentVelocity.x) > MaxHorizontalSpeed)
-                {
-                    var difference = currentVelocity.x < 0
-                        ? currentVelocity.x + MaxHorizontalSpeed
-                        : currentVelocity.x - MaxHorizontalSpeed;
-
-                    var correction = -difference;
-                    
-                    rigidbody.AddForce(new Vector3(correction, 0, 0), ForceMode.VelocityChange);
-                    //SlowDownHorizontalMovement();
-                }
-
+                
                 TryJump();
             }
             else if (State == PlayerState.InAir)
@@ -153,6 +141,18 @@ namespace Assets.Scripts
                     TryPlayerMoveInAir();
                 }
             }
+
+            if (Mathf.Abs(currentVelocity.x) > MaxHorizontalSpeed)
+            {
+                SetHorizontalVelocity(MaxHorizontalSpeed * Mathf.Sign(currentVelocity.x));
+            }
+        }
+
+        private void SetHorizontalVelocity(float velocity)
+        {
+            var difference = currentVelocity.x - velocity;
+
+            rigidbody.AddForce(new Vector3(-difference, 0, 0), ForceMode.VelocityChange);
         }
 
         private void SetVerticalVelocity(float velocity)
