@@ -2422,10 +2422,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 10899336, guid: bade6a3cffb72b14aa82fa2e5c2671d4, type: 2}
-      propertyPath: m_BounceIntensity
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bade6a3cffb72b14aa82fa2e5c2671d4, type: 2}
   m_IsPrefabParent: 0
@@ -4513,7 +4509,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 421412, guid: bade6a3cffb72b14aa82fa2e5c2671d4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.68700004
+      value: 1.687
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bade6a3cffb72b14aa82fa2e5c2671d4, type: 2}
@@ -5599,7 +5595,7 @@ Light:
   serializedVersion: 6
   m_Type: 1
   m_Color: {r: 0.88235295, g: 0.9902637, b: 1, a: 1}
-  m_Intensity: 1.78
+  m_Intensity: 1.69
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10

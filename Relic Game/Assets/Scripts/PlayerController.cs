@@ -6,7 +6,7 @@ namespace Assets.Scripts
 {
     public class PlayerController : MonoBehaviour
     {	
-        [Range(0, 100)]
+        [Range(0, 3)]
         public float Gravity;
 
         [Range(0, 30)]
@@ -38,6 +38,9 @@ namespace Assets.Scripts
 
         [Range(0, 30)]
         public float BounceOtherPlayerForce;
+
+        [Range(0, 100)]
+        public float MaxVerticalSpeed;
 
         public enum Direction { Left, Right }
 
@@ -106,7 +109,11 @@ namespace Assets.Scripts
                 State = PlayerState.InAir;
 
             // Always apply gravity
-            rigidbody.AddForce(0, -Gravity, 0);
+
+            if (currentVelocity.y > -MaxVerticalSpeed)
+            {
+                rigidbody.AddForce(0, -Gravity, 0, ForceMode.VelocityChange);
+            }
 
             if (hitGround)
             {
