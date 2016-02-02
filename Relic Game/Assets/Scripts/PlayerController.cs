@@ -80,21 +80,16 @@ namespace Assets.Scripts
         public void Update()
         {
             UpdateInput();
-			if(currentVelocity.x != 0.0f)
-			{
-				AnimController.SetBool("isRunning", true);
-				if(currentVelocity.x < 0.0f)
-					AnimController.gameObject.transform.localScale = new Vector3(localModelScale, localModelScale, -localModelScale);
-				else
-					AnimController.gameObject.transform.localScale = new Vector3(localModelScale, localModelScale, localModelScale);
-			}
-			else
-				AnimController.SetBool("isRunning", false);
-
-			if(currentVelocity.y > 0.001f)
-				AnimController.SetBool("isJumping", true);
-			else
-				AnimController.SetBool("isJumping", false);
+            if (Math.Abs(currentVelocity.x) > 0.05f)
+            {
+                AnimController.SetBool("isRunning", true);
+                if (currentVelocity.x < 0.0f)
+                    AnimController.gameObject.transform.localScale = new Vector3(-localModelScale, localModelScale, -localModelScale);
+                else
+                    AnimController.gameObject.transform.localScale = new Vector3(-localModelScale, localModelScale, localModelScale);
+            }
+            else
+                AnimController.SetBool("isRunning", false);
         }
 
         public void FixedUpdate()
@@ -117,6 +112,7 @@ namespace Assets.Scripts
             {
                 State = PlayerState.Grounded;
                 hitGround = false;
+                AnimController.SetBool("isJumping", false);
             }
 
             if (State == PlayerState.Grounded)
@@ -168,6 +164,7 @@ namespace Assets.Scripts
             if (!jumpRequested)
                 return;
 
+            AnimController.SetBool("isJumping", true);
             SetVerticalVelocity(JumpVelocity);
             jumpRequested = false;
             State = PlayerState.InAir;

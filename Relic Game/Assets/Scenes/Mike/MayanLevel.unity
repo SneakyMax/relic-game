@@ -1209,6 +1209,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  timeToWaitAfterHit: 0
   timeToMaxSpeed: 0.5
   crushingEasingTimer: 0
   _currentState: 0
@@ -1572,7 +1573,7 @@ Transform:
   - {fileID: 11114345}
   - {fileID: 734717777}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1001 &537188908
 Prefab:
   m_ObjectHideFlags: 0
@@ -3186,6 +3187,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  timeToWaitAfterHit: 0
   timeToMaxSpeed: 0.5
   crushingEasingTimer: 0
   _currentState: 0
@@ -5805,6 +5807,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  timeToWaitAfterHit: 0
   timeToMaxSpeed: 0.5
   crushingEasingTimer: 0
   _currentState: 0
@@ -6208,6 +6211,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  timeToWaitAfterHit: 0
   timeToMaxSpeed: 0.5
   crushingEasingTimer: 0
   _currentState: 0
