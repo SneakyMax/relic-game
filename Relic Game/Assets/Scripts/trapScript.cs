@@ -3,6 +3,8 @@ using System.Collections;
 
 public class trapScript : MonoBehaviour {
 
+	#region public variables
+
 	public enum direction {UP, RIGHT, LEFT, DOWN};
 
 	public direction trapDirection = direction.UP;
@@ -17,12 +19,17 @@ public class trapScript : MonoBehaviour {
 	[Range(0.0f, 1.0f)]
 	public float snap = 0.2f;
 
-	public AnimationCurve speedEasingCrushingCurve;
+	public AnimationCurve speedEasingCrushingCurve = AnimationCurve.Linear;
+
+	public float timeToWaitAfterHit = 0.0f;
 
 	[Range(0.0f, 2.0f)]
 	public float timeToMaxSpeed = 0.5f;
 
 	public float crushingEasingTimer = 0.0f;
+
+	#endregion
+	#region private variables
 
 	private Vector3 startLocation;
 
@@ -32,6 +39,10 @@ public class trapScript : MonoBehaviour {
 
 	[SerializeField]
 	private STATE _currentState = STATE.WAITING;
+
+	private float hitPauseTimer = 0.0f;
+
+	#endregion
 
 	// Use this for initialization
 	void Start () 
@@ -56,6 +67,7 @@ public class trapScript : MonoBehaviour {
 			rigid.MovePosition(startLocation);
 			rigid.velocity = Vector3.zero;
 			crushingEasingTimer = 0.0f;
+			hitPauseTimer = 0.0f;
 			// not doing anything, waiting for the word to take off.
 			break;
 		case STATE.ACTIVATED:
@@ -66,12 +78,11 @@ public class trapScript : MonoBehaviour {
 			CrushTrapMovement();               
                 break;
 		case STATE.HIT:
-			// wait for dramatic effect
-			// maybe squish or something when hitting
-			//if(!isHolding)_currentState = STATE.RETURNING;
-			_currentState = STATE.RETURNING;
-                GeneralAudioController.PlaySound("RushSquish");
-                break;
+			hitPauseTimer += Time.deltaTime;
+
+			if(hitPauseTimer >= timeToWaitAfterHit)
+				_currentState = STATE.RETURNING;
+			break;
 		case STATE.RETURNING:
 			Vector3 moveVec = (startLocation - transform.position).normalized;
 			if((startLocation - transform.position).magnitude > snap)
@@ -138,7 +149,11 @@ public class trapScript : MonoBehaviour {
 			return;
 
 		// v ONLY IF BUILDING v
-		_currentState = STATE.HIT;
+		if(_currentState == STATE.MOVING)
+		{
+			_currentState = STATE.HIT;
+			GeneralAudioController.PlaySound("RushSquish");
+		}
 	}
 
 	public void Activate()
