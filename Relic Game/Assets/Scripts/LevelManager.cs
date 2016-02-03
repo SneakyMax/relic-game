@@ -83,6 +83,7 @@ namespace Assets.Scripts
             if (secondsSelectHeld >= SecondsToHoldSelect)
             {
 #pragma warning disable 618
+                Destroy(GameObject.Find("Main Scene Preferences"));
                 Application.LoadLevel(ReadyUpLevelId);
 #pragma warning restore 618
             }
