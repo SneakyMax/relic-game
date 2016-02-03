@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
 
 public class trapScript : MonoBehaviour {
 
@@ -151,8 +153,7 @@ public class trapScript : MonoBehaviour {
 		// v ONLY IF BUILDING v
 		if(_currentState == STATE.MOVING)
 		{
-			_currentState = STATE.HIT;
-			GeneralAudioController.PlaySound("RushSquish");
+		    StopCrushingAndReturn();
 		}
 	}
 
@@ -168,6 +169,9 @@ public class trapScript : MonoBehaviour {
 
 	public void StopCrushingAndReturn()
 	{
-		_currentState = STATE.HIT;
+	    Camera.main.GetComponent<CameraController>().ShakeScreen(1, TimeSpan.FromSeconds(0.35));
+
+        GeneralAudioController.PlaySound("RushSquish");
+        _currentState = STATE.HIT;
 	}
 }
