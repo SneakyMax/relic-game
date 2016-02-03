@@ -39,6 +39,12 @@ namespace Assets.Scripts
             ScoreController.ScoreChanged += HandleScoreChanged;
         }
 
+        public void Update()
+        {
+            if (Input.GetButtonDown("Quit"))
+                Application.Quit();
+        }
+
         private void SetUpPlayers()
         {
             var prefsObj = GameObject.Find("Main Scene Preferences");
