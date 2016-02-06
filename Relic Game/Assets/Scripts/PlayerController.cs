@@ -6,16 +6,16 @@ namespace Assets.Scripts
 {
     public class PlayerController : MonoBehaviour
     {	
-        [Range(0, 100)]
+        [Range(0, 3)]
         public float Gravity;
 
         [Range(0, 30)]
         public float MaxHorizontalSpeed;
 
-        [Range(0, 10)]
+        [Range(0, 30)]
         public float MaxHorizontalAccelleration;
 
-        [Range(0, 1)]
+        [Range(0, 5)]
         public float AirControl;
 
         [Range(0, 10)]
@@ -30,14 +30,17 @@ namespace Assets.Scripts
         [Range(0, 5)]
         public float JumpStartAmount = 3;
         
-        [Range(0, 30)]
-        public float JumpForce;
+        [Range(0, 60)]
+        public float JumpVelocity;
 
         [Range(0, 10)]
         public float InstantStopSpeedThreshold;
 
         [Range(0, 30)]
         public float BounceOtherPlayerForce;
+
+        [Range(0, 100)]
+        public float MaxVerticalSpeed;
 
         public enum Direction { Left, Right }
 
@@ -55,7 +58,10 @@ namespace Assets.Scripts
         }
 
 		private int playerNumber;
+
         private bool jumpRequested;
+        private bool jumpStopRequested;
+
         private float desiredHorizontalAccelleration;
         private bool hitGround;
 		private Animator AnimController;
@@ -80,21 +86,16 @@ namespace Assets.Scripts
         public void Update()
         {
             UpdateInput();
-			if(currentVelocity.x != 0.0f)
-			{
-				AnimController.SetBool("isRunning", true);
-				if(currentVelocity.x < 0.0f)
-					AnimController.gameObject.transform.localScale = new Vector3(localModelScale, localModelScale, -localModelScale);
-				else
-					AnimController.gameObject.transform.localScale = new Vector3(localModelScale, localModelScale, localModelScale);
-			}
-			else
-				AnimController.SetBool("isRunning", false);
-
-			if(currentVelocity.y > 0.001f)
-				AnimController.SetBool("isJumping", true);
-			else
-				AnimController.SetBool("isJumping", false);
+            if (Math.Abs(currentVelocity.x) > 0.05f)
+            {
+                AnimController.SetBool("isRunning", true);
+                if (currentVelocity.x < 0.0f)
+                    AnimController.gameObject.transform.localScale = new Vector3(-localModelScale, localModelScale, -localModelScale);
+                else
+                    AnimController.gameObject.transform.localScale = new Vector3(-localModelScale, localModelScale, localModelScale);
+            }
+            else
+                AnimController.SetBool("isRunning", false);
         }
 
         public void FixedUpdate()
@@ -111,16 +112,23 @@ namespace Assets.Scripts
                 State = PlayerState.InAir;
 
             // Always apply gravity
-            rigidbody.AddForce(0, -Gravity, 0);
+
+            if (currentVelocity.y > -MaxVerticalSpeed)
+            {
+                rigidbody.AddForce(0, -Gravity, 0, ForceMode.VelocityChange);
+            }
 
             if (hitGround)
             {
                 State = PlayerState.Grounded;
                 hitGround = false;
+                AnimController.SetBool("isJumping", false);
             }
 
             if (State == PlayerState.Grounded)
             {
+                jumpStopRequested = false;
+
                 if (Mathf.Abs(desiredHorizontalAccelleration) > 0)
                 {
                     TryPlayerMoveOnGround();
@@ -130,19 +138,7 @@ namespace Assets.Scripts
                     StopInstantly();
                     //SlowDownHorizontalMovement();
                 }
-
-                if (Mathf.Abs(currentVelocity.x) > MaxHorizontalSpeed)
-                {
-                    var difference = currentVelocity.x < 0
-                        ? currentVelocity.x + MaxHorizontalSpeed
-                        : currentVelocity.x - MaxHorizontalSpeed;
-
-                    var correction = -difference;
-                    
-                    rigidbody.AddForce(new Vector3(correction, 0, 0), ForceMode.VelocityChange);
-                    //SlowDownHorizontalMovement();
-                }
-
+                
                 TryJump();
             }
             else if (State == PlayerState.InAir)
@@ -152,7 +148,33 @@ namespace Assets.Scripts
                     // Air control
                     TryPlayerMoveInAir();
                 }
+
+                if (jumpStopRequested && currentVelocity.y > 0.1)
+                {
+                    jumpStopRequested = false;
+                    SetVerticalVelocity(0);
+                }
             }
+
+            if (Mathf.Abs(currentVelocity.x) > MaxHorizontalSpeed)
+            {
+                SetHorizontalVelocity(MaxHorizontalSpeed * Mathf.Sign(currentVelocity.x));
+            }
+        }
+
+        private void SetHorizontalVelocity(float velocity)
+        {
+            var difference = currentVelocity.x - velocity;
+
+            rigidbody.AddForce(new Vector3(-difference, 0, 0), ForceMode.VelocityChange);
+        }
+
+        private void SetVerticalVelocity(float velocity)
+        {
+            var verticalVelocity = rigidbody.velocity.y;
+            var difference = verticalVelocity - velocity;
+
+            rigidbody.AddForce(new Vector3(0, -difference, 0), ForceMode.VelocityChange);
         }
 
         private void TryJump()
@@ -160,7 +182,8 @@ namespace Assets.Scripts
             if (!jumpRequested)
                 return;
 
-            rigidbody.AddForce(0, JumpForce, 0, ForceMode.Impulse);
+            AnimController.SetBool("isJumping", true);
+            SetVerticalVelocity(JumpVelocity);
             jumpRequested = false;
             State = PlayerState.InAir;
             AudioSource audio = GetComponent<AudioSource>();
@@ -208,7 +231,8 @@ namespace Assets.Scripts
                 //We're trying to reverse direction
                 rigidbody.AddForce(new Vector3(desiredHorizontalAccelleration * ReverseSpeedFactor * AirControl, 0, 0));
             }
-            else
+
+            if (Mathf.Abs(desiredHorizontalAccelleration) > 0.1)
             {
                 // Apply force to move
                 rigidbody.AddForce(new Vector3(desiredHorizontalAccelleration * AirControl, 0, 0));
@@ -233,7 +257,9 @@ namespace Assets.Scripts
 
             var upAmount = Vector2.Dot(new Vector2(0, 1), normal);
 
-            if (upAmount > 0.1) // Facing up?
+            var verticalVelocity = rigidbody.velocity.y;
+
+            if (upAmount > 0.1 && verticalVelocity < 0.1) //facing up and moving down
             {
                 hitGround = true;
             }
@@ -276,7 +302,9 @@ namespace Assets.Scripts
 
             var upAmount = Vector2.Dot(new Vector2(0, 1), normal);
 
-            if (upAmount > 0.1) // Facing up?
+            var verticalVelocity = rigidbody.velocity.y;
+
+            if (upAmount > 0.1 && verticalVelocity < 0.1) //facing up and moving down
             {
                 hitGround = true;
             }
@@ -302,10 +330,21 @@ namespace Assets.Scripts
                 ? Direction.Left
                 : horizontalAxis > 0 ? Direction.Right : LastRequestedDirection;
 
-            if (Input.GetButton("buttonA" + playerNumber)) 
+            if (State == PlayerState.Grounded)
             {
-                if(State == PlayerState.Grounded)
+                if (Input.GetButtonDown("buttonA" + playerNumber))
+                {
                     jumpRequested = true;
+                }
+            }
+
+
+            if (Input.GetButtonUp("buttonA" + playerNumber))
+            {
+                if (State == PlayerState.InAir)
+                {
+                    jumpStopRequested = true;
+                }
             }
         }
     }

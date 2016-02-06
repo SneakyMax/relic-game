@@ -10,13 +10,12 @@ namespace Assets.Scripts
     {
         public PlayersDefinition PlayersDefinition;
 
-        public MainScenePreferences Preferences;
-
         public Text NextStepText;
 
         public int MinPlayers = 2;
 
         private IDictionary<int, bool> readyStates;
+        private MainScenePreferences preferences;
 
         public void Start()
         {
@@ -34,6 +33,8 @@ namespace Assets.Scripts
             }
 
             RefreshTexts();
+
+            preferences = GameObject.Find("Main Scene Preferences").GetComponent<MainScenePreferences>();
         }
 
         public void ReadyUp(int playerNumber, bool isReady)
@@ -54,7 +55,7 @@ namespace Assets.Scripts
 
             foreach (var pair in readyStates)
             {
-                Preferences.PlayersIn[pair.Key] = pair.Value;
+                preferences.PlayersIn[pair.Key] = pair.Value;
             }
 
             var levelManager = GameObject.Find("LevelManager");

@@ -46,6 +46,17 @@ public class Relic : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("DropPoint"))
+        {
+            RandomImpulse();
+            return;
+        }
+
+        CollisionAnythingElse(collision);
+    }
+
+    private void CollisionAnythingElse(Collision collision)
+    {
         var collisionMagnitude = collision.relativeVelocity.magnitude;
         if (collisionMagnitude < MinCollisionSpeed)
             return;
@@ -61,8 +72,20 @@ public class Relic : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("SpearTrap"))
+        {
+            RandomImpulse();
+            return;
+        }
+
         if (other.gameObject.CompareTag("KillZone"))
             EnterKillZone();
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("SpearTrap") == rigidbody.velocity.y < 0.1)
+            RandomImpulse();
     }
 
     private void EnterKillZone()

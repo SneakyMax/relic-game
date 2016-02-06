@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
 
 public class trapScript : MonoBehaviour {
+
+	#region public variables
 
 	public enum direction {UP, RIGHT, LEFT, DOWN};
 
@@ -17,21 +21,30 @@ public class trapScript : MonoBehaviour {
 	[Range(0.0f, 1.0f)]
 	public float snap = 0.2f;
 
-	public AnimationCurve speedEasingCrushingCurve;
+	public AnimationCurve speedEasingCrushingCurve = AnimationCurve.Linear(0, 0, 1, 1);
+
+	public float timeToWaitAfterHit = 0.0f;
 
 	[Range(0.0f, 2.0f)]
 	public float timeToMaxSpeed = 0.5f;
 
 	public float crushingEasingTimer = 0.0f;
 
+	#endregion
+	#region private variables
+
 	private Vector3 startLocation;
 
 	private Rigidbody rigid;
 
-	private enum STATE {WAITING, ACTIVATED, MOVING, HIT, RETURNING}
+	public enum STATE {WAITING, ACTIVATED, MOVING, HIT, RETURNING}
 
 	[SerializeField]
-	private STATE _currentState = STATE.WAITING;
+	public STATE CurrentState = STATE.WAITING;
+
+	private float hitPauseTimer = 0.0f;
+
+	#endregion
 
 	// Use this for initialization
 	void Start () 
@@ -46,32 +59,32 @@ public class trapScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		switch (_currentState) 
+		switch (CurrentState) 
 		{
 		case STATE.WAITING:
 			if(isActive)
 			{
-				_currentState = STATE.ACTIVATED;
+				CurrentState = STATE.ACTIVATED;
 			}
 			rigid.MovePosition(startLocation);
 			rigid.velocity = Vector3.zero;
 			crushingEasingTimer = 0.0f;
+			hitPauseTimer = 0.0f;
 			// not doing anything, waiting for the word to take off.
 			break;
 		case STATE.ACTIVATED:
 			// any initializations stuff like slight shake before taking off.
-			_currentState = STATE.MOVING;            
+			CurrentState = STATE.MOVING;            
                 break;
 		case STATE.MOVING:
 			CrushTrapMovement();               
                 break;
 		case STATE.HIT:
-			// wait for dramatic effect
-			// maybe squish or something when hitting
-			//if(!isHolding)_currentState = STATE.RETURNING;
-			_currentState = STATE.RETURNING;
-                GeneralAudioController.PlaySound("RushSquish");
-                break;
+			hitPauseTimer += Time.deltaTime;
+
+			if(hitPauseTimer >= timeToWaitAfterHit)
+				CurrentState = STATE.RETURNING;
+			break;
 		case STATE.RETURNING:
 			Vector3 moveVec = (startLocation - transform.position).normalized;
 			if((startLocation - transform.position).magnitude > snap)
@@ -81,7 +94,7 @@ public class trapScript : MonoBehaviour {
 			else
 			{
 				rigid.MovePosition(startLocation);
-				_currentState = STATE.WAITING;
+				CurrentState = STATE.WAITING;
 				isActive = false;
 			}
 			break;
@@ -134,11 +147,14 @@ public class trapScript : MonoBehaviour {
 	void OnCollisionEnter(Collision c)
 	{
 		// check layer for Player or toggle movement off
-		if(c.gameObject.CompareTag("Player") || _currentState != STATE.MOVING )
+		if(c.gameObject.CompareTag("Player") || CurrentState != STATE.MOVING || c.gameObject.CompareTag("Relic") )
 			return;
 
 		// v ONLY IF BUILDING v
-		_currentState = STATE.HIT;
+		if(CurrentState == STATE.MOVING)
+		{
+		    StopCrushingAndReturn();
+		}
 	}
 
 	public void Activate()
@@ -153,6 +169,9 @@ public class trapScript : MonoBehaviour {
 
 	public void StopCrushingAndReturn()
 	{
-		_currentState = STATE.HIT;
+	    Camera.main.GetComponent<CameraController>().ShakeScreen(1, TimeSpan.FromSeconds(0.35));
+
+        GeneralAudioController.PlaySound("RushSquish");
+        CurrentState = STATE.HIT;
 	}
 }

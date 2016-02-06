@@ -1,0 +1,11 @@
+<sbspresets count="1" formatversion="1.0">
+ <sbspreset label="Mon Feb 1 21:15:58 2016" pkgurl="pkg://Bitmap2Material_3">
+  <presetinput uid="2248540187" type="0" identifier="roughness_value" value="0.712"/>
+  <presetinput uid="2248605176" type="0" identifier="ao_cancellation" value="0.324"/>
+  <presetinput uid="2248633212" type="0" identifier="ao_radius" value="0.221"/>
+  <presetinput uid="2258746387" type="0" identifier="contrast" value="0.041"/>
+  <presetinput uid="2260298739" type="5" filepath="../../../Textures/oneby3_D.tga" identifier="main_input"/>
+  <presetinput uid="2287939933" type="0" identifier="light_cancellation_angle" value="0.219"/>
+  <presetinput uid="4224312677" type="8" identifier="$outputsize" value="10,10"/>
+ </sbspreset>
+</sbspresets>

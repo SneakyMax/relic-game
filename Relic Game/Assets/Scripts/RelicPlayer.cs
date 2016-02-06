@@ -62,24 +62,36 @@ namespace Assets.Scripts
 
             if (collision.gameObject.CompareTag("CrushingTrap"))
                 CollideWithCrushingTrap(collision);
+
+			if (collision.gameObject.CompareTag("SpearTrap"))
+				CollideWithSpearTrap();
         }
 
         public void OnCollisionStay(Collision collision)
         {
             if (collision.gameObject.CompareTag("CrushingTrap"))
                 CollideWithCrushingTrap(collision);
+
+			if (collision.gameObject.CompareTag("SpearTrap"))
+				CollideWithSpearTrap();
         }
 
         public void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("KillZone"))
                 CollideWithKillZone();
+
+			if (other.gameObject.CompareTag("SpearTrap"))
+				CollideWithSpearTrap();
         }
 
 		public void OnTriggerStay(Collider other)
 		{
 			if (other.gameObject.CompareTag("LeverZone"))
 				CollideWithLeverObject(other);
+
+			if (other.gameObject.CompareTag("SpearTrap"))
+				CollideWithSpearTrap();
 		}
 
         private void CollideWithKillZone()
@@ -107,6 +119,10 @@ namespace Assets.Scripts
 
         private void CollideWithCrushingTrap(Collision collision)
         {
+            var crushingTrap = collision.gameObject.GetComponent<trapScript>();
+            if (crushingTrap.CurrentState == trapScript.STATE.WAITING)
+                return;
+
             var normal = collision.contacts.First().normal;
 
             var allInRaycast = Physics.RaycastAll(new Ray(transform.position, normal), CrushingDistance);
@@ -124,6 +140,11 @@ namespace Assets.Scripts
 
             trapController.StopCrushingAndReturn();
         }
+
+		private void CollideWithSpearTrap()
+		{
+			BeSquashed(gameObject, DeathType.Squash);
+		}
 
         private void CollideWithDropPoint(Collision collision)
         {

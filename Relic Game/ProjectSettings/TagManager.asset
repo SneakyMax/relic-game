@@ -9,6 +9,7 @@ TagManager:
   - CrushingTrap
   - KillZone
   - LeverZone
+  - SpearTrap
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Walls
   - Players
   - Solid Objects
-  - 
+  - SpearBlock
   - 
   - 
   - 
