@@ -119,6 +119,10 @@ namespace Assets.Scripts
 
         private void CollideWithCrushingTrap(Collision collision)
         {
+            var crushingTrap = collision.gameObject.GetComponent<trapScript>();
+            if (crushingTrap.CurrentState == trapScript.STATE.WAITING)
+                return;
+
             var normal = collision.contacts.First().normal;
 
             var allInRaycast = Physics.RaycastAll(new Ray(transform.position, normal), CrushingDistance);

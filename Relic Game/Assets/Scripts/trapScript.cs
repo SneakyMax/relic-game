@@ -37,10 +37,10 @@ public class trapScript : MonoBehaviour {
 
 	private Rigidbody rigid;
 
-	private enum STATE {WAITING, ACTIVATED, MOVING, HIT, RETURNING}
+	public enum STATE {WAITING, ACTIVATED, MOVING, HIT, RETURNING}
 
 	[SerializeField]
-	private STATE _currentState = STATE.WAITING;
+	public STATE CurrentState = STATE.WAITING;
 
 	private float hitPauseTimer = 0.0f;
 
@@ -59,12 +59,12 @@ public class trapScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		switch (_currentState) 
+		switch (CurrentState) 
 		{
 		case STATE.WAITING:
 			if(isActive)
 			{
-				_currentState = STATE.ACTIVATED;
+				CurrentState = STATE.ACTIVATED;
 			}
 			rigid.MovePosition(startLocation);
 			rigid.velocity = Vector3.zero;
@@ -74,7 +74,7 @@ public class trapScript : MonoBehaviour {
 			break;
 		case STATE.ACTIVATED:
 			// any initializations stuff like slight shake before taking off.
-			_currentState = STATE.MOVING;            
+			CurrentState = STATE.MOVING;            
                 break;
 		case STATE.MOVING:
 			CrushTrapMovement();               
@@ -83,7 +83,7 @@ public class trapScript : MonoBehaviour {
 			hitPauseTimer += Time.deltaTime;
 
 			if(hitPauseTimer >= timeToWaitAfterHit)
-				_currentState = STATE.RETURNING;
+				CurrentState = STATE.RETURNING;
 			break;
 		case STATE.RETURNING:
 			Vector3 moveVec = (startLocation - transform.position).normalized;
@@ -94,7 +94,7 @@ public class trapScript : MonoBehaviour {
 			else
 			{
 				rigid.MovePosition(startLocation);
-				_currentState = STATE.WAITING;
+				CurrentState = STATE.WAITING;
 				isActive = false;
 			}
 			break;
@@ -147,11 +147,11 @@ public class trapScript : MonoBehaviour {
 	void OnCollisionEnter(Collision c)
 	{
 		// check layer for Player or toggle movement off
-		if(c.gameObject.CompareTag("Player") || _currentState != STATE.MOVING )
+		if(c.gameObject.CompareTag("Player") || CurrentState != STATE.MOVING || c.gameObject.CompareTag("Relic") )
 			return;
 
 		// v ONLY IF BUILDING v
-		if(_currentState == STATE.MOVING)
+		if(CurrentState == STATE.MOVING)
 		{
 		    StopCrushingAndReturn();
 		}
@@ -172,6 +172,6 @@ public class trapScript : MonoBehaviour {
 	    Camera.main.GetComponent<CameraController>().ShakeScreen(1, TimeSpan.FromSeconds(0.35));
 
         GeneralAudioController.PlaySound("RushSquish");
-        _currentState = STATE.HIT;
+        CurrentState = STATE.HIT;
 	}
 }

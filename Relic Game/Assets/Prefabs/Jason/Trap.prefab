@@ -12,7 +12,7 @@ GameObject:
   - 54: {fileID: 5416728}
   m_Layer: 0
   m_Name: Trap
-  m_TagString: Untagged
+  m_TagString: CrushingTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.5, y: -.25, z: 0}
+  m_LocalPosition: {x: -0.5, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -36,13 +36,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132204}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1000
   m_Drag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!114 &11472026
 MonoBehaviour:
@@ -58,8 +58,8 @@ MonoBehaviour:
   trapDirection: 0
   isActive: 0
   isHolding: 0
-  speed: 20
-  snap: .239999995
+  speed: 1.33
+  snap: 0.24
   speedEasingCrushingCurve:
     serializedVersion: 2
     m_Curve:
@@ -75,10 +75,11 @@ MonoBehaviour:
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   timeToWaitAfterHit: 0
-  timeToMaxSpeed: .5
+  timeToMaxSpeed: 0.5
   crushingEasingTimer: 0
-  _currentState: 0
+  CurrentState: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -89,6 +90,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: speedEasingCrushingCurve.m_Curve.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Constraints
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: CrushingTrap
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
