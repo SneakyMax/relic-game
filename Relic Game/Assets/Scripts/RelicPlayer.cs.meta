@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: f1e83c88d4fae7342b3b1a063f70cf70
-timeCreated: 1454188080
+timeCreated: 1454805025
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - HoldingRelicPrefab: {instanceID: 0}
+  - SquishEffects: {fileID: 172400, guid: b9daba373d6d85a44982cf9a6db57a1f, type: 2}
+  - DeathByPlayerEffects: {fileID: 172400, guid: b9daba373d6d85a44982cf9a6db57a1f,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
