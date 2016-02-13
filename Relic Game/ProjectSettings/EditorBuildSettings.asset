@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Asia/Level3.unity
   - enabled: 1
     path: Assets/Scenes/Andy/MayanLevel2.unity
+  - enabled: 1
+    path: Assets/Scenes/Mike/MayanLevel2.unity
