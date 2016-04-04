@@ -48,7 +48,7 @@ namespace Assets.Scripts
         }
 
         public void OnCollisionEnter(Collision collision)
-        {
+        {			
             if (collision.gameObject.CompareTag("Relic"))
             {
                 CollideWithRelic(collision);
@@ -69,6 +69,7 @@ namespace Assets.Scripts
 
         public void OnCollisionStay(Collision collision)
         {
+
             if (collision.gameObject.CompareTag("CrushingTrap"))
                 CollideWithCrushingTrap(collision);
 
@@ -127,7 +128,7 @@ namespace Assets.Scripts
 
             var allInRaycast = Physics.RaycastAll(new Ray(transform.position, normal), CrushingDistance);
 
-            var hit = allInRaycast.Any(x => x.collider.gameObject.CompareTag("Player") == false);
+			var hit = allInRaycast.Any(x => x.collider.gameObject.CompareTag("Player") == false && x.collider.gameObject.CompareTag("Non-Interact") == false);
 
             if (!hit)
                 return;

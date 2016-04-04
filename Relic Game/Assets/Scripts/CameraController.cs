@@ -59,7 +59,7 @@ namespace Assets.Scripts
                 var amount = factor * (1.0f - percentThrough);
                 var angle = Random.Range(0, Mathf.PI * 2);
 
-                var movement = new Vector3(Mathf.Cos(angle), -Mathf.Sin(angle), 0) * amount;
+                var movement = new Vector3(Mathf.Cos(angle), -Mathf.Sin(angle), 0) * amount / 5;
 
                 transform.localPosition = cameraBasePosition + movement;
 
