@@ -54,6 +54,7 @@ namespace Assets.Scripts
         public void Awake()
         {
             PlayersIn = new Dictionary<int, bool>();
+            IsResetReady = true;
 
             if (Instance != null)
             {
@@ -67,27 +68,25 @@ namespace Assets.Scripts
 
         public void Start()
         {
-            SKState<GameStateController> initialState;
-            if (SceneManager.GetActiveScene().name != MainMenu.name)
+            stateMachine = new SKStateMachine<GameStateController>(this, new NoState());
+
+            stateMachine.addState(new InGame());
+            stateMachine.addState(new LevelChange(Scenes));
+            stateMachine.addState(new PlayerWon());
+            stateMachine.addState(new ReadyingUp());
+            stateMachine.addState(new StartCountdown());
+            stateMachine.addState(new OnMainMenu());
+            stateMachine.addState(new StartScene());
+            stateMachine.addState(new PostMainMenu());
+
+            if (SceneManager.GetActiveScene().name == MainMenu.name)
             {
-                initialState = new ReadyingUp();
+                Transition<OnMainMenu>();
             }
             else
             {
-                initialState = new OnMainMenu();
+                Transition<ReadyingUp>();
             }
-
-            stateMachine = new SKStateMachine<GameStateController>(this, initialState);
-            CurrentState = initialState.GetType().Name;
-
-            stateMachine.addStateIfNotAdded(new InGame());
-            stateMachine.addStateIfNotAdded(new LevelChange(Scenes));
-            stateMachine.addStateIfNotAdded(new PlayerWon());
-            stateMachine.addStateIfNotAdded(new ReadyingUp());
-            stateMachine.addStateIfNotAdded(new StartCountdown());
-            stateMachine.addStateIfNotAdded(new OnMainMenu());
-            stateMachine.addStateIfNotAdded(new StartScene());
-            stateMachine.addStateIfNotAdded(new PostMainMenu());
         }
 
         public T Transition<T>() where T : SKState<GameStateController>
