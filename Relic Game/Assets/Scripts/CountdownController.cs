@@ -9,6 +9,8 @@ namespace Assets.Scripts
     {
         public event Action Done;
 
+        public ReadyUpController ReadyUpController;
+
         public RectTransform CounterPrefab;
 
         public Canvas GUICanvas;
@@ -25,6 +27,8 @@ namespace Assets.Scripts
 
             counterText = counterInstance.GetComponentInChildren<Text>();
 
+            ReadyUpController.DeactivateText();
+
             StartCoroutine(CounterCoroutine());
         }
 
@@ -32,6 +36,11 @@ namespace Assets.Scripts
         {
             for (var i = CountdownFrom; i > 0; i--)
             {
+                if (i == 3)
+                {
+                    ReadyUpController.CreateSpawningPortals();
+                }
+
                 SetText(i);
                 yield return new WaitForSeconds(1);
             }

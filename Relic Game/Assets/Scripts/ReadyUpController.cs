@@ -14,6 +14,8 @@ namespace Assets.Scripts
 
         public RectTransform ReadyUpTextPrefab;
 
+        public GameObject SpawningPortalPrefab;
+
         public PlayersDefinition PlayersDefinition;
 
         public PlayerSpawnPoint[] SpawnPoints;
@@ -96,12 +98,37 @@ namespace Assets.Scripts
             }
         }
 
+        public void DeactivateText()
+        {
+            foreach (var pair in portals)
+            {
+                if (pair.Value == null)
+                    continue;
+
+                var blink = pair.Value.GetComponentInChildren<Blink>();
+
+                if(blink != null)
+                    blink.TurnOff();
+            }
+        }
+
         public void RemoveAllPortals()
         {
             foreach (var pair in portals)
             {
                 if (pair.Value != null)
                     Destroy(pair.Value);
+            }
+        }
+
+        public void CreateSpawningPortals()
+        {
+            foreach (var pair in portals)
+            {
+                if (pair.Value == null)
+                    continue;
+                var position = pair.Value.transform.position;
+                Instantiate(SpawningPortalPrefab, position, Quaternion.identity);
             }
         }
 
