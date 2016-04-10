@@ -148,6 +148,10 @@ namespace Assets.Scripts
                     // Air control
                     TryPlayerMoveInAir();
                 }
+                else
+                {
+                    StopInstantly();
+                }
 
                 if (jumpStopRequested && currentVelocity.y > 0.1)
                 {
