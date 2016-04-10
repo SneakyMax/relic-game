@@ -1734,9 +1734,9 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 11435410, guid: 1370baccfcba6a743af2caf058be8288, type: 2}
   SpawnEffect: {fileID: 125524, guid: 21ac15ff0a992c14ba30a563112fa2df, type: 2}
   PlayerMaterials:
-  - {fileID: 2100000, guid: 34439a071af1af042b2dcbaba713f0fb, type: 2}
-  - {fileID: 2100000, guid: 2378235a4d4f6814d92727959f247cdd, type: 2}
   - {fileID: 2100000, guid: d3886f92725e53d489f1ba8e0592ce1a, type: 2}
+  - {fileID: 2100000, guid: 2378235a4d4f6814d92727959f247cdd, type: 2}
+  - {fileID: 2100000, guid: 34439a071af1af042b2dcbaba713f0fb, type: 2}
   - {fileID: 2100000, guid: 3dd96222d6e19b945b98508eccf2f4be, type: 2}
   SpawnPortalPrefab: {fileID: 194390, guid: 289bae4203111c44a8d54b6655b79b34, type: 2}
   RespawnDelay: 3
