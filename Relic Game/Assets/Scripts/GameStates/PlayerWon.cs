@@ -32,11 +32,13 @@ namespace Assets.Scripts.GameStates
             playerSpawner.Disable();
             relicSpawner.DespawnAndStop();
 
-            foreach (var player in playerSpawner.Players.Where(x => x.PlayerNumber != playerNumber))
+            foreach (var player in playerSpawner.Players)
             {
                 if (player.PlayerInstance != null)
                     player.PlayerInstance.StopInput();
             }
+
+            playerSpawner.CreatePortalOn(playerNumber);
 
             yield return new WaitForSeconds(1);
 
