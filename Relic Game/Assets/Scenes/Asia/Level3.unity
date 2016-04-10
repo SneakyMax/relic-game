@@ -3157,15 +3157,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 421048, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -19.35
+      value: -19.15
       objectReference: {fileID: 0}
     - target: {fileID: 437488, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -19.066
+      value: -18.86
       objectReference: {fileID: 0}
     - target: {fileID: 440026, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 19.05
+      value: 19.12
       objectReference: {fileID: 0}
     - target: {fileID: 405242, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3173,7 +3173,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 440026, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.97
+      value: -1.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 421048, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 437488, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.81
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
@@ -3756,7 +3764,7 @@ MonoBehaviour:
   timeToWaitAfterHit: 0
   timeToMaxSpeed: 0.5
   crushingEasingTimer: 0
-  _currentState: 0
+  CurrentState: 0
 --- !u!54 &1343032445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5225,7 +5233,7 @@ MonoBehaviour:
   timeToWaitAfterHit: 0
   timeToMaxSpeed: 0.5
   crushingEasingTimer: 0
-  _currentState: 0
+  CurrentState: 0
 --- !u!54 &1829589908
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6243,7 +6251,7 @@ MonoBehaviour:
   timeToWaitAfterHit: 0
   timeToMaxSpeed: 0.5
   crushingEasingTimer: 0
-  _currentState: 0
+  CurrentState: 0
 --- !u!54 &2068774661
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -2,7 +2,6 @@
 using Prime31.StateKit;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -25,7 +24,7 @@ namespace Assets.Scripts.GameStates
             _context.LevelLoaded += ContextOnLeveLoaded;
             _context.CurrentLevel = level;
 
-            SceneManager.LoadScene(level.Scene.name);
+            SceneManager.LoadScene(level.SceneBuildIndex);
         }
 
         private void ContextOnLeveLoaded(int i)
