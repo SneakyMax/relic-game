@@ -32,6 +32,7 @@ namespace Assets.Scripts
         public void SetColor(Color color)
         {
             particleSystem.startColor = color;
+            particleSystem.GetComponent<ParticleSystemRenderer>().material.color = color;
         }
 
         public void Awake()
