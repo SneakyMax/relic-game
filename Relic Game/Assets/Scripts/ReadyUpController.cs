@@ -8,44 +8,128 @@ namespace Assets.Scripts
 {
     public class ReadyUpController : MonoBehaviour
     {
+        public event Action EveryoneReady;
+
+        public Canvas GUICanvas;
+
+        public RectTransform ReadyUpTextPrefab;
+
+        public GameObject SpawningPortalPrefab;
+
         public PlayersDefinition PlayersDefinition;
 
-        public Text NextStepText;
+        public PlayerSpawnPoint[] SpawnPoints;
+
+        public GameObject PortalPrefab;
 
         public int MinPlayers = 2;
 
         private IDictionary<int, bool> readyStates;
-        private MainScenePreferences preferences;
 
-        public void Start()
+        private IDictionary<int, GameObject> portals = new Dictionary<int, GameObject>();
+
+        private GameObject readyUpTextInstance;
+
+        private bool acceptInput;
+
+        public void Awake()
         {
             readyStates = new Dictionary<int, bool>();
 
             if (PlayersDefinition == null)
                 throw new InvalidOperationException("Missing players definition.");
 
-            if (NextStepText == null)
-                throw new InvalidOperationException("Mising next step text.");
-
             foreach (var player in PlayersDefinition.Players)
             {
                 readyStates[player.PlayerNumber] = false;
+                portals[player.PlayerNumber] = null;
             }
+        }
 
-            RefreshTexts();
+        public void StartController()
+        {
+            acceptInput = true;
 
-            preferences = GameObject.Find("Main Scene Preferences").GetComponent<MainScenePreferences>();
+            readyUpTextInstance = Instantiate(ReadyUpTextPrefab.gameObject);
+            readyUpTextInstance.transform.SetParent(GUICanvas.transform, false);
+        }
+
+        public void StopController()
+        {
+            if (readyUpTextInstance != null)
+                Destroy(readyUpTextInstance);
+
+            acceptInput = false;
+        }
+
+        public void ToggleReady(int playerNumber)
+        {
+            var currentReady = readyStates[playerNumber];
+            ReadyUp(playerNumber, !currentReady);
         }
 
         public void ReadyUp(int playerNumber, bool isReady)
         {
             readyStates[playerNumber] = isReady;
-            RefreshTexts();
+
+            if (isReady)
+            {
+                var spawnPoint = SpawnPoints.FirstOrDefault(x => x.PlayerNumber == playerNumber);
+                if (spawnPoint == null)
+                    throw new InvalidOperationException("Missing spawn point for player " + playerNumber);
+
+                var playerDefinition = PlayersDefinition.Players.FirstOrDefault(x => x.PlayerNumber == playerNumber);
+                if (playerDefinition.PlayerNumber == 0)
+                    throw new InvalidOperationException("Missing player definition for player " + playerNumber);
+
+                var portal = Instantiate(PortalPrefab);
+                portal.transform.position = spawnPoint.transform.position;
+
+                var portalScript = portal.GetComponent<SpiralParticleSpawner>();
+                if (portalScript != null)
+                    portalScript.SetColor(playerDefinition.Color);
+
+                portals[playerNumber] = portal;
+            }
+            else
+            {
+                if (portals[playerNumber] != null)
+                    Destroy(portals[playerNumber]);
+            }
         }
 
-        private void RefreshTexts()
+        public void DeactivateText()
         {
-            NextStepText.enabled = readyStates.Count(x => x.Value) >= MinPlayers;
+            foreach (var pair in portals)
+            {
+                if (pair.Value == null)
+                    continue;
+
+                var blink = pair.Value.GetComponentInChildren<Blink>();
+
+                if(blink != null)
+                    blink.TurnOff();
+            }
+        }
+
+        public void RemoveAllPortals()
+        {
+            foreach (var pair in portals)
+            {
+                if (pair.Value != null)
+                    Destroy(pair.Value);
+            }
+        }
+
+        public void CreateSpawningPortals()
+        {
+            foreach (var pair in portals)
+            {
+                if (pair.Value == null)
+                    continue;
+                var position = pair.Value.transform.position;
+                Instantiate(SpawningPortalPrefab, position, Quaternion.identity);
+            }
         }
 
         public void TryStart()
@@ -55,15 +139,30 @@ namespace Assets.Scripts
 
             foreach (var pair in readyStates)
             {
-                preferences.PlayersIn[pair.Key] = pair.Value;
+                GameStateController.Instance.SetPlayerIn(pair.Key, pair.Value);
             }
 
-            var levelManager = GameObject.Find("LevelManager");
+            if (EveryoneReady != null)
+                EveryoneReady();
+        }
 
-            if (levelManager == null)
-                throw new InvalidOperationException("Couldn't find level manager");
+        public void Update()
+        {
+            if (!acceptInput)
+                return;
 
-            levelManager.GetComponent<LevelManager>().NextRandomLevel();
+            foreach (var definition in PlayersDefinition.Players)
+            {
+                if (Input.GetButtonDown("buttonA" + definition.PlayerNumber))
+                {
+                    ToggleReady(definition.PlayerNumber);
+                }
+            }
+
+            if (Input.GetButtonDown("buttonStartAny"))
+            {
+                TryStart();
+            }
         }
     }
 }

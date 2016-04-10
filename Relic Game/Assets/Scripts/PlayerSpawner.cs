@@ -8,6 +8,8 @@ namespace Assets.Scripts
 {
     public class PlayerSpawner : MonoBehaviour
     {
+        public event Action OnEnabled;
+
         public PlayersDefinition PlayersDefinition;
 
         public IList<PlayerInfo> Players { get; private set; }
@@ -152,6 +154,8 @@ namespace Assets.Scripts
         public void Enable()
         {
             Enabled = true;
+            if (OnEnabled != null)
+                OnEnabled();
         }
     }
 

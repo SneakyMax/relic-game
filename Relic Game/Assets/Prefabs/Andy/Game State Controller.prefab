@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 233.04526, y: 145.4491, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,7 +39,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c055832e5f8454eb7810c66e9985ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RelicSpawner: {fileID: 0}
+  Scenes:
+  - Scene: {fileID: 102900000, guid: 390a4db4ab8e7f44b940ca54397b2024, type: 3}
+    IsEgyptLevel: 0
+  MainMenu: {fileID: 102900000, guid: f0d8bdb20e9c6334489c0c9e7daaab48, type: 3}
+  CurrentState: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
