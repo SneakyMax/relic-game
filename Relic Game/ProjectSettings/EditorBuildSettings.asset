@@ -15,7 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Asia/Level2.unity
   - enabled: 1
     path: Assets/Scenes/Asia/Level3.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Andy/AndyMayanLevel.unity
   - enabled: 1
     path: Assets/Scenes/Mike/MayanLevel2.unity
+  - enabled: 1
+    path: Assets/Scenes/Jess/SkullLevel.unity
