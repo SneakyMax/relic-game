@@ -24,6 +24,8 @@ namespace Assets.Scripts
 
 		public Material[] PlayerMaterials;
 
+        public GameObject SpawnPortalPrefab;
+
         [Range(0, 10)]
         public float RespawnDelay = 3;
 
@@ -156,6 +158,23 @@ namespace Assets.Scripts
             Enabled = true;
             if (OnEnabled != null)
                 OnEnabled();
+        }
+
+        public PlayerInfo GetPlayer(int playerNumber)
+        {
+            return Players.FirstOrDefault(x => x.PlayerNumber == playerNumber);
+        }
+
+        public void CreatePortalOn(int playerNumber)
+        {
+            var player = GetPlayer(playerNumber);
+
+            if (player.PlayerInstance != null)
+            {
+                var playerPos = player.PlayerInstance.transform.position;
+                var playerCenter = playerPos + new Vector3(0, 1.5f, 0);
+                Instantiate(SpawnPortalPrefab, playerCenter, Quaternion.identity);
+            }
         }
     }
 
