@@ -133,6 +133,16 @@ namespace Assets.Scripts
         public void Update()
         {
             stateMachine.update(Time.deltaTime);
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (CurrentState != "OnMainMenu")
+                {
+                    SceneManager.LoadScene(MainMenu.SceneBuildIndex);
+                    SetNoOneReady();
+                    Transition<OnMainMenu>();
+                }
+            }
         }
 
         public void OnLevelWasLoaded(int level)
