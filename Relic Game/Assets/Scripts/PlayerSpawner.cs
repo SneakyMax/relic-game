@@ -69,10 +69,20 @@ namespace Assets.Scripts
 
         private IEnumerator SpawnAfterDelayCoroutine(int playerNumber, TimeSpan delay)
         {
+            var adjustedPortalPosition = GetPortalPosition(playerNumber);
+            Instantiate(SpawnPortalPrefab, adjustedPortalPosition, Quaternion.identity);
+
             yield return new WaitForSeconds((float) delay.TotalSeconds);
             Spawn(playerNumber);
         }
 
+        private Vector3 GetPortalPosition(int playerNumber)
+        {
+            var spawnPoint = GetSpawnPoint(playerNumber).transform.position;
+            var adjustedPortalPosition = spawnPoint + new Vector3(0, 0.5f, 0);
+            return adjustedPortalPosition;
+        }
+        
         public void Spawn(int playerNumber)
         {
             if (!Enabled)
@@ -86,11 +96,7 @@ namespace Assets.Scripts
             if (player.PlayerInstance != null)
                 Despawn(playerNumber);
 
-            var spawnPoint = PlayerSpawnPoints.FirstOrDefault(x => x.PlayerNumber == playerNumber);
-            if (spawnPoint == null)
-            {
-                spawnPoint = PlayerSpawnPoints.First();
-            }
+            var spawnPoint = GetSpawnPoint(playerNumber);
 
             var playerInstance = (GameObject)Instantiate(PlayerPrefab.gameObject, spawnPoint.transform.position, Quaternion.identity);
             var relicPlayer = playerInstance.GetComponent<RelicPlayer>();
@@ -106,6 +112,16 @@ namespace Assets.Scripts
 
             if (SpawnEffect != null)
                 Instantiate(SpawnEffect, spawnPoint.transform.position, Quaternion.identity);
+        }
+
+        private PlayerSpawnPoint GetSpawnPoint(int playerNumber)
+        {
+            var spawnPoint = PlayerSpawnPoints.FirstOrDefault(x => x.PlayerNumber == playerNumber);
+            if (spawnPoint == null)
+            {
+                spawnPoint = PlayerSpawnPoints.First();
+            }
+            return spawnPoint;
         }
 
         public void SpawnEveryone()
