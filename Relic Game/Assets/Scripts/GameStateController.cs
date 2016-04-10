@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.GameStates;
 using Prime31.StateKit;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,7 +21,7 @@ namespace Assets.Scripts
     [Serializable]
     public struct LevelInfo
     {
-        public SceneAsset Scene;
+        public int SceneBuildIndex;
         public bool IsEgyptLevel;
     }
 
@@ -34,7 +33,7 @@ namespace Assets.Scripts
 
         public LevelInfo[] Scenes;
 
-        public SceneAsset MainMenu;
+        public LevelInfo MainMenu;
 
         public static GameStateController Instance { get; private set; }
 
@@ -81,7 +80,7 @@ namespace Assets.Scripts
             stateMachine.addState(new StartScene());
             stateMachine.addState(new PostMainMenu());
 
-            if (SceneManager.GetActiveScene().name == MainMenu.name)
+            if (SceneManager.GetActiveScene().buildIndex == MainMenu.SceneBuildIndex)
             {
                 Transition<OnMainMenu>();
             }
