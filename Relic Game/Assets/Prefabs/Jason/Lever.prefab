@@ -150,9 +150,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-
-  m_LocalPosition: {x: -9.13, y: 0.4, z: 0}
-
+  m_LocalPosition: {x: 0, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 490106}
@@ -180,8 +178,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.015981, y: -0.19943, z: 0.042281}
+  m_LocalScale: {x: 1.1483549, y: 1.1483548, z: 1.1483548}
   m_Children:
   - {fileID: 22425554}
   m_Father: {fileID: 460084}
@@ -196,7 +194,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d30e84f7989ff1743832ba766e01952c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -222,7 +220,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a2f7d1c4d5679bd4ca7b59c0b46287ee, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -340,9 +338,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-
   m_Sprite: {fileID: 21300000, guid: 31120b1e3fb69f542b153337361d6a13, type: 3}
-
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -396,8 +392,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerables:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isActive: 0
 --- !u!114 &11492786
 MonoBehaviour:
@@ -436,6 +430,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
