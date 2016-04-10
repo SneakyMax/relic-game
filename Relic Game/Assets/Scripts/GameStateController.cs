@@ -1,64 +1,51 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.GameStates;
+using Prime31.StateKit;
+using UnityEngine;
 //using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
-    public enum GameState
+    public enum GameMode
     {
-        Start,
-        ReadyUp,
-        ActiveGame,
-        Restart,
-        Pause
+        Score,
+        Time
     }
-
-    public delegate void GameStateChanged(GameState oldState, GameState newState);
 
     public class GameStateController : MonoBehaviour
     {
-        public RelicSpawner RelicSpawner;
+        public static GameStateController Instance { get; private set; }
 
-		public event GameStateChanged StateChanged;
+        private SKStateMachine<GameStateController> stateMachine;
 
-        public GameState GameState
-        {
-            get { return gameState; }
-            set
-            {
-                if(value == gameState)
-                    return;
-
-                if(StateChanged != null)
-                    StateChanged(gameState, value);
-
-                gameState = value;
-            }
-        }
-
-        private GameState gameState = GameState.Start;
-
-        public void Awake()
-        {
-            DontDestroyOnLoad(gameObject); //keeps the state controller alive across all scenes (i think)
-        }
+        public GameMode CurrentGameMode { get; private set; }
 
         public void Start()
         {
-            StateChanged += HandleNewState;
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
 
-            //RelicSpawner.RemoveAndSpawnNewRelic();
+            Instance = this;
+
+            stateMachine = new SKStateMachine<GameStateController>(this, new OnMainMenu());
+
+            stateMachine.addState(new InGame());
+            stateMachine.addState(new LevelChange());
+            stateMachine.addState(new PlayerWon());
+            stateMachine.addState(new ReadyingUp());
+            stateMachine.addState(new StartCountdown());
         }
 
-        private void HandleNewState(GameState oldState, GameState newState)
+        public T Transition<T>() where T : SKState<GameStateController>
         {
-            if (oldState == GameState.Start && newState == GameState.ReadyUp)
-            {
-                //SceneManager.LoadScene(1);
-            }
-            else if (oldState == GameState.ReadyUp && newState == GameState.ActiveGame)
-            {
+            return stateMachine.changeState<T>();
+        }
 
-            }
+        public void SetGameMode(GameMode mode)
+        {
+            CurrentGameMode = mode;
         }
     }
 }
