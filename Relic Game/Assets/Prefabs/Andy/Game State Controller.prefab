@@ -42,8 +42,16 @@ MonoBehaviour:
   Scenes:
   - Scene: {fileID: 102900000, guid: 390a4db4ab8e7f44b940ca54397b2024, type: 3}
     IsEgyptLevel: 0
+  - Scene: {fileID: 102900000, guid: e36ddba8a395d194383e4ab179dbaa5a, type: 3}
+    IsEgyptLevel: 1
+  - Scene: {fileID: 102900000, guid: cc9e45710c779ec40849bc52739fd9d9, type: 3}
+    IsEgyptLevel: 0
+  - Scene: {fileID: 102900000, guid: 441d253229a6604469da0a124fa6a501, type: 3}
+    IsEgyptLevel: 0
   MainMenu: {fileID: 102900000, guid: f0d8bdb20e9c6334489c0c9e7daaab48, type: 3}
+  CurrentGameMode: 0
   CurrentState: 
+  CurrentGameModeArgument: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
