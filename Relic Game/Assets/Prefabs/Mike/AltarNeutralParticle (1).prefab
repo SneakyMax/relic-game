@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 423636}
   m_Layer: 0
-  m_Name: AltarNeutralParticle
+  m_Name: AltarNeutralParticle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
