@@ -28,8 +28,6 @@ GameObject:
   - 114: {fileID: 11435410}
   - 136: {fileID: 13674856}
   - 82: {fileID: 8253390}
-  - 33: {fileID: 3303442}
-  - 23: {fileID: 2388548}
   m_Layer: 9
   m_Name: Character
   m_TagString: Player
@@ -1268,39 +1266,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 488432}
   m_RootOrder: 0
---- !u!23 &2388548
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 101804}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &3303442
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 101804}
-  m_Mesh: {fileID: 4300000, guid: 8dab4da1b948ce14eb221344e135e913, type: 3}
 --- !u!54 &5411060
 Rigidbody:
   m_ObjectHideFlags: 1

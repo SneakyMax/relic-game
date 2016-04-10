@@ -18,7 +18,7 @@ namespace Assets.Scripts
         [Range(0, 5)]
         public float Radius;
 
-        [Range(0.0f, 1f)]
+        [Range(0.0f, 6f)]
         public float SpinSpeed;
 
         [Range(0, 8)]
@@ -66,7 +66,7 @@ namespace Assets.Scripts
             }
         }
 
-        public void SpawnParticles()
+        public void FixedUpdate()
         {
             foreach (var info in spawners)
             {
@@ -74,8 +74,14 @@ namespace Assets.Scripts
                 var newPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * Radius;
 
                 info.Position = newPosition;
-                info.Angle += SpinSpeed;
+                info.Angle += SpinSpeed * Time.fixedDeltaTime;
+            }
+        }
 
+        public void SpawnParticles()
+        {
+            foreach(var info in spawners)
+            {
                 var worldSpacePosition = transform.position + info.Position;
 
                 var velocity = worldSpacePosition.UnitVectorTo(transform.position) * particleSystem.startSpeed;
