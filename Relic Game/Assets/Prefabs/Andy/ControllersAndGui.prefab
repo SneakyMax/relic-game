@@ -161,6 +161,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &128262
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 435048}
+  - 114: {fileID: 11462016}
+  m_Layer: 0
+  m_Name: Countdown Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &129140
 GameObject:
   m_ObjectHideFlags: 1
@@ -446,6 +462,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &176036
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 401338}
+  - 114: {fileID: 11432130}
+  m_Layer: 0
+  m_Name: Ready Up Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &178074
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 483490}
+  - 114: {fileID: 11449742}
+  m_Layer: 0
+  m_Name: Game State Controller Checker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &180646
 GameObject:
   m_ObjectHideFlags: 1
@@ -542,6 +590,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &401338
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 403424}
+  m_RootOrder: 6
 --- !u!4 &403424
 Transform:
   m_ObjectHideFlags: 1
@@ -558,6 +618,9 @@ Transform:
   - {fileID: 466498}
   - {fileID: 428814}
   - {fileID: 434558}
+  - {fileID: 401338}
+  - {fileID: 483490}
+  - {fileID: 435048}
   m_Father: {fileID: 414350}
   m_RootOrder: 0
 --- !u!4 &403656
@@ -678,6 +741,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 403424}
   m_RootOrder: 5
+--- !u!4 &435048
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 403424}
+  m_RootOrder: 8
 --- !u!4 &437488
 Transform:
   m_ObjectHideFlags: 1
@@ -750,6 +825,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 417972}
   m_RootOrder: 0
+--- !u!4 &483490
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178074}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 403424}
+  m_RootOrder: 7
 --- !u!82 &8209030
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1414,6 +1501,27 @@ MonoBehaviour:
   m_Spacing: 1.05
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
+--- !u!114 &11432130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 223afb801e29f7c4fb739d3a9f4301b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GUICanvas: {fileID: 22361324}
+  ReadyUpTextPrefab: {fileID: 22472522, guid: 8b579d94394c6c14bbaab026388bd1dc, type: 2}
+  PlayersDefinition: {fileID: 11457684}
+  SpawnPoints:
+  - {fileID: 11442160}
+  - {fileID: 11441434}
+  - {fileID: 11428244}
+  - {fileID: 11401246}
+  PortalPrefab: {fileID: 179972, guid: 559e9fab13cd13a4483c62e2608609e2, type: 2}
+  MinPlayers: 1
 --- !u!114 &11435798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1556,6 +1664,19 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: f51591b529286d244a87a15f20d6b3e6, type: 3}
   - RelicName: dagger
     Sprite: {fileID: 21300000, guid: 9a1a5b9f7b387354ca9a4576c652efb9, type: 3}
+--- !u!114 &11449742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba4fb9fc69827e4ab18019bd45e8f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameStateControllerPrefab: {fileID: 11446388, guid: 6de6e20c7ca998040a34ac41602af52f,
+    type: 2}
 --- !u!114 &11457684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1623,6 +1744,20 @@ MonoBehaviour:
   m_Spacing: 1.05
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
+--- !u!114 &11462016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc99f44471ae8d4eb062869c1394ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CounterPrefab: {fileID: 22430316, guid: 32cb0a08cf74db44bade5708f45125bb, type: 2}
+  GUICanvas: {fileID: 22361324}
+  CountdownFrom: 3
 --- !u!114 &11465890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1785,6 +1920,7 @@ MonoBehaviour:
   RelicSpawner: {fileID: 11416284}
   ScoreController: {fileID: 11428646}
   ScoreToWin: 5
+  <State>k__BackingField: 0
 --- !u!222 &22218302
 CanvasRenderer:
   m_ObjectHideFlags: 1

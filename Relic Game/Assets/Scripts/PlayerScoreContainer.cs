@@ -33,9 +33,11 @@ namespace Assets.Scripts
 
 			if (ScoreController == null || PlayersDefinition == null || ItemPrefab == null || PlayerSpawner == null || EgyptContainer == null || MayanContainer == null)
 				throw new InvalidOperationException("Incorrectly configured.");
+
+            PlayerSpawner.OnEnabled += PlayerSpawnerOnOnEnabled;
 		}
 
-        public void Start()
+        private void PlayerSpawnerOnOnEnabled()
         {
             SetBackgroundColor();
 
@@ -46,7 +48,7 @@ namespace Assets.Scripts
             }
             else
             {
-                if (levelManager.GetComponent<LevelManager>().CurrentLevelIsEgypt)
+                if(GameStateController.Instance.CurrentLevel.IsEgyptLevel)
                 {
                     SetEgypt();
                 }
@@ -60,13 +62,11 @@ namespace Assets.Scripts
 		public void Update()
 		{
 			var playerInfo = PlayerSpawner.Players.FirstOrDefault(x => x.PlayerNumber == PlayerNumber);
-			if (playerInfo == null)
-			{
-				foreach(Transform subObj in transform)
-				{
-					subObj.gameObject.SetActive(false);
-				}
-			}
+
+		    foreach (Transform subObj in transform)
+		    {
+		        subObj.gameObject.SetActive(playerInfo != null);
+		    }
 		}
 
         public void SetMayan()

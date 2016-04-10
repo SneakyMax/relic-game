@@ -1,64 +1,138 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.GameStates;
+using Prime31.StateKit;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
 //using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
-    public enum GameState
+    [Serializable]
+    public enum GameMode
     {
-        Start,
-        ReadyUp,
-        ActiveGame,
-        Restart,
-        Pause
+        Score,
+        Time
     }
 
-    public delegate void GameStateChanged(GameState oldState, GameState newState);
+    [Serializable]
+    public struct LevelInfo
+    {
+        public SceneAsset Scene;
+        public bool IsEgyptLevel;
+    }
 
     public class GameStateController : MonoBehaviour
     {
-        public RelicSpawner RelicSpawner;
+        public event Action<int> LevelLoaded;
 
-		public event GameStateChanged StateChanged;
+        public LevelInfo[] Scenes;
 
-        public GameState GameState
-        {
-            get { return gameState; }
-            set
-            {
-                if(value == gameState)
-                    return;
+        public SceneAsset MainMenu;
 
-                if(StateChanged != null)
-                    StateChanged(gameState, value);
+        public static GameStateController Instance { get; private set; }
 
-                gameState = value;
-            }
-        }
+        private SKStateMachine<GameStateController> stateMachine;
 
-        private GameState gameState = GameState.Start;
+        public GameMode CurrentGameMode;
+
+        public bool IsResetReady { get; private set; }
+
+        public string CurrentState;
+
+        public IDictionary<int, bool> PlayersIn { get; private set; }
+
+        public LevelInfo CurrentLevel { get; set; }
+
+        public int CurrentGameModeArgument;
+        public int PlayerThatWonLast { get; set; }
 
         public void Awake()
         {
-            DontDestroyOnLoad(gameObject); //keeps the state controller alive across all scenes (i think)
+            PlayersIn = new Dictionary<int, bool>();
+            IsResetReady = true;
+
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         public void Start()
         {
-            StateChanged += HandleNewState;
+            stateMachine = new SKStateMachine<GameStateController>(this, new NoState());
 
-            //RelicSpawner.RemoveAndSpawnNewRelic();
+            stateMachine.addState(new InGame());
+            stateMachine.addState(new LevelChange(Scenes));
+            stateMachine.addState(new PlayerWon());
+            stateMachine.addState(new ReadyingUp());
+            stateMachine.addState(new StartCountdown());
+            stateMachine.addState(new OnMainMenu());
+            stateMachine.addState(new StartScene());
+            stateMachine.addState(new PostMainMenu());
+
+            if (SceneManager.GetActiveScene().name == MainMenu.name)
+            {
+                Transition<OnMainMenu>();
+            }
+            else
+            {
+                Transition<ReadyingUp>();
+            }
         }
 
-        private void HandleNewState(GameState oldState, GameState newState)
+        public T Transition<T>() where T : SKState<GameStateController>
         {
-            if (oldState == GameState.Start && newState == GameState.ReadyUp)
-            {
-                //SceneManager.LoadScene(1);
-            }
-            else if (oldState == GameState.ReadyUp && newState == GameState.ActiveGame)
-            {
+            var newStateName = typeof (T).Name;
+            CurrentState = newStateName;
 
-            }
+            return stateMachine.changeState<T>();
+        }
+
+        public void SetGameMode(GameMode mode, int argument)
+        {
+            CurrentGameMode = mode;
+            CurrentGameModeArgument = argument;
+        }
+
+        public void SetNoOneReady()
+        {
+            IsResetReady = true;
+            PlayersIn = new Dictionary<int, bool>();
+        }
+
+        public IList<int> GetPlayersIn()
+        {
+            return PlayersIn.Where(x => x.Value).Select(x => x.Key).ToList();
+        }
+
+        public void SetPlayerIn(int playerNumber, bool isIn)
+        {
+            PlayersIn[playerNumber] = isIn;
+        }
+
+        public void UnsetNoOneReady()
+        {
+            IsResetReady = false;
+        }
+
+        public void Update()
+        {
+            stateMachine.update(Time.deltaTime);
+        }
+
+        public void OnLevelWasLoaded(int level)
+        {
+            if (LevelLoaded != null)
+                LevelLoaded(level);
         }
     }
 }
