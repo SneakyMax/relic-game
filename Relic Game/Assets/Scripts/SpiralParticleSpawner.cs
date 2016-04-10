@@ -13,7 +13,7 @@ namespace Assets.Scripts
             public Vector3 Position { get; set; }
         }
 
-        private ParticleSystem particleSystem;
+        private new ParticleSystem particleSystem;
 
         [Range(0, 5)]
         public float Radius;
@@ -34,7 +34,7 @@ namespace Assets.Scripts
             particleSystem.startColor = color;
         }
 
-        public void Start()
+        public void Awake()
         {
             particleSystem = GetComponent<ParticleSystem>();
 
@@ -50,7 +50,10 @@ namespace Assets.Scripts
 
                 spawners.Add(info);
             }
+        }
 
+        public void Start()
+        {
             StartCoroutine(Spawn());
         }
 
@@ -80,7 +83,7 @@ namespace Assets.Scripts
                 var emitInfo = new ParticleSystem.EmitParams
                 {
                     velocity = velocity,
-                    position = info.Position
+                    position = new Vector3(info.Position.x, info.Position.y, -1.5f)
                 };
 
                 particleSystem.Emit(emitInfo, 1);

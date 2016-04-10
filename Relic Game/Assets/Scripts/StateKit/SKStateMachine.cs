@@ -42,6 +42,13 @@ namespace Prime31.StateKit
 			_states[state.GetType()] = state;
 		}
 
+	    public void addStateIfNotAdded(SKState<T> state)
+	    {
+	        if (_states.ContainsKey(state.GetType()))
+	            return;
+	        addState(state);
+	    } 
+
 
 		/// <summary>
 		/// ticks the state machine with the provided delta time

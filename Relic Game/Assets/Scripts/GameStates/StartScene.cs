@@ -1,13 +1,14 @@
-﻿using Prime31.StateKit;
+﻿using System.Collections;
+using Prime31.StateKit;
+using UnityEngine;
 
 namespace Assets.Scripts.GameStates
 {
-    public class PostMainMenu : SKState<GameStateController>
+    public class StartScene : SKState<GameStateController>
     {
         public override void begin()
         {
-            _context.SetNoOneReady();
-            _context.Transition<LevelChange>();
+            _context.Transition<ReadyingUp>();
         }
 
         public override void update(float deltaTime)

@@ -17,6 +17,11 @@ namespace Assets.Scripts.MainMenu
         public int CounterIncrement = 1;
 
         public bool IsFirstToScore;
+        
+        public void Start()
+        {
+            SetCounter(CounterValue);
+        }
 
         public void NavigatedTo()
         {
@@ -89,7 +94,7 @@ namespace Assets.Scripts.MainMenu
         public void Selected()
         {
             var controller = GameStateController.Instance;
-            controller.SetGameMode(IsFirstToScore ? GameMode.Score : GameMode.Time);
+            controller.SetGameMode(IsFirstToScore ? GameMode.Score : GameMode.Time, CounterValue);
             controller.Transition<PostMainMenu>();
         }
     }
