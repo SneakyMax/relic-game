@@ -187,9 +187,9 @@ namespace Assets.Scripts
             if (playerController.LastRequestedDirection == lastDirection)
                 return;
 
-            HoldingRelic.transform.localPosition = 
-                playerController.LastRequestedDirection == PlayerController.Direction.Left ? 
-                leftHoldPosition.localPosition : rightHoldPosition.localPosition;
+            //HoldingRelic.transform.localPosition = 
+            //    playerController.LastRequestedDirection == PlayerController.Direction.Left ? 
+            //    leftHoldPosition.localPosition : rightHoldPosition.localPosition;
 
             lastDirection = playerController.LastRequestedDirection;
         }
