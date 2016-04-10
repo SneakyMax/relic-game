@@ -7,7 +7,7 @@ namespace Assets.Scripts
     {
         public GameStateController GameStateControllerPrefab;
 
-        public void Start()
+        public void Awake()
         {
             if (GameStateController.Instance == null)
             {

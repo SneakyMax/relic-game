@@ -28,6 +28,8 @@ namespace Assets.Scripts
 
     public class GameStateController : MonoBehaviour
     {
+        public event Action<string> StateChanged;
+
         public event Action<int> LevelLoaded;
 
         public LevelInfo[] Scenes;
@@ -94,7 +96,12 @@ namespace Assets.Scripts
             var newStateName = typeof (T).Name;
             CurrentState = newStateName;
 
-            return stateMachine.changeState<T>();
+            var newState = stateMachine.changeState<T>();
+
+            if (StateChanged != null)
+                StateChanged(newStateName);
+
+            return newState;
         }
 
         public void SetGameMode(GameMode mode, int argument)
