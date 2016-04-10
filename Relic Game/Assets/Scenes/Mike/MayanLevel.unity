@@ -3123,38 +3123,6 @@ Prefab:
       propertyPath: ScoreController
       value: 
       objectReference: {fileID: 259424351}
-    - target: {fileID: 8277896, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: panLevelCustomCurve.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8277896, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400800, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0.488
-      objectReference: {fileID: 0}
-    - target: {fileID: 19858356, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: InitialModule.startColor.maxColor.rgba
-      value: 4286971896
-      objectReference: {fileID: 0}
-    - target: {fileID: 19858356, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: InitialModule.startSize.scalar
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 19811502, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 19811502, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: InitialModule.startColor.maxColor.rgba
-      value: 4286243071
-      objectReference: {fileID: 0}
-    - target: {fileID: 19811502, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: ShapeModule.type
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
   m_IsPrefabParent: 0
