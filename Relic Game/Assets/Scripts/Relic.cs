@@ -39,6 +39,17 @@ public class Relic : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
 
+    public void Start()
+    {
+        StartCoroutine(NotPickedUpAfter10Seconds());
+    }
+
+    public IEnumerator NotPickedUpAfter10Seconds()
+    {
+        yield return new WaitForSeconds(10);
+        Spawner.RemoveAndSpawnNewRelic();
+    }
+
     // Update is called once per frame
     private void Update()
     {

@@ -120,7 +120,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111734}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0, y: 1.76, z: 0}
+  m_LocalPosition: {x: 0, y: 7.05, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 489612}
@@ -285,7 +285,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -361,6 +361,8 @@ MonoBehaviour:
   RelicSpawner: {fileID: 0}
   ScoreController: {fileID: 0}
   SpawnEffect: {fileID: 101136, guid: 1cc1548ccc362f143b5f76d1c05f112e, type: 2}
+  HowToPlayOverlayPrefab: {fileID: 102514, guid: 984eb9aa731ba854089bbe2feb8cb4b8,
+    type: 2}
 --- !u!198 &19811502
 ParticleSystem:
   m_ObjectHideFlags: 1

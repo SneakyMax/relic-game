@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -9,7 +10,27 @@ namespace Assets.Scripts
         public ScoreController ScoreController;
 
         public GameObject SpawnEffect;
-        
+
+        public GameObject HowToPlayOverlayPrefab;
+
+        public void Start()
+        {
+            GameStateController.Instance.StateChanged += InstanceOnStateChanged;
+        }
+
+        public void OnDestroy()
+        {
+            GameStateController.Instance.StateChanged -= InstanceOnStateChanged;
+        }
+
+        private void InstanceOnStateChanged(string newState)
+        {
+            if (newState != "InGame")
+                return;
+
+            Instantiate(HowToPlayOverlayPrefab, transform.position, Quaternion.identity);
+        }
+
         public void AcceptRelic(RelicPlayer player)
         {
             var relicName = RelicSpawner.LastRelicName;

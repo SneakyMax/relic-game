@@ -3699,8 +3699,8 @@ MonoBehaviour:
   PlayerMaterials:
   - {fileID: 2100000, guid: d3886f92725e53d489f1ba8e0592ce1a, type: 2}
   - {fileID: 2100000, guid: 2378235a4d4f6814d92727959f247cdd, type: 2}
-  - {fileID: 2100000, guid: d3886f92725e53d489f1ba8e0592ce1a, type: 2}
   - {fileID: 2100000, guid: 34439a071af1af042b2dcbaba713f0fb, type: 2}
+  - {fileID: 2100000, guid: 3dd96222d6e19b945b98508eccf2f4be, type: 2}
   SpawnPortalPrefab: {fileID: 194390, guid: 289bae4203111c44a8d54b6655b79b34, type: 2}
   RespawnDelay: 3
 --- !u!4 &607308938
@@ -4875,22 +4875,6 @@ Prefab:
       propertyPath: ScoreController
       value: 
       objectReference: {fileID: 259424351}
-    - target: {fileID: 8277896, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: panLevelCustomCurve.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8277896, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400800, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0.488
-      objectReference: {fileID: 0}
-    - target: {fileID: 8277896, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
-      propertyPath: spreadCustomCurve.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 311575d044065c94cb5bd74e316ca192, type: 2}
   m_IsPrefabParent: 0

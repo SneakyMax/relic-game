@@ -70,7 +70,9 @@ namespace Assets.Scripts
         private IEnumerator SpawnAfterDelayCoroutine(int playerNumber, TimeSpan delay)
         {
             var adjustedPortalPosition = GetPortalPosition(playerNumber);
-            Instantiate(SpawnPortalPrefab, adjustedPortalPosition, Quaternion.identity);
+
+            if(Enabled)
+                Instantiate(SpawnPortalPrefab, adjustedPortalPosition, Quaternion.identity);
 
             yield return new WaitForSeconds((float) delay.TotalSeconds);
             Spawn(playerNumber);

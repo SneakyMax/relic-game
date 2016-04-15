@@ -45,11 +45,11 @@ namespace Assets.Scripts
                 yield return new WaitForSeconds(1);
             }
 
-            if (Done != null)
-                Done();
-
             if (counterInstance != null)
                 Destroy(counterInstance);
+
+            if (Done != null)
+                Done();
         }
 
         private void SetText(int count)
