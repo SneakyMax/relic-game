@@ -561,22 +561,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &187780
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 466498}
-  - 114: {fileID: 11494038}
-  m_Layer: 0
-  m_Name: In Game State Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &188048
 GameObject:
   m_ObjectHideFlags: 1
@@ -652,7 +636,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403424}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!4 &403424
 Transform:
   m_ObjectHideFlags: 1
@@ -666,7 +650,6 @@ Transform:
   - {fileID: 452694}
   - {fileID: 403656}
   - {fileID: 417972}
-  - {fileID: 466498}
   - {fileID: 428814}
   - {fileID: 434558}
   - {fileID: 401338}
@@ -767,7 +750,7 @@ Transform:
   - {fileID: 421048}
   - {fileID: 440026}
   m_Father: {fileID: 403424}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!4 &432628
 Transform:
   m_ObjectHideFlags: 1
@@ -791,7 +774,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403424}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!4 &435048
 Transform:
   m_ObjectHideFlags: 1
@@ -803,7 +786,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403424}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!4 &437488
 Transform:
   m_ObjectHideFlags: 1
@@ -852,18 +835,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 417972}
   m_RootOrder: 2
---- !u!4 &466498
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187780}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 403424}
-  m_RootOrder: 3
 --- !u!4 &468850
 Transform:
   m_ObjectHideFlags: 1
@@ -887,7 +858,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403424}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!82 &8209030
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1235,7 +1206,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1257,7 +1228,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!82 &8293986
 AudioSource:
   m_ObjectHideFlags: 1
@@ -2048,22 +2019,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2.61, y: 3.41}
   m_UseGraphicAlpha: 1
---- !u!114 &11494038
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 329162ba51d8f5a42836420f3a3a4481, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerSpawner: {fileID: 11445912}
-  RelicSpawner: {fileID: 11416284}
-  ScoreController: {fileID: 11428646}
-  ScoreToWin: 5
-  <State>k__BackingField: 0
 --- !u!222 &22218302
 CanvasRenderer:
   m_ObjectHideFlags: 1
