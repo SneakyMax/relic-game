@@ -84,6 +84,9 @@ namespace Assets.Scripts
 
 			if (other.gameObject.CompareTag("SpearTrap"))
 				CollideWithSpearTrap();
+
+            if (other.gameObject.CompareTag ("WarpZone"))
+                CollideWithTeleportZone (other);
         }
 
 		public void OnTriggerStay(Collider other)
@@ -140,6 +143,20 @@ namespace Assets.Scripts
                 throw new InvalidOperationException("huh?");
 
             trapController.StopCrushingAndReturn();
+        }
+
+        private void CollideWithTeleportZone(Collider col)
+        {
+            Debug.Log ("Hit");
+            Transform offset = col.gameObject.GetComponent<teleportZoneScript> ().offset;
+            Rigidbody rigid = GetComponent<Rigidbody> ();
+
+            Debug.Log (offset.position);
+
+            Vector3 tempRigidPos = rigid.position;
+			tempRigidPos.y += offset.localPosition.y;
+			tempRigidPos.x += offset.localPosition.x;
+            rigid.position = tempRigidPos;
         }
 
 		private void CollideWithSpearTrap()

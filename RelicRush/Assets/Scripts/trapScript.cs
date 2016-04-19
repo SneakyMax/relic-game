@@ -117,22 +117,26 @@ public class trapScript : MonoBehaviour {
 		switch (trapDirection)
 		{
 		case direction.UP:		
-			rigid.MovePosition(transform.position + (Vector3.up * modifiedSpeed));
+			rigid.MovePosition (transform.position + (Vector3.up * modifiedSpeed));
+			rigid.position.Scale(new Vector3 (0, 1, 1));
 			rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move UP
 		case direction.DOWN:
 			rigid.MovePosition(transform.position + (Vector3.down * modifiedSpeed));
+			rigid.position.Scale(new Vector3 (0, 1, 1));
 			rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move DOWN
 		case direction.LEFT:
 			rigid.MovePosition(transform.position + (Vector3.left * modifiedSpeed));
+			rigid.position.Scale(new Vector3 (1, 0, 1));
 			rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move LEFT
 		case direction.RIGHT:
 			rigid.MovePosition(transform.position + (Vector3.right * modifiedSpeed));
+			rigid.position.Scale(new Vector3 (1, 0, 1));
 			rigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			break;
 			//move RIGHT

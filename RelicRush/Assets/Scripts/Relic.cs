@@ -66,6 +66,17 @@ public class Relic : MonoBehaviour
         CollisionAnythingElse(collision);
     }
 
+    public void OnTriggerWarpZone(Collider collider)
+    {
+        Transform offset = collider.gameObject.GetComponent<teleportZoneScript> ().offset;
+        Rigidbody rigid = GetComponent<Rigidbody> ();
+
+        Vector3 tempRigidPos = rigid.position;
+		tempRigidPos.y += offset.localPosition.y;
+		tempRigidPos.x += offset.localPosition.x;
+        rigid.position = tempRigidPos;
+    }
+
     private void CollisionAnythingElse(Collision collision)
     {
         var collisionMagnitude = collision.relativeVelocity.magnitude;
@@ -91,6 +102,9 @@ public class Relic : MonoBehaviour
 
         if (other.gameObject.CompareTag("KillZone"))
             EnterKillZone();
+
+        if(other.gameObject.CompareTag("WarpZone"))
+            OnTriggerWarpZone (other);
     }
 
     public void OnTriggerStay(Collider other)

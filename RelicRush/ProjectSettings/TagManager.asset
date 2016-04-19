@@ -11,6 +11,7 @@ TagManager:
   - LeverZone
   - SpearTrap
   - Non-Interact
+  - WarpZone
   layers:
   - Default
   - TransparentFX
