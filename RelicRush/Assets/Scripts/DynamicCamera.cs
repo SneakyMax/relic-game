@@ -50,13 +50,14 @@ namespace Assets.Scripts
             playerSpawner = controllersAndGui.GetComponentInChildren<PlayerSpawner>();
             relicSpawner = controllersAndGui.GetComponentInChildren<RelicSpawner>();
             camera = GetComponentInChildren<Camera>();
-
-            Enabled = GameStateController.Instance.GetOption<bool>("DynamicCamera");
         }
 
         [UnityMessage]
         public void Start()
         {
+            if(GameStateController.Instance.HasOption("DynamicCamera"))
+                Enabled = GameStateController.Instance.GetOption<bool>("DynamicCamera");
+
             startOrthographicScale = camera.GetComponent<CameraFit>().GetOrthographicSizee();
             startPosition = transform.position;
             heightOffset = transform.position.y;

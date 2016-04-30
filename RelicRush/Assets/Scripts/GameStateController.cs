@@ -158,6 +158,11 @@ namespace Assets.Scripts
             this.options = options;
         }
 
+        public bool HasOption(string key)
+        {
+            return options.ContainsKey(key);
+        }
+
         public T GetOption<T>(string key)
         {
             object value;
