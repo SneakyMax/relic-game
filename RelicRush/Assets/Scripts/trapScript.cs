@@ -173,7 +173,7 @@ public class trapScript : MonoBehaviour {
 
 	public void StopCrushingAndReturn()
 	{
-	    Camera.main.GetComponent<CameraController>().ShakeScreen(1, TimeSpan.FromSeconds(0.35));
+	    CameraShaker.Get().ShakeScreen(1, TimeSpan.FromSeconds(0.35));
 
         GeneralAudioController.PlaySound("RushSquish");
         CurrentState = STATE.HIT;

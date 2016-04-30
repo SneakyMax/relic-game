@@ -33,7 +33,7 @@ namespace Assets.Scripts
 
         private PlayerController.Direction? lastDirection;
 
-        private CameraController cameraController;
+        private CameraShaker cameraShaker;
 
         private Vector3 deathPosition;
 
@@ -44,7 +44,7 @@ namespace Assets.Scripts
             leftHoldPosition = transform.FindChild("RelicHoldPositionLeft");
             rightHoldPosition = transform.Find("RelicHoldPositionRight");
 
-            cameraController = Camera.main.GetComponent<CameraController>();
+            cameraShaker = CameraShaker.Get();
         }
 
         public void OnCollisionEnter(Collision collision)
@@ -233,7 +233,7 @@ namespace Assets.Scripts
 
         private void SquashDeathEffects()
         {
-            cameraController.ShakeScreen(1, TimeSpan.FromSeconds(0.5f));
+            cameraShaker.ShakeScreen(1, TimeSpan.FromSeconds(0.5f));
 
             if(SquishEffects != null)
                 Instantiate(SquishEffects, deathPosition, Quaternion.identity);
@@ -241,7 +241,7 @@ namespace Assets.Scripts
 
         private void PlayerDeathEffects()
         {
-            cameraController.ShakeScreen(0.5f, TimeSpan.FromSeconds(0.5f));
+            cameraShaker.ShakeScreen(0.5f, TimeSpan.FromSeconds(0.5f));
 
             if(DeathByPlayerEffects != null)
                 Instantiate(DeathByPlayerEffects, deathPosition, Quaternion.identity);

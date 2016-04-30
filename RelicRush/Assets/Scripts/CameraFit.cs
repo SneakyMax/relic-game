@@ -148,13 +148,7 @@
         {
             float leftX, rightX, topY, bottomY;
 
-            if (constraint == Constraint.Landscape)
-            {
-                camera.orthographicSize = 1f / camera.aspect * UnitsSize / 2f;
-            }
-            else {
-                camera.orthographicSize = UnitsSize / 2f;
-            }
+            camera.orthographicSize = GetOrthographicSizee();
 
             _height = 2f * camera.orthographicSize;
             _width = _height * camera.aspect;
@@ -183,9 +177,18 @@
             Instance = this;
         }
 
+        public float GetOrthographicSizee()
+        {
+            return constraint == Constraint.Landscape ? 
+                1f / camera.aspect * UnitsSize / 2f : 
+                UnitsSize / 2f;
+        }
+
         private void Update()
         {
 #if UNITY_EDITOR
+            if (Application.isPlaying)
+                return;
             ComputeResolution();
 #endif
         }

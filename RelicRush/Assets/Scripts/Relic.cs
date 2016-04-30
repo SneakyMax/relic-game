@@ -1,164 +1,169 @@
 ﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
-using Assets.Scripts;
 using Random = UnityEngine.Random;
 
-public class Relic : MonoBehaviour
+namespace Assets.Scripts
 {
-    public ParticleSystem CollisionParticleSystemPrefab;
+    public class Relic : MonoBehaviour
+    {
+        public ParticleSystem CollisionParticleSystemPrefab;
 
-    [Range(0, 2000)]
-    public float EjectionSpeed;
+        [Range(0, 2000)]
+        public float EjectionSpeed;
 
-    [Range(0, 500)]
-    public float RotationMax;
+        [Range(0, 500)]
+        public float RotationMax;
 
-    [Range(0, 1)]
-    public float CameraShakeFactor;
+        [Range(0, 1)]
+        public float CameraShakeFactor;
 
-    [Range(0, 10)]
-    public float MinCollisionSpeed;
+        [Range(0, 10)]
+        public float MinCollisionSpeed;
 
-    [Range(0, 10)]
-    public float SpawnPickupDelay;
+        [Range(0, 10)]
+        public float SpawnPickupDelay;
 
-	public string RelicName;
+        public string RelicName;
 
-    private CameraController cameraController;
-    private new Rigidbody rigidbody;
+        private CameraShaker cameraShaker;
+        private new Rigidbody rigidbody;
 
-    public RelicSpawner Spawner { get; set; }
+        public RelicSpawner Spawner { get; set; }
     
-    public bool CanPickUp { get; set; }
+        public bool CanPickUp { get; set; }
 
-	// Use this for initialization
-    private void Awake()
-    {
-        cameraController = Camera.main.GetComponent<CameraController>();
-        rigidbody = GetComponent<Rigidbody>();
-    }
+        public bool EnableRespawning;
 
-    public void Start()
-    {
-        StartCoroutine(NotPickedUpAfter10Seconds());
-    }
-
-    public IEnumerator NotPickedUpAfter10Seconds()
-    {
-        yield return new WaitForSeconds(10);
-        Spawner.RemoveAndSpawnNewRelic();
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("DropPoint"))
+        // Use this for initialization
+        private void Awake()
         {
-            RandomImpulse();
-            return;
+            cameraShaker = CameraShaker.Get();
+            rigidbody = GetComponent<Rigidbody>();
         }
 
-        CollisionAnythingElse(collision);
-    }
-
-    public void OnTriggerWarpZone(Collider collider)
-    {
-        Transform offset = collider.gameObject.GetComponent<teleportZoneScript> ().offset;
-        Rigidbody rigid = GetComponent<Rigidbody> ();
-
-        Vector3 tempRigidPos = rigid.position;
-		tempRigidPos.y += offset.localPosition.y;
-		tempRigidPos.x += offset.localPosition.x;
-        rigid.position = tempRigidPos;
-    }
-
-    private void CollisionAnythingElse(Collision collision)
-    {
-        var collisionMagnitude = collision.relativeVelocity.magnitude;
-        if (collisionMagnitude < MinCollisionSpeed)
-            return;
-
-        cameraController.TicScreen(collisionMagnitude * CameraShakeFactor);
-
-        var collisionPoint = collision.contacts.First().point;
-        var particlePoint = new Vector3(collisionPoint.x, collisionPoint.y, 0);
-
-        var particles = (GameObject)Instantiate(CollisionParticleSystemPrefab.gameObject, particlePoint, Quaternion.identity);
-        Destroy(particles, 8);
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("SpearTrap"))
+        public void Start()
         {
-            RandomImpulse();
-            return;
+            if(EnableRespawning)
+                StartCoroutine(NotPickedUpAfter10Seconds());
         }
 
-        if (other.gameObject.CompareTag("KillZone"))
-            EnterKillZone();
+        public IEnumerator NotPickedUpAfter10Seconds()
+        {
+            yield return new WaitForSeconds(10);
+            Spawner.RemoveAndSpawnNewRelic();
+        }
 
-        if(other.gameObject.CompareTag("WarpZone"))
-            OnTriggerWarpZone (other);
-    }
+        // Update is called once per frame
+        private void Update()
+        {
+        }
 
-    public void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("SpearTrap") == rigidbody.velocity.y < 0.1)
-            RandomImpulse();
-    }
+        public void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("DropPoint"))
+            {
+                RandomImpulse();
+                return;
+            }
 
-    private void EnterKillZone()
-    {
-        Spawner.RemoveAndSpawnNewRelic();
-    }
+            CollisionAnythingElse(collision);
+        }
 
-    public void RandomImpulse()
-    {
-        const float pi = Mathf.PI;
+        public void OnTriggerWarpZone(Collider collider)
+        {
+            Transform offset = collider.gameObject.GetComponent<teleportZoneScript> ().offset;
+            Rigidbody rigid = GetComponent<Rigidbody> ();
 
-        var angle1 = Random.Range(pi, pi + (pi / 3));
-        var angle2 = Random.Range(pi + (pi / 3), pi * 2);
+            Vector3 tempRigidPos = rigid.position;
+            tempRigidPos.y += offset.localPosition.y;
+            tempRigidPos.x += offset.localPosition.x;
+            rigid.position = tempRigidPos;
+        }
 
-        var angle = Random.Range(0, 2) == 0 ? angle1 : angle2;
+        private void CollisionAnythingElse(Collision collision)
+        {
+            var collisionMagnitude = collision.relativeVelocity.magnitude;
+            if (collisionMagnitude < MinCollisionSpeed)
+                return;
 
-        var x = Mathf.Cos(angle);
-        var y = -Mathf.Sin(angle);
+            cameraShaker.TicScreen(collisionMagnitude * CameraShakeFactor);
 
-        var force = new Vector2(x, y) * EjectionSpeed;
+            var collisionPoint = collision.contacts.First().point;
+            var particlePoint = new Vector3(collisionPoint.x, collisionPoint.y, 0);
 
-        rigidbody.AddForce(force);
-        rigidbody.AddTorque(new Vector3(0, 0, Random.Range(RotationMax / 2, RotationMax)));
-    }
+            var particles = (GameObject)Instantiate(CollisionParticleSystemPrefab.gameObject, particlePoint, Quaternion.identity);
+            Destroy(particles, 8);
+        }
 
-    public HoldingRelic BeHeldBy(RelicPlayer player)
-    {
-        Spawner.DespawnRelic();
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("SpearTrap"))
+            {
+                RandomImpulse();
+                return;
+            }
 
-        var holdingRelic = Instantiate(Spawner.HoldingRelicPrefab);
-        holdingRelic.transform.SetParent(player.gameObject.transform, false);
+            if (other.gameObject.CompareTag("KillZone"))
+                EnterKillZone();
 
-        holdingRelic.Spawner = Spawner;
+            if(other.gameObject.CompareTag("WarpZone"))
+                OnTriggerWarpZone (other);
+        }
 
-        return holdingRelic;
-    }
+        public void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.CompareTag("SpearTrap") == rigidbody.velocity.y < 0.1)
+                RandomImpulse();
+        }
 
-    public void DelayBeingAbleToBePickedUp()
-    {
-        StartCoroutine(DelayBeingAbleToBePickedUpCouroutine());
-    }
+        private void EnterKillZone()
+        {
+            Spawner.RemoveAndSpawnNewRelic();
+        }
 
-    private IEnumerator DelayBeingAbleToBePickedUpCouroutine()
-    {
-        CanPickUp = false;
+        public void RandomImpulse()
+        {
+            const float pi = Mathf.PI;
+
+            var angle1 = Random.Range(pi, pi + (pi / 3));
+            var angle2 = Random.Range(pi + (pi / 3), pi * 2);
+
+            var angle = Random.Range(0, 2) == 0 ? angle1 : angle2;
+
+            var x = Mathf.Cos(angle);
+            var y = -Mathf.Sin(angle);
+
+            var force = new Vector2(x, y) * EjectionSpeed;
+
+            rigidbody.AddForce(force);
+            rigidbody.AddTorque(new Vector3(0, 0, Random.Range(RotationMax / 2, RotationMax)));
+        }
+
+        public HoldingRelic BeHeldBy(RelicPlayer player)
+        {
+            Spawner.DespawnRelic();
+
+            var holdingRelic = Instantiate(Spawner.HoldingRelicPrefab);
+            holdingRelic.transform.SetParent(player.gameObject.transform, false);
+
+            holdingRelic.Spawner = Spawner;
+
+            return holdingRelic;
+        }
+
+        public void DelayBeingAbleToBePickedUp()
+        {
+            StartCoroutine(DelayBeingAbleToBePickedUpCouroutine());
+        }
+
+        private IEnumerator DelayBeingAbleToBePickedUpCouroutine()
+        {
+            CanPickUp = false;
         
-        yield return new WaitForSeconds(SpawnPickupDelay);
+            yield return new WaitForSeconds(SpawnPickupDelay);
 
-        CanPickUp = true;
+            CanPickUp = true;
+        }
     }
 }

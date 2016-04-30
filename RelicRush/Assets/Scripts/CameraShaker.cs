@@ -5,14 +5,15 @@ using Random = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
-    public class CameraController : MonoBehaviour
+    // Should be put on CameraShakeGimbal
+    [UnityComponent]
+    public class CameraShaker : MonoBehaviour
     {
         private float startShakeTime;
-        private Vector3 cameraBasePosition;
 
-        public void Start()
+        public static CameraShaker Get()
         {
-            cameraBasePosition = transform.localPosition;
+            return Camera.main.GetComponentInParent<CameraShaker>();
         }
 
         public void Update()
@@ -36,11 +37,11 @@ namespace Assets.Scripts
 
             var movement = new Vector3(Mathf.Cos(angle), -Mathf.Sin(angle), 0) * factor;
 
-            transform.localPosition = cameraBasePosition + movement;
+            transform.localPosition = movement;
 
             yield return null;
 
-            transform.localPosition = cameraBasePosition;
+            transform.localPosition = new Vector3();
         }
 
         private IEnumerator ShakeCoroutine(float factor, TimeSpan duration)
@@ -52,7 +53,7 @@ namespace Assets.Scripts
 
                 if (percentThrough >= 1)
                 {
-                    transform.localPosition = cameraBasePosition;
+                    transform.localPosition = new Vector3();
                     break;
                 }
 
@@ -61,7 +62,7 @@ namespace Assets.Scripts
 
                 var movement = new Vector3(Mathf.Cos(angle), -Mathf.Sin(angle), 0) * amount / 5;
 
-                transform.localPosition = cameraBasePosition + movement;
+                transform.localPosition = movement;
 
                 yield return null;
             }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Assets.Scripts
@@ -21,13 +20,10 @@ namespace Assets.Scripts
         private Coroutine spawnAfterDelayCoroutine;
         public HoldingRelic HoldingRelicPrefab;
 
+        public bool EnableRespawning = true;
+
         public void Start()
         {
-            /*foreach (var item in RelicPrefabs) {
-
-			}
-                throw new InvalidOperationException("No relic prefab");*/
-
             if (HoldingRelicPrefab == null)
                 throw new InvalidOperationException("No holding relic prefab");
         }
@@ -49,6 +45,7 @@ namespace Assets.Scripts
 
             var newObj = (GameObject)Instantiate(relicRandom.gameObject, position, Quaternion.identity);
             var relic = newObj.GetComponent<Relic>();
+            relic.EnableRespawning = EnableRespawning;
             relic.Spawner = this;
             {
                 AudioSource audio = GetComponent<AudioSource>();
