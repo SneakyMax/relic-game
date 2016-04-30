@@ -52,6 +52,8 @@ namespace Assets.Scripts
         public int CurrentGameModeArgument;
         public int PlayerThatWonLast { get; set; }
 
+        private IDictionary<string, object> options = new Dictionary<string, object>();
+
         public void Awake()
         {
             PlayersIn = new Dictionary<int, bool>();
@@ -149,6 +151,20 @@ namespace Assets.Scripts
         {
             if (LevelLoaded != null)
                 LevelLoaded(level);
+        }
+
+        public void SetOptions(IDictionary<string, object> options)
+        {
+            this.options = options;
+        }
+
+        public T GetOption<T>(string key)
+        {
+            object value;
+            if (options.TryGetValue(key, out value) == false)
+                return default(T);
+
+            return value == null ? default(T) : (T)Convert.ChangeType(value, typeof(T));
         }
     }
 }

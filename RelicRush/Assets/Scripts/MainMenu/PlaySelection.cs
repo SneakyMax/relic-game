@@ -4,20 +4,28 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.MainMenu
 {
-    public class ChooseMainMenuSelection : MonoBehaviour, IMainMenuSelection
+    [UnityComponent]
+    public class PlaySelection : MonoBehaviour, IMainMenuSelection
     {
+        [AssignedInUnity]
         public GameObject[] Arrows;
 
+        [AssignedInUnity]
         public Text NumberText;
 
         private bool isNavigatedTo;
         private bool axisIsReset = true;
 
+        [AssignedInUnity]
         public int CounterValue = 3;
+
+        [AssignedInUnity]
         public int CounterIncrement = 1;
 
+        [AssignedInUnity]
         public bool IsFirstToScore;
         
+        [UnityMessage]
         public void Start()
         {
             SetCounter(CounterValue);
@@ -43,6 +51,7 @@ namespace Assets.Scripts.MainMenu
             }
         }
 
+        [UnityMessage]
         public void Update()
         {
             if (!isNavigatedTo)
@@ -95,6 +104,7 @@ namespace Assets.Scripts.MainMenu
         {
             var controller = GameStateController.Instance;
             controller.SetGameMode(IsFirstToScore ? GameMode.Score : GameMode.Time, CounterValue);
+            controller.SetOptions(MainMenuController.Instance.Options);
             controller.Transition<PostMainMenu>();
         }
     }

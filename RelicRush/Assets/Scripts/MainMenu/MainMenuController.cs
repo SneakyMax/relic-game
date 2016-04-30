@@ -1,42 +1,54 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.MainMenu
 {
+    [UnityComponent]
     public class MainMenuController : MonoBehaviour
     {
-        public GameObject[] Selections;
+        public static MainMenuController Instance { get; private set; }
 
-        private bool axisIsReset = true;
+        [AssignedInUnity]
+        public MainMenuArea[] Areas;
 
-        private int currentSelectionIndex;
+        [AssignedInUnity]
+        public MainMenuArea StartArea;
 
-        private IList<IMainMenuSelection> selections = new List<IMainMenuSelection>();
+        private MainMenuArea currentArea;
+        private bool axisIsReset;
 
-        public void Start()
+        public IDictionary<string, object> Options { get; private set; }
+
+        public MainMenuController()
         {
-            if (Selections.Length == 0)
-            {
-                throw new InvalidOperationException("MISSING SELECTIONS");
-            }
-
-            foreach (var selectionObj in Selections)
-            {
-                var selection = selectionObj.GetComponents<MonoBehaviour>().OfType<IMainMenuSelection>().FirstOrDefault();
-                selections.Add(selection);
-            }
-            
-            foreach (var selection in selections)
-            {
-                selection.NavigatedAwayFrom();
-            }
-
-            currentSelectionIndex = 0;
-            selections[currentSelectionIndex].NavigatedTo();
+            Options = new Dictionary<string, object>();
         }
 
+        [UnityMessage]
+        public void Awake()
+        {
+            Instance = this;
+            foreach (var area in Areas)
+            {
+                area.Parent = this;
+            }
+        }
+
+        [UnityMessage]
+        public void Start()
+        {
+            foreach (var area in Areas)
+            {
+                area.Hide();
+            }
+
+            ChangeArea(StartArea);
+        }
+
+        [UnityMessage]
         public void Update()
         {
             var y = Input.GetAxis("Any Y Axis");
@@ -65,40 +77,35 @@ namespace Assets.Scripts.MainMenu
 
             if (Input.GetButtonDown("Any A Button"))
             {
-                selections[currentSelectionIndex].Selected();
+                currentArea.MakeSelection();
             }
         }
 
         private void PreviousSelection()
         {
-            selections[currentSelectionIndex].NavigatedAwayFrom();
-
-            if (currentSelectionIndex == 0)
-            {
-                currentSelectionIndex = Selections.Length - 1;
-            }
-            else
-            {
-                currentSelectionIndex--;
-            }
-
-            selections[currentSelectionIndex].NavigatedTo();
+            currentArea.PreviousSelection();
         }
 
         private void NextSelection()
         {
-            selections[currentSelectionIndex].NavigatedAwayFrom();
+            currentArea.NextSelection();
+        }
 
-            if (currentSelectionIndex == Selections.Length - 1)
-            {
-                currentSelectionIndex = 0;
-            }
-            else
-            {
-                currentSelectionIndex++;
-            }
+        public void ChangeArea(MainMenuArea area)
+        {
+            if (Areas.Any(x => x == area) == false)
+                throw new InvalidOperationException("Not an area.");
 
-            selections[currentSelectionIndex].NavigatedTo();
+            if(currentArea != null)
+                currentArea.Hide();
+
+            currentArea = area;
+            area.Show();
+        }
+
+        public void SetOption(string optionName, object value)
+        {
+            Options[optionName] = value;
         }
     }
 }
