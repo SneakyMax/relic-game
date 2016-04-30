@@ -39,6 +39,9 @@ namespace Assets.Scripts
         private Vector3 targetPosition;
         private float targetOrthographicSize;
 
+        [Space(10), Header("Options")]
+        public bool Enabled;
+
         [UnityMessage]
         public void Awake()
         {
@@ -47,6 +50,8 @@ namespace Assets.Scripts
             playerSpawner = controllersAndGui.GetComponentInChildren<PlayerSpawner>();
             relicSpawner = controllersAndGui.GetComponentInChildren<RelicSpawner>();
             camera = GetComponentInChildren<Camera>();
+
+            Enabled = GameStateController.Instance.GetOption<bool>("DynamicCamera");
         }
 
         [UnityMessage]
@@ -60,6 +65,9 @@ namespace Assets.Scripts
         [UnityMessage]
         public void Update()
         {
+            if (Enabled == false)
+                return;
+
             UpdateTargets();
 
             MoveToTargets();
