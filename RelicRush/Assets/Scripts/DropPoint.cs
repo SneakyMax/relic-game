@@ -3,21 +3,28 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
+    [UnityComponent]
     public class DropPoint : MonoBehaviour
     {
+        [AssignedInUnity]
         public RelicSpawner RelicSpawner;
 
+        [AssignedInUnity]
         public ScoreController ScoreController;
 
+        [AssignedInUnity]
         public GameObject SpawnEffect;
 
+        [AssignedInUnity]
         public GameObject HowToPlayOverlayPrefab;
 
+        [UnityMessage]
         public void Start()
         {
             GameStateController.Instance.StateChanged += InstanceOnStateChanged;
         }
 
+        [UnityMessage]
         public void OnDestroy()
         {
             GameStateController.Instance.StateChanged -= InstanceOnStateChanged;
@@ -27,8 +34,8 @@ namespace Assets.Scripts
         {
             if (newState != "InGame")
                 return;
-
-            Instantiate(HowToPlayOverlayPrefab, transform.position, Quaternion.identity);
+            
+            Instantiate(HowToPlayOverlayPrefab, transform.position + HowToPlayOverlayPrefab.transform.position, Quaternion.identity);
         }
 
         public void AcceptRelic(RelicPlayer player)
