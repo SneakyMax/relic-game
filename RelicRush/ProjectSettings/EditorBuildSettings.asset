@@ -17,5 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Mike/MayanLevel2.unity
   - enabled: 0
     path: Assets/Scenes/Jess/SkullLevel.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Mike/screenWrapLevel.unity

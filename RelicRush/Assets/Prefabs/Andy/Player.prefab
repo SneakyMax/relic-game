@@ -160,7 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e83c88d4fae7342b3b1a063f70cf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HoldingRelicPrefab: {fileID: 11434730, guid: fa944072a13724b4dbdc9e3aa31bea67, type: 2}
+  PlayerNumber: 0
+  HoldingRelicPrefab: {fileID: 0}
+  CrushingDistance: 0
+  SquishEffects: {fileID: 100002, guid: 7cf17ed91cf254b5ab4b35d42b430b8a, type: 2}
+  DeathByPlayerEffects: {fileID: 100002, guid: 7cf17ed91cf254b5ab4b35d42b430b8a, type: 2}
 --- !u!114 &11423306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,8 +184,10 @@ MonoBehaviour:
   ReverseSpeedFactor: 2.94
   JumpStartThreshhold: 1
   JumpStartAmount: 3
-  JumpForce: 15.4
+  JumpVelocity: 0
   InstantStopSpeedThreshold: 6.1
+  BounceOtherPlayerForce: 0
+  MaxVerticalSpeed: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
