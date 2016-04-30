@@ -3396,10 +3396,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11445912, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
-      propertyPath: PlayerMaterials.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 414350, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3432,22 +3428,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 11445912, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
-      propertyPath: PlayerMaterials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 34439a071af1af042b2dcbaba713f0fb, type: 2}
-    - target: {fileID: 11445912, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
-      propertyPath: PlayerMaterials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2378235a4d4f6814d92727959f247cdd, type: 2}
-    - target: {fileID: 11445912, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
-      propertyPath: PlayerMaterials.Array.data[3]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3dd96222d6e19b945b98508eccf2f4be, type: 2}
-    - target: {fileID: 11445912, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
-      propertyPath: PlayerMaterials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: d3886f92725e53d489f1ba8e0592ce1a, type: 2}
     - target: {fileID: 437488, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
       propertyPath: m_LocalPosition.y
       value: -5.17
@@ -3528,6 +3508,14 @@ Prefab:
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11445912, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
+      propertyPath: PlayerMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d3886f92725e53d489f1ba8e0592ce1a, type: 2}
+    - target: {fileID: 11445912, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
+      propertyPath: PlayerMaterials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 34439a071af1af042b2dcbaba713f0fb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85540a9667ffc7141bb5bbc682ac374a, type: 2}
   m_IsPrefabParent: 0
@@ -6069,6 +6057,10 @@ Prefab:
     - target: {fileID: 2011508, guid: 0f7e9f6f4f3d3e44dac5696b159311d3, type: 2}
       propertyPath: orthographic size
       value: 10.8876
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080592, guid: 0f7e9f6f4f3d3e44dac5696b159311d3, type: 2}
+      propertyPath: orthographic size
+      value: 10.884376
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f7e9f6f4f3d3e44dac5696b159311d3, type: 2}
