@@ -31,6 +31,8 @@ namespace Assets.Scripts
         public GameObject SquishEffects;
         public GameObject DeathByPlayerEffects;
 
+        public float CharacterHeight;
+
         private PlayerController.Direction? lastDirection;
 
         private CameraShaker cameraShaker;
@@ -127,12 +129,13 @@ namespace Assets.Scripts
             if (crushingTrap.CurrentState == trapScript.STATE.WAITING)
                 return;
 
-            var normal = collision.contacts.First().normal;
+            var normal = crushingTrap.LastMovementNormal;
 
-            var allInRaycast = Physics.RaycastAll(new Ray(transform.position, normal), CrushingDistance);
+            var center = new Vector3(transform.position.x, transform.position.y + CharacterHeight / 2f, transform.position.z);
+            var allInRaycast = Physics.RaycastAll(new Ray(center, normal), CrushingDistance);
 
 			var hit = allInRaycast.Any(x => x.collider.gameObject.CompareTag("Player") == false && x.collider.gameObject.CompareTag("Non-Interact") == false);
-
+            
             if (!hit)
                 return;
 
@@ -147,7 +150,6 @@ namespace Assets.Scripts
 
         private void CollideWithTeleportZone(Collider col)
         {
-            Debug.Log ("Hit");
             Transform offset = col.gameObject.GetComponent<teleportZoneScript> ().offset;
             Rigidbody rigid = GetComponent<Rigidbody> ();
 

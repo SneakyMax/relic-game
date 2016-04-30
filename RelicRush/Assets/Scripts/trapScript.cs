@@ -30,6 +30,8 @@ public class trapScript : MonoBehaviour {
 
 	public float crushingEasingTimer = 0.0f;
 
+    public Vector3 LastMovementNormal { get; private set; }
+
 	#endregion
 	#region private variables
 
@@ -57,8 +59,10 @@ public class trapScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void FixedUpdate ()
 	{
+	    var startPosition = rigid.position;
+
 		switch (CurrentState) 
 		{
 		case STATE.WAITING:
@@ -101,7 +105,12 @@ public class trapScript : MonoBehaviour {
 		default:
 		break;
 		}
-		//move towards "startLocation"
+
+	    var endPosition = rigid.position;
+
+	    var change = endPosition - startPosition;
+	    LastMovementNormal = change.normalized;
+	    //move towards "startLocation"
 	}
 
 	private void CrushTrapMovement()

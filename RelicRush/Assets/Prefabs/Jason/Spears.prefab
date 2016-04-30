@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 439446}
   - 33: {fileID: 3363536}
   - 23: {fileID: 2369516}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Spear2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 449796}
   - 33: {fileID: 3397304}
   - 23: {fileID: 2379596}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Spear1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - 4: {fileID: 452646}
   - 33: {fileID: 3343892}
   - 23: {fileID: 2366838}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Spear6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - 4: {fileID: 461162}
   - 33: {fileID: 3338122}
   - 23: {fileID: 2394082}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Spear7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 487964}
   - 65: {fileID: 6533230}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Collider Catch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - 4: {fileID: 472888}
   - 33: {fileID: 3387470}
   - 23: {fileID: 2319714}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Spear4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 496842}
   - 65: {fileID: 6587634}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: DamageBox
   m_TagString: SpearTrap
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - 4: {fileID: 421620}
   - 33: {fileID: 3355482}
   - 23: {fileID: 2379302}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Spear3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - 4: {fileID: 405796}
   - 33: {fileID: 3397086}
   - 23: {fileID: 2340584}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Spear5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 436948}
   - 54: {fileID: 5454190}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Spears
   m_TagString: SpearTrap
   m_Icon: {fileID: 0}
