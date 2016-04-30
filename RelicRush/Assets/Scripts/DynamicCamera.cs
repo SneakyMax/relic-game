@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -7,6 +8,7 @@ namespace Assets.Scripts
     [UnityComponent]
     public class DynamicCamera : MonoBehaviour
     {
+        [Header("Zoom Control")]
         [AssignedInUnity]
         public float MaxZoom;
 
@@ -19,6 +21,13 @@ namespace Assets.Scripts
         [AssignedInUnity]
         public float AdditionalYDistanceModifier = 1;
 
+
+        [AssignedInUnity, Space(10), Header("Adjusting Speed")]
+        public float ZoomAdjustmentSpeed = 1f;
+
+        [AssignedInUnity]
+        public float MoveAdjustmentSpeed = 1f;
+
         private PlayerSpawner playerSpawner;
         private RelicSpawner relicSpawner;
         private new Camera camera;
@@ -26,6 +35,9 @@ namespace Assets.Scripts
         private float startOrthographicScale;
         private Vector3 startPosition;
         private float heightOffset;
+
+        private Vector3 targetPosition;
+        private float targetOrthographicSize;
 
         [UnityMessage]
         public void Awake()
@@ -48,20 +60,53 @@ namespace Assets.Scripts
         [UnityMessage]
         public void Update()
         {
+            UpdateTargets();
+
+            MoveToTargets();
+        }
+
+        private void MoveToTargets()
+        {
+            DoSmallZoom();
+            DoSmallMove();
+        }
+
+        private void DoSmallZoom()
+        {
+            var zoomAdjustConstantSpeed = ZoomAdjustmentSpeed * Time.deltaTime;
+            Func<float, float> clamp = x => Mathf.Clamp(x, -zoomAdjustConstantSpeed, zoomAdjustConstantSpeed);
+
+            var zoomDiff = camera.orthographicSize - targetOrthographicSize;
+            camera.orthographicSize -= clamp(zoomDiff);
+        }
+
+        private void DoSmallMove()
+        {
+            var positionAdjustConstantSpeed = MoveAdjustmentSpeed * Time.deltaTime;
+            Func<float, float> clamp = x => Mathf.Clamp(x, -positionAdjustConstantSpeed, positionAdjustConstantSpeed);
+
+            var positionDiff = transform.position - targetPosition;
+            var adjustment = new Vector3(clamp(positionDiff.x), clamp(positionDiff.y), clamp(positionDiff.z));
+
+            transform.position -= adjustment;
+        }
+
+        private void UpdateTargets()
+        {
             var spawnedPlayers = GetPointsOfInterest();
 
             if (spawnedPlayers.Count == 0)
             {
-                transform.position = startPosition;
-                camera.orthographicSize = startOrthographicScale;
+                targetPosition = startPosition;
+                targetOrthographicSize = startOrthographicScale;
                 return;
             }
 
             var centroid = GetCentroid(spawnedPlayers);
             var zoomAmount = GetZoomAmount(spawnedPlayers);
 
-            transform.position = new Vector3(centroid.x, centroid.y + heightOffset, startPosition.z);
-            camera.orthographicSize = startOrthographicScale / zoomAmount;
+            targetOrthographicSize = startOrthographicScale / zoomAmount;
+            targetPosition = new Vector3(centroid.x, centroid.y + heightOffset, startPosition.z);
         }
 
         private float GetZoomAmount(IList<Vector3> pointsOfInterest)

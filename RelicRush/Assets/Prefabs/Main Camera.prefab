@@ -152,8 +152,9 @@ MonoBehaviour:
   MaxZoom: 2
   ZoomDistanceFactor: 33
   ZoomPushBack: 0
-  ControllersAndGui: {fileID: 0}
   AdditionalYDistanceModifier: 1.21
+  ZoomAdjustmentSpeed: 3
+  MoveAdjustmentSpeed: 20
 --- !u!114 &11432474
 MonoBehaviour:
   m_ObjectHideFlags: 1
