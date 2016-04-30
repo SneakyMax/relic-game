@@ -48,6 +48,12 @@ MonoBehaviour:
     IsEgyptLevel: 0
   - SceneBuildIndex: 4
     IsEgyptLevel: 0
+  - SceneBuildIndex: 5
+    IsEgyptLevel: 0
+  - SceneBuildIndex: 6
+    IsEgyptLevel: 0
+  - SceneBuildIndex: 7
+    IsEgyptLevel: 0
   MainMenu:
     SceneBuildIndex: 0
     IsEgyptLevel: 0
