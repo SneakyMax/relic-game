@@ -21494,7 +21494,7 @@ MonoBehaviour:
   - {fileID: 11452264, guid: a0eb2b9655968e144a9e563ed751d3fe, type: 2}
   RelicSpawnDelay: 1
   HoldingRelicPrefab: {fileID: 11491526, guid: fa944072a13724b4dbdc9e3aa31bea67, type: 2}
-  EnableRespawning: 0
+  EnableRespawning: 1
 --- !u!1 &1963555570
 GameObject:
   m_ObjectHideFlags: 0
